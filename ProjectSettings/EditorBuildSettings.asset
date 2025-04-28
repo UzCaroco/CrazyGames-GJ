@@ -6,8 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: b58d5b9a807facf40a6460757dba3ecd
+  - enabled: 1
+    path: Assets/CrazySDK/Demo/LoadingScene.unity
+    guid: d34c3ed37bb0fd745b38d55bc61e21c8
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Game.unity
+    guid: 75b25e6d2c74acd48b8f485c7f7b1f25
   - enabled: 1
     path: Assets/CrazySDK/Demo/_Start.unity
     guid: 719c97d2bda674bff93b80c2bd0a0f7e
@@ -26,9 +35,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/CrazySDK/Demo/GameModule.unity
     guid: 2c740c6d1b0553d4ebde1f9c8e2a9989
-  - enabled: 1
-    path: Assets/CrazySDK/Demo/LoadingScene.unity
-    guid: d34c3ed37bb0fd745b38d55bc61e21c8
   - enabled: 1
     path: Assets/CrazySDK/Demo/PlayerPrefsAPS.unity
     guid: a01a79a26758f284d80007a7c789d352

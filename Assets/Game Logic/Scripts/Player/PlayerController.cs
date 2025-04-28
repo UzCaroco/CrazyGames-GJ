@@ -14,31 +14,14 @@ public class PlayerController : NetworkBehaviour
     Collider2D col;
     public LayerMask collisionLayers; // Define no Inspector os layers que vai colidir
 
-    //PlayerStateMachine stateMachine;
-
-    //public IdleState idleState;
-    //public WalkState walkState;
-    //public PushState pushState;
+    PlayerChecker playerChecker;
 
     private void Awake()
     {
-        CrazySDK.Init(() => {
-            // Aqui dentro, o SDK já tá pronto pra usar
-            Debug.Log("CrazySDK inicializado com sucesso!");
-        });
+        CrazySDK.Init(() => { Debug.Log("CrazySDK inicializado com sucesso!"); });
 
         playerInput = new PlayerInputs();
         col = GetComponent<Collider2D>();
-
-        //stateMachine = new PlayerStateMachine();
-        //idleState = new IdleState(stateMachine, this);
-        //walkState = new WalkState(stateMachine, this);
-        //pushState = new PushState(stateMachine, this);
-    }
-
-    private void Start()
-    {
-        //stateMachine.Inicialize(idleState);
     }
 
     private void OnEnable()
@@ -50,15 +33,27 @@ public class PlayerController : NetworkBehaviour
     {
         playerInput.Player.Disable();
     }
+    public override void Spawned()
+    {
+        base.Spawned();
+        playerChecker = FindAnyObjectByType<PlayerChecker>();
 
+        playerChecker.AdicionarPlayerALista(this);
+    }
+
+    public override void Despawned(NetworkRunner runner, bool hasState)
+    {
+        base.Despawned(runner, hasState);
+
+        playerChecker.RemovePlayerFromList(this);
+    }
     public override void FixedUpdateNetwork()
     {
+        base.FixedUpdateNetwork();
         UnityEngine.InputSystem.InputSystem.Update();
 
         moveInput = playerInput.Player.Move.ReadValue<Vector2>().normalized;
         Vector2 moveDelta = moveInput * speed * Runner.DeltaTime;
-
-        //stateMachine.Update();
 
 
         if (moveDelta != Vector2.zero)
@@ -75,11 +70,6 @@ public class PlayerController : NetworkBehaviour
                 Debug.Log("Bateu em: " + hit.collider.name);
             }
         }
-
-        /*if (playerInput.Player.Jump.triggered)
-        {
-            //rb.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
-        }*/
 
     }
 }

@@ -11,8 +11,10 @@ public class MissionStaySquare : Missions
     {
         
     }
-    void Update()
+    public override void FixedUpdateNetwork()
     {
+        base.FixedUpdateNetwork();
+
         StartMission();
     }
     protected override void StartMission()
