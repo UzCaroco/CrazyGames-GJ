@@ -26,8 +26,8 @@ public class SunController : NetworkBehaviour
     /// Controller the Missions
     /// </summary>
 
-    int randomNumber; // Variable to store the random number
-    int random;
+    int randomNumber = -1; // Variable to store the random number
+    int random = -1;
     [SerializeField] private float[] timerForStartTheMission = new float[8]; // Array to store time for each mission
     [SerializeField] private float[] timeCompleteMission = new float[6]; // Array to store time for each mission
 
@@ -82,7 +82,7 @@ public class SunController : NetworkBehaviour
     {
         while (random == randomNumber)
         {
-            random = Random.Range(0, 3); // Generate a random number between 0 and 9
+            random = Random.Range(0, 2); // Generate a random number between 0 and 9
         }
         
         randomNumber = random;
