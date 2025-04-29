@@ -15,7 +15,7 @@ public class MissionAvoidProjectiles : Missions
     int[] quantityProjectiles = new int[4];
     
 
-    private void OnEnable()
+    private void Start()
     {
         RandomLocalIntanciete();
     }
