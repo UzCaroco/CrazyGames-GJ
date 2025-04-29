@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using CrazyGames;
 using Fusion;
 using UnityEngine;
 
@@ -8,13 +9,14 @@ public class MissionStayAwayBomb : Missions
     [Header("Mission 6 - SAB")]
     [SerializeField] private GameObject prefabBomb;
 
-    [SerializeField] private bool isInitialized;
-
     [SerializeField] private byte index;
 
     [SerializeField] private int posXBomb, posYBomb;
     [SerializeField] private int lastXRandom, lastYRandom;
-    [SerializeField] private Vector2 spawnBomb;
+
+    [Networked] private Vector2 BombPosition { get; set; }
+    [Networked] private bool isInitialized { get; set; }
+
     [SerializeField] private bool isExploding;
 
     void Start()
@@ -24,11 +26,19 @@ public class MissionStayAwayBomb : Missions
 
     void Update()
     {
+
+    }
+
+    public override void FixedUpdateNetwork()
+    {
         StartMission();
     }
 
     void DrawPosition()
     {
+        /*if (!HasStateAuthority)
+            return;*/
+
         while (lastXRandom == posXBomb)
         {
             lastXRandom = Random.Range(-7,7);
@@ -41,7 +51,7 @@ public class MissionStayAwayBomb : Missions
 
         posXBomb = lastXRandom;
         posYBomb = lastYRandom;
-        spawnBomb = new Vector2(posXBomb, posYBomb);
+        BombPosition = new Vector2(posXBomb, posYBomb);
     }
 
     void initializeBomb()
@@ -51,7 +61,7 @@ public class MissionStayAwayBomb : Missions
             DrawPosition();
 
             Debug.Log("Spawndando em X:" + posXBomb + "em Y:" + posYBomb + "sendo a:" + index);
-            GameObject bomb = Instantiate(prefabBomb, spawnBomb, transform.rotation);
+            NetworkObject bomb = Runner.Spawn(prefabBomb, BombPosition, Quaternion.identity, null);
             bomb.transform.SetParent(transform);
             isInitialized = true;
             
