@@ -15,10 +15,6 @@ public class MissionAvoidProjectiles : Missions
     int[] quantityProjectiles = new int[4];
     
 
-    private void Start()
-    {
-        RandomLocalIntanciete();
-    }
     void Update()
     {
         StartMission();
@@ -59,7 +55,7 @@ public class MissionAvoidProjectiles : Missions
 
     protected override void StartMission()
     {
-        //Debug.Log("Avoid projéteis, Beginning!");
+        RandomLocalIntanciete();
     }
     protected override void CompleteMission()
     {

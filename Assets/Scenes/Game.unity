@@ -226,7 +226,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 73610355}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca8904f146d81a84bbfc7506b5461069, type: 3}
   m_Name: 
@@ -842,6 +842,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5781f5ae325705d438937c6e856a97ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  prefabBomb: {fileID: 2147233385447397752, guid: 59588d8cfecb3174ea03c85413f0992b, type: 3}
+  isInitialized: 0
+  index: 0
+  posXBomb: 0
+  posYBomb: 0
+  lastXRandom: 0
+  lastYRandom: 0
+  spawnBomb: {x: 0, y: 0}
+  isExploding: 0
 --- !u!114 &1563069022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -914,7 +923,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72a4fade3a89ae34198e1d5188ead778, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 2147233385447397751, guid: 59588d8cfecb3174ea03c85413f0992b, type: 3}
+  projectilePrefab: {fileID: 8791348976117388835, guid: 59588d8cfecb3174ea03c85413f0992b, type: 3}
 --- !u!114 &1563069028
 MonoBehaviour:
   m_ObjectHideFlags: 0
