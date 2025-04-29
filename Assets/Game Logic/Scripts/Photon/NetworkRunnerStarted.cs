@@ -2,6 +2,7 @@ using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NetworkRunnerStarted : MonoBehaviour
 {
@@ -18,8 +19,8 @@ public class NetworkRunnerStarted : MonoBehaviour
         {
             GameMode = GameMode.Host, // Ou Client, Server, etc.
             SessionName = "SalaTeste", // Nome da sala
-            //Scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex,
-            SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>()
+            //Scene = SceneManager.GetActiveScene().buildIndex,
+            SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>(),
         });
     }
 }
