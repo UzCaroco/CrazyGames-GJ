@@ -2,12 +2,15 @@ using System;
 using System.Collections.Generic;
 using Fusion;
 using Fusion.Sockets;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : NetworkBehaviour
 {
     // Score por jogador
     private Dictionary<PlayerRef, int> playerScores = new Dictionary<PlayerRef, int>();
+
+    [SerializeField] TextMeshProUGUI first, second, third;
 
     // Eventos locais para UI
     public static event Action<PlayerRef, int> OnScoreChanged;
