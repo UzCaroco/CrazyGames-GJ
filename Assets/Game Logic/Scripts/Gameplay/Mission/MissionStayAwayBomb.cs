@@ -26,7 +26,7 @@ public class MissionStayAwayBomb : Missions
 
     void Update()
     {
-
+        StartMission();
     }
 
     public override void FixedUpdateNetwork()
@@ -61,11 +61,15 @@ public class MissionStayAwayBomb : Missions
             DrawPosition();
 
             Debug.Log("Spawndando em X:" + posXBomb + "em Y:" + posYBomb + "sendo a:" + index);
-            NetworkObject bomb = Runner.Spawn(prefabBomb, BombPosition, Quaternion.identity, null);
+            NetworkObject bomb = Runner.Spawn(prefabBomb, BombPosition, Quaternion.identity);
             bomb.transform.SetParent(transform);
             isInitialized = true;
             
             StartCoroutine(CountDown());
+        }
+        else
+        {
+            print("nao");
         }
     }
 

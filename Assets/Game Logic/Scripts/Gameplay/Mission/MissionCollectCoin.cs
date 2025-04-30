@@ -7,6 +7,11 @@ public class MissionCollectCoin : Missions
 {
     [Header("Mission 1 - CC")]
     byte any;
+    //[Networked} byte totalPLayers;
+    //[Networked] byte takeCoin;
+    [Networked] private Vector2 BombPosition { get; set; }
+    [Networked] private bool isInitialized { get; set; }
+
     void Start()
     {
         

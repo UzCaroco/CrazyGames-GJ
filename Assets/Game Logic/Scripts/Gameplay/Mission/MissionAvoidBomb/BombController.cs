@@ -24,7 +24,6 @@ public class BombController : NetworkBehaviour
         
     }
 
-
     public bool GetIsExplode()
     {
         return isExplode;
