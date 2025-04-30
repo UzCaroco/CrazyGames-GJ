@@ -14,7 +14,7 @@ public class PlayerController : NetworkBehaviour
     Collider2D col;
     public LayerMask collisionLayers; // Define no Inspector os layers que vai colidir
 
-    PlayerChecker playerChecker;
+    GameManager gameManager;
 
     private void Awake()
     {
@@ -36,16 +36,22 @@ public class PlayerController : NetworkBehaviour
     public override void Spawned()
     {
         base.Spawned();
-        playerChecker = FindAnyObjectByType<PlayerChecker>();
+        gameManager = FindAnyObjectByType<GameManager>();
 
-        playerChecker.AdicionarPlayerALista(this);
+        if (gameManager != null)
+        {
+            gameManager.OnPlayerJoined(Object.InputAuthority, this);
+        }
     }
 
     public override void Despawned(NetworkRunner runner, bool hasState)
     {
         base.Despawned(runner, hasState);
 
-        playerChecker.RemovePlayerFromList(this);
+        if (gameManager != null)
+        {
+            gameManager.OnPlayerLeft(Object.InputAuthority, this);
+        }
     }
     public override void FixedUpdateNetwork()
     {

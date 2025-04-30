@@ -30,10 +30,15 @@ public class GameSessionBootstrapper : MonoBehaviour
 
         Debug.Log("[Bootstrapper] Este cliente tem autoridade no modo Shared. Spawnando GameManager.");
 
-        if (FindObjectOfType<GameManager>() == null)
+        try
         {
-            runner.Spawn(gameManagerPrefab, Vector3.zero, Quaternion.identity, null);
-            Debug.Log("[Bootstrapper] GameManager instanciado com sucesso.");
-        }
+            if (FindObjectOfType<GameManager>() == null)
+            {
+                runner.Spawn(gameManagerPrefab, Vector3.zero, Quaternion.identity, null);
+                Debug.Log("[Bootstrapper] GameManager instanciado com sucesso.");
+            }
+        }catch (System.Exception) {}
+
     }
+
 }
