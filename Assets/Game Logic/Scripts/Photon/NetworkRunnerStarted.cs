@@ -17,7 +17,7 @@ public class NetworkRunnerStarted : MonoBehaviour
 
         await runner.StartGame(new StartGameArgs()
         {
-            GameMode = GameMode.Host, // Ou Client, Server, etc.
+            GameMode = GameMode.Server, // Ou Client, Server, etc.
             SessionName = "SalaTeste", // Nome da sala
             //Scene = SceneManager.GetActiveScene().buildIndex,
             SceneManager = gameObject.AddComponent<NetworkSceneManagerDefault>(),

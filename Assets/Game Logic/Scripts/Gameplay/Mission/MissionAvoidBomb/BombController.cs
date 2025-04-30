@@ -39,11 +39,11 @@ public class BombController : NetworkBehaviour
             if (timeForExplosion >= 5)
             {
                 isCountDown = false;
-                ExplodeTheBomb();
+                ForExplodeTheBomb();
             }
         }
     }
-    void ExplodeTheBomb()
+    void ForExplodeTheBomb()
     {
         //animBomb.SetTrigger("Explode");
 
@@ -53,23 +53,49 @@ public class BombController : NetworkBehaviour
             {
                 if (playerManager.GetCollision()) // Usando o método GetCollision()
                 {
-                    Debug.Log($"Player {playerManager.name} colidiu com a bomba!");
+                    Debug.Log($"Player {playerManager.name} colidiu com a bomba e Explodio!");
                     
                     
                     // Aqui você pode causar dano, explodir, etc
                 }
+                else
+                {
+                    Debug.Log("");
+                }
             }
         }
 
-        isExplode = true;
+        Invoke("Explode", 1f);
+
         isCountDown = false;
     }
 
-    
+    void Explode()
+    {
+        if (Object.HasStateAuthority)
+        {
+            runner.Despawn(Object);
+        }
+    }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        foreach (var player in runner.ActivePlayers)
+        // Verifica se o objeto colidido tem um NetworkObject
+        NetworkObject netObj = collision.GetComponent<NetworkObject>();
+        if (netObj == null) return;
+
+        // Verifica se é um player da lista de jogadores ativos
+        if (!runner.IsPlayer.Equals(netObj.InputAuthority)) return;
+
+        // Tenta pegar o PlayerManager
+        PlayerManager playerManager = netObj.GetComponent<PlayerManager>();
+        if (playerManager != null && !playersCollided.Contains(playerManager))
+        {
+            playersCollided.Add(playerManager);
+            playerManager.SetCollision(true);
+        }
+
+        /*foreach (var player in runner.ActivePlayers)
         {
             NetworkObject playerObject = runner.GetPlayerObject(player);
             if (playerObject != null && collision.gameObject == playerObject.gameObject)
@@ -81,10 +107,26 @@ public class BombController : NetworkBehaviour
                     playerObject.GetComponent<PlayerManager>().SetCollision(true);
                 }
             }
-        }
+        }*/
     }
     void OnTriggerExit2D(Collider2D collision)
     {
+        // Verifica se o objeto colidido tem um NetworkObject
+        NetworkObject netObj = collision.GetComponent<NetworkObject>();
+        if (netObj == null) return;
+
+        // Verifica se é um player da lista de jogadores ativos
+        if (!runner.IsPlayer.Equals(netObj.InputAuthority)) return;
+
+        // Tenta pegar o PlayerManager
+        PlayerManager playerManager = netObj.GetComponent<PlayerManager>();
+        if (playerManager != null && !playersCollided.Contains(playerManager))
+        {
+            playersCollided.Add(playerManager);
+            playerManager.SetCollision(false);
+        }
+
+        /*
         foreach (var player in runner.ActivePlayers)
         {
             NetworkObject playerObject = runner.GetPlayerObject(player);
@@ -94,8 +136,10 @@ public class BombController : NetworkBehaviour
                 if (playerManager != null && playersCollided.Contains(playerManager))
                 {
                     playersCollided.Remove(playerManager);
+                    playerObject.GetComponent<PlayerManager>().SetCollision(false);
                 }
             }
         }
+        */
     }
 }
