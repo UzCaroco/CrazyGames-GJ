@@ -6,17 +6,31 @@ using UnityEngine;
 public class MissionStaySquare : Missions
 {
     [Header("Mission 7 - SS")]
-    byte any;
+    [SerializeField] private int posXSquare, posYSquere;
+    private Vector2 squarePos;
+    bool isInicialized;
+
     void Start()
     {
         
     }
-    public override void FixedUpdateNetwork()
+    private void FixedUpdate()
     {
-        base.FixedUpdateNetwork();
+        
+    }
+
+   /* protected override void FixedUpdateNetwork()
+    {
+        //base.FixedUpdateNetwork();
 
         StartMission();
-    }
+    }*/
+
+    void SquarePos()
+    {
+        posXSquare = Random.Range(-7, 7);
+    } 
+
     protected override void StartMission()
     {
         Debug.Log("Stay Square, Beginning!");
