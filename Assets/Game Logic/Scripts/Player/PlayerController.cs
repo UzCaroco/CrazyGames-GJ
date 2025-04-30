@@ -7,17 +7,20 @@ using CrazyGames;
 public class PlayerController : NetworkBehaviour
 {
     private Vector2 moveInput;
-    private PlayerInputs playerInput;
-
-    public sbyte speed = 5;
-    private Collider2D col;
     public LayerMask collisionLayers; // Define no Inspector os layers que vai colidir
 
-    GameManager gameManager;
+    private PlayerInputs playerInput;
+    private Collider2D col;
+    private GameManager gameManager;
+
+    public sbyte speed = 5;
 
     [Header("Missions Bool")]
 
-    [SerializeField] bool missionProjectile, missionCollectCoin, missionCopyMoviment, missionDontMove, missionMove, missionPushRival, missionBomb, missionStaySquare;
+    
+    public NetworkBool missionProjectile, missionCollectCoin, missionCopyMoviment, missionDontMove, missionMove, missionPushRival, missionBomb, missionStaySquare;
+
+    
 
     private void Awake()
     {

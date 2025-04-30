@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 19053805543826194}
   - component: {fileID: 19053805543826195}
   - component: {fileID: 19053805543826192}
+  - component: {fileID: 2495088106577844586}
   m_Layer: 0
   m_Name: GameManager Prefab
   m_TagString: Untagged
@@ -53,6 +54,7 @@ MonoBehaviour:
   - {fileID: 5588663556972665792}
   NetworkedBehaviours:
   - {fileID: 19053805543826192}
+  - {fileID: 2495088106577844586}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &19053805543826192
 MonoBehaviour:
@@ -66,6 +68,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52694b1ab8cce8048a164be7e74f5f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2495088106577844586
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 19053805543826193}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53052010be4830347b5edd48c8710953, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 19053805543826192}
 --- !u!1 &4087724282759456513
 GameObject:
   m_ObjectHideFlags: 0

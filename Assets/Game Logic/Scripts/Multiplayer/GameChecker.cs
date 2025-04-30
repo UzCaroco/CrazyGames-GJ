@@ -6,8 +6,11 @@ using UnityEngine;
 public class GameChecker : NetworkBehaviour
 {
     NetworkRunner runner;
+    [SerializeField] GameManager gameManager;
 
-    List<PlayerChecker> playerControllers = new List<PlayerChecker>();
+     List<PlayerChecker> playerCheckers = new List<PlayerChecker>();
+
+     List<PlayerChecker> playersSequence = new List<PlayerChecker>();
 
     private void OnEnable()
     {
@@ -29,27 +32,91 @@ public class GameChecker : NetworkBehaviour
         }*/
     }
 
-    public void AdicionarPlayerALista(PlayerChecker playerController)
+    public void AdicionarPlayerALista(PlayerChecker playerChecker)
     {
-        if (!playerControllers.Contains(playerController))
+        if (!playerCheckers.Contains(playerChecker))
         {
-            playerControllers.Add(playerController);
+            playerCheckers.Add(playerChecker);
         }
     }
 
-    public void CheckPlayersInTheEndOfMission(Missions missions)
+    public void CheckPlayersInTheEndOfMission(sbyte mission)
     {
-        foreach (var player in playerControllers)
+        switch (mission)
         {
-
+            case 0:
+                foreach (var playerChecker in playerCheckers)
+                {
+                    if (playerChecker.MissionProjectile(true))
+                    {
+                        Debug.Log("Player " + playerChecker + " completed the mission!");
+                    }
+                }
+                break;
+            case 3:
+                foreach (var playerChecker in playerCheckers)
+                {
+                    if (playerChecker.MissionDontMove(true))
+                    {
+                        Debug.Log("Player " + playerChecker + " completed the mission!");
+                    }
+                }
+                break;
+            case 4:
+                foreach (var playerChecker in playerCheckers)
+                {
+                    if (playerChecker.MissionMove(true))
+                    {
+                        Debug.Log("Player " + playerChecker + " completed the mission!");
+                    }
+                }
+                break;
+            case 6:
+                foreach (var playerChecker in playerCheckers)
+                {
+                    if (playerChecker.MissionBomb(true))
+                    {
+                        Debug.Log("Player " + playerChecker + " completed the mission!");
+                    }
+                }
+                break;
+            case 7:
+                foreach (var playerChecker in playerCheckers)
+                {
+                    if (playerChecker.MissionStaySquare(true))
+                    {
+                        Debug.Log("Player " + playerChecker + " completed the mission!");
+                    }
+                }
+                break;
         }
     }
 
-    public void RemovePlayerFromList(PlayerChecker playerController)
+
+    public void RemovePlayerFromList(PlayerChecker playerChecker)
     {
-        if (playerControllers.Contains(playerController))
+        if (playerCheckers.Contains(playerChecker))
         {
-            playerControllers.Remove(playerController);
+            playerCheckers.Remove(playerChecker);
+        }
+    }
+
+
+    // Missões onde os players recebem pontuações diferentes dependendo da ordem que completaram
+
+    public void NotifyMissionCompleted(PlayerChecker player)
+    {
+        if (!Runner.IsServer) return; // Só o Host pode registrar!
+
+        if (!playersSequence.Contains(player))
+        {
+            playersSequence.Add(player);
+            Debug.Log("Player " + player + " foi adicionado à lista na posição " + playersSequence.Count);
+
+
+
+
+            //gameManager.AtualizarPontuacao(player, completedPlayers.Count);
         }
     }
 }
