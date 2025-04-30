@@ -9,18 +9,20 @@ public class BombController : NetworkBehaviour
     [SerializeField] private NetworkRunner runner;
     Animator animBomb;
 
-    bool isCountDown, isExplode =  false, hasCollision = false;
-    private float timeForExplosion;
+    bool isCountDown = true, isExplode =  false, hasCollision = false;
+    [SerializeField] private float timeForExplosion;
 
     // Start is called before the first frame update
     void Start()
     {
         animBomb = GetComponent<Animator>();
+        runner = FindObjectOfType<NetworkRunner>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        TimeExplode();
         
     }
 

@@ -14,8 +14,10 @@ public class MissionStayAwayBomb : Missions
     [SerializeField] private int posXBomb, posYBomb;
     [SerializeField] private int lastXRandom, lastYRandom;
 
-    [Networked] private Vector2 BombPosition { get; set; }
-    [Networked] private bool isInitialized { get; set; }
+    // [Networked] private Vector2 BombPosition { get; set; }
+    private Vector2 BombPosition;
+    //[Networked] private bool isInitialized { get; set; }
+    private bool isInitialized;
 
     [SerializeField] private bool isExploding;
 
@@ -26,11 +28,19 @@ public class MissionStayAwayBomb : Missions
 
     void Update()
     {
+    }
+
+    private void FixedUpdate()
+    {
+        print("Rodando Upfdate"); 
         StartMission();
     }
 
     public override void FixedUpdateNetwork()
     {
+        print("Rodando Netork Upfdate");
+        if (!Object || !Object.IsValid || !Object.HasStateAuthority) return;
+
         StartMission();
     }
 

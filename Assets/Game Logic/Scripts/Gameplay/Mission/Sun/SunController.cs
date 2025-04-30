@@ -18,9 +18,9 @@ public class SunController : NetworkBehaviour
     private MissionCopyMovement missionCopyMovement; // SCRIPT COPY THE MOVEMENT 2
     private MissionDontMove missionDontMove; // SCRIPT DONT MOVE 3
     private MissionMove missionMove; // SCRIPT MOVE 4
-    private MissionPushRival missionPushRival; // SCRIPT PUSH THE RIVAL 5
+    private MissionPushRival missionPushRival; // SCRIPT PUSH THE RIVAL 5*/
     private MissionStayAwayBomb missionStayAwayBomb; // SCRIPT STAY AWAY FROM THE BOMB 6 
-    private MissionStaySquare missionStaySquare; // SCRIPT STAY IN THE GREEN SQUARE 7*/
+   // private MissionStaySquare missionStaySquare; // SCRIPT STAY IN THE GREEN SQUARE 7
     
     /// <summary>
     /// Controller the Missions
@@ -52,6 +52,8 @@ public class SunController : NetworkBehaviour
         mission[5] = GetComponentInChildren<MissionPushRival>();
         mission[6] = GetComponentInChildren<MissionStayAwayBomb>();
         mission[7] = GetComponentInChildren<MissionStaySquare>();
+
+        //missionStayAwayBomb = GetComponentInChildren<MissionStayAwayBomb>();
     }
 
 

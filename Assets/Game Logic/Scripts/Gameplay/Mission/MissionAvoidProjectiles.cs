@@ -17,6 +17,11 @@ public class MissionAvoidProjectiles : Missions
 
     void Update()
     {
+        //StartMission();
+    }
+
+    private void FixedUpdate()
+    {
         StartMission();
     }
 
