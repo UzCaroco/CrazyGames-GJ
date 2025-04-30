@@ -4,49 +4,44 @@ using Fusion;
 
 public class PlayerChecker : NetworkBehaviour
 {
-    [SerializeField] NetworkRunner runner;
-
-    List<PlayerController> playerControllers = new List<PlayerController>();
-
-    /*private void Start()
+    [SerializeField] private PlayerController playerController;
+    public bool MissionProjectile(bool expectedResult)
     {
-        foreach (var player in runner.ActivePlayers)
-        {
-            var networkObject = runner.GetPlayerObject(player); //Percorre os objetos de rede ativos (Players)
-
-            if (networkObject != null) //Verifica se o objeto de rede não é nulo
-            {
-                PlayerController playerController = networkObject.GetComponent<PlayerController>(); //Pega o script PlayerController do objeto de rede
-
-                if (playerController != null)
-                {
-                    playerControllers.Add(playerController); //Adiciona a lista
-                }
-            }
-        }
-    }*/
-
-    public void AdicionarPlayerALista(PlayerController playerController)
-    {
-        if (!playerControllers.Contains(playerController))
-        {
-            playerControllers.Add(playerController);
-        }
+        return true;
     }
 
-    public void CheckPlayersInTheEndOfMission(Missions missions)
+    public bool MissionCollectCoin(bool expectedResult)
     {
-        foreach (var player in playerControllers)
-        {
-            
-        }
+        return true;
     }
 
-    public void RemovePlayerFromList(PlayerController playerController)
+    public bool MissionCopyMoviment(bool expectedResult)
     {
-        if (playerControllers.Contains(playerController))
-        {
-            playerControllers.Remove(playerController);
-        }
+        return true;
     }
+
+    public bool MissionDontMove(bool expectedResult)
+    {
+        return true;
+    }
+
+    public bool MissionMove(bool expectedResult)
+    {
+        return true;
+    }
+    public bool MissionPushRival(bool expectedResult)
+    {
+        return true;
+    }
+
+    public bool MissionBomb(bool expectedResult)
+    {
+        return true;
+    }
+
+    public bool MissionStaySquare(bool expectedResult)
+    {
+        return true;
+    }
+
 }

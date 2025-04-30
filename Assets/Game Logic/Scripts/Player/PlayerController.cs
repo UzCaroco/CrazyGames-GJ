@@ -2,19 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using Fusion;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 using CrazyGames;
 
 public class PlayerController : NetworkBehaviour
 {
-    Vector2 moveInput;
-    PlayerInputs playerInput;
+    private Vector2 moveInput;
+    private PlayerInputs playerInput;
 
     public sbyte speed = 5;
-    Collider2D col;
+    private Collider2D col;
     public LayerMask collisionLayers; // Define no Inspector os layers que vai colidir
 
     GameManager gameManager;
+
+    [Header("Missions Bool")]
+
+    [SerializeField] bool missionProjectile, missionCollectCoin, missionCopyMoviment, missionDontMove, missionMove, missionPushRival, missionBomb, missionStaySquare;
 
     private void Awake()
     {
