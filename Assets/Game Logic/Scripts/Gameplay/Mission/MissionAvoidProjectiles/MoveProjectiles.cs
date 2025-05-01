@@ -20,7 +20,15 @@ public class MoveProjectiles : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log($"Tem autoridade? {Object.HasStateAuthority}");
+        if (Object.HasStateAuthority)
+        {
+            transform.Translate(direction * speedObjects * Runner.DeltaTime);
+            if (transform.position.x > 30 || transform.position.x < -30 || transform.position.y > 30 || transform.position.y < -30)
+            {
+                Runner.Despawn(Object);
+            }
+        }
     }
     public override void FixedUpdateNetwork()
     {

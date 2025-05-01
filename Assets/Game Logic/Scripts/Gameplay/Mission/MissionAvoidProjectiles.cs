@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using CrazyGames;
 using Fusion;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MissionAvoidProjectiles : Missions
@@ -58,11 +59,19 @@ public class MissionAvoidProjectiles : Missions
     
     IEnumerator CountDown()
     {
-        InstacienteProjectiles();
+        while(indexProj[randomURDL] != randomQuantProject[randomURDL])
+        {
+            InstacienteProjectiles();
 
-        yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.5f);
 
-        LocalIntanciete();
+            LocalIntanciete();
+        }
+
+        if(indexProj[randomURDL] == randomQuantProject[randomURDL])
+        {
+            FinishAllProjectiles();
+        }
     }
     
 
@@ -169,14 +178,16 @@ public class MissionAvoidProjectiles : Missions
             else if (randomURDL == 2)
                 extremes = -14;
 
-            float randomPositionSpawn = Random.Range(-22, 22);
+            print("extremes" + extremes);
+            float randomPositionSpawn = Random.Range(-10.5f, 10.5f);
 
             if (indexProj[randomURDL] != randomQuantProject[randomURDL])
             {
                 NetworkObject obj = Runner.Spawn(projectilePrefab, new Vector3(randomPositionSpawn, extremes, 0), Quaternion.identity);
+                obj.transform.SetParent(transform);
+                indexProj[randomURDL]++;
                 if (obj.TryGetComponent<MoveProjectiles>(out var projectileScript))
                 {
-                    indexProj[randomURDL]++;
                     projectileScript.GetDirAndIndex(directionsProjectitles, randomURDL);
                 }
             }
@@ -196,11 +207,15 @@ public class MissionAvoidProjectiles : Missions
             else if (randomURDL == 3)
                 extremes = -22;
 
-            float randomPositionSpawn = Random.Range(-14, 14);
+            print("extremes" + extremes);
+
+            float randomPositionSpawn = Random.Range(-7f, 7f);
 
             if (indexProj[randomURDL] != randomQuantProject[randomURDL])
             {
                 NetworkObject obj = Runner.Spawn(projectilePrefab, new Vector3(extremes, randomPositionSpawn, 0), Quaternion.identity);
+                obj.transform.SetParent(transform);
+                indexProj[randomURDL]++;
                 if (obj.TryGetComponent<MoveProjectiles>(out var projectileScript))
                 {
                     projectileScript.GetDirAndIndex(directionsProjectitles, randomURDL);
