@@ -12,7 +12,7 @@ public class GameSessionBootstrapper : MonoBehaviour
     private void Start()
     {
         runner = FindObjectOfType<NetworkRunner>();
-        StartCoroutine(WaitAndSpawnGameManager());
+        //StartCoroutine(WaitAndSpawnGameManager());
     }
 
     private IEnumerator WaitAndSpawnGameManager()
