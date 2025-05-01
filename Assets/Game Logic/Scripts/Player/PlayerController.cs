@@ -37,6 +37,7 @@ public class PlayerController : NetworkBehaviour
 
     private void OnEnable()
     {
+        /*
         playerInput.Player.Enable();
 
         Camera cam = FindAnyObjectByType<Camera>();
@@ -48,7 +49,7 @@ public class PlayerController : NetworkBehaviour
         {
             Debug.LogError("Camera não encontrada!");
         }
-
+        */
     }
 
     private void OnDisable()
