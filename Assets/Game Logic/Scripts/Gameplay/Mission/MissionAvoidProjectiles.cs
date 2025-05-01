@@ -9,9 +9,10 @@ public class MissionAvoidProjectiles : Missions
     [SerializeField] NetworkObject projectilePrefab;
 
     bool isInstantiate = false;
-    private Vector2[] directionsProjectitles;
+    private Vector2[] directionsProjectitles = new Vector2[4];
 
-    private int lastRandom;
+    [SerializeField] int totalProjects;
+
     int[] quantityProjectiles = new int[4];
     
 
@@ -31,6 +32,7 @@ public class MissionAvoidProjectiles : Missions
     }
     public override void CallStartMission()
     {
+        StartMission();
         print("Begginng");
     }
     public override void CallCompleteMission()
@@ -40,6 +42,16 @@ public class MissionAvoidProjectiles : Missions
 
     void SetupDirections()
     {
+        directionsProjectitles[0] = Vector2.up;
+        directionsProjectitles[1] = Vector2.right;
+        directionsProjectitles[2] = Vector2.down;
+        directionsProjectitles[3] = Vector2.left;
+    }
+
+    void RandomDirInstanciete()
+    {
+        //RANDOM UP, RIGHT, DOWN, LEFT
+        sbyte randomURDL = (sbyte)Random.Range(0, 5);
 
     }
 
@@ -74,6 +86,9 @@ public class MissionAvoidProjectiles : Missions
     protected override void StartMission()
     {
         RandomLocalIntanciete();
+
+        SetupDirections();
+        RandomDirInstanciete();
     }
     protected override void CompleteMission()
     {

@@ -9,10 +9,12 @@ public class MoveProjectiles : NetworkBehaviour
     [SerializeField] private Rigidbody2D rbProjectiles;
     private int speedObjects;
 
+    private bool touchPlayer;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        rbProjectiles.velocity = direction * speedObjects;
     }
 
     // Update is called once per frame

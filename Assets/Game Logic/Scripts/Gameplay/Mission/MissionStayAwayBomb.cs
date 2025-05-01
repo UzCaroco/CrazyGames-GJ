@@ -16,7 +16,7 @@ public class MissionStayAwayBomb : Missions
     private byte indexExplode = 0;
 
     [SerializeField] private int posXBomb, posYBomb;
-    [SerializeField] private int lastXRandom, lastYRandom;
+    [SerializeField] private sbyte lastXRandom, lastYRandom;
 
     // [Networked] private Vector2 BombPosition { get; set; }
     private Vector2 BombPosition;
@@ -71,12 +71,12 @@ public class MissionStayAwayBomb : Missions
 
         while (lastXRandom == posXBomb)
         {
-            lastXRandom = Random.Range(-7, 7);
+            lastXRandom = (sbyte)Random.Range(-7, 7);
         }
 
         while (lastYRandom == posYBomb)
         {
-            lastYRandom = Random.Range(-4, 4);
+            lastYRandom = (sbyte)Random.Range(-4, 4);
         }
 
         posXBomb = lastXRandom;
