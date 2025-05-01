@@ -3,9 +3,13 @@ using System.Collections.Generic;
 using Fusion;
 using UnityEngine;
 using CrazyGames;
+using Cinemachine;
 
 public class PlayerController : NetworkBehaviour
 {
+    public GameObject cameraRoot;
+    [SerializeField] public CinemachineVirtualCamera virtualCam;
+
     private Vector2 moveInput;
     public LayerMask collisionLayers; // Define no Inspector os layers que vai colidir
 
@@ -28,6 +32,7 @@ public class PlayerController : NetworkBehaviour
 
         playerInput = new PlayerInputs();
         col = GetComponent<Collider2D>();
+
     }
 
     private void OnEnable()
@@ -47,6 +52,19 @@ public class PlayerController : NetworkBehaviour
         if (gameManager != null)
         {
             gameManager.OnPlayerJoined(Object.InputAuthority, this);
+        }
+        if (Object.HasInputAuthority || Object.HasStateAuthority) // Só ativa a câmera do jogador local
+        {
+            print("entrei aqui");
+
+            if (cameraRoot != null) cameraRoot.SetActive(true);
+            else print("nulo");
+            virtualCam.Follow = this.transform;
+            virtualCam.LookAt = this.transform;
+        }
+        else
+        {
+            cameraRoot.SetActive(false);
         }
     }
 
