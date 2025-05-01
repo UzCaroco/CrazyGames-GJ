@@ -361,6 +361,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4bd34f5b900f1d4b9239fac1bff60a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runner: {fileID: 0}
+  TimeToArriveOnTheSquare: 15
+  squarePrefab: {fileID: 1607036666089159234, guid: 506172e7f6477c440acc36c156c3af5a, type: 3}
   posXSquare: 0
   posYSquere: 0
 --- !u!114 &6456106406888569077
