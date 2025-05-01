@@ -30,7 +30,7 @@ public class MoveProjectiles : NetworkBehaviour
         if (Object.HasStateAuthority)
         {
             transform.Translate(direction * speedObjects * Runner.DeltaTime);
-            if (transform.position.x > 10 || transform.position.x < -10 || transform.position.y > 10 || transform.position.y < -10)
+            if (transform.position.x > 30 || transform.position.x < -30 || transform.position.y > 30 || transform.position.y < -30)
             {
                 Runner.Despawn(Object);
             }

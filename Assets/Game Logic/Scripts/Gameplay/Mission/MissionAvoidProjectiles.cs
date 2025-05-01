@@ -10,7 +10,7 @@ public class MissionAvoidProjectiles : Missions
     [SerializeField] NetworkObject projectilePrefab;
     //private NetworkRunner runner;
 
-    bool isInstantiate = false;
+    [SerializeField]bool isInstantiate = false;
 
     private Vector2[] directionsProjectitles = new Vector2[4];
 
@@ -20,7 +20,7 @@ public class MissionAvoidProjectiles : Missions
     sbyte randomURDL;
     [SerializeField] int[] randomQuantProject = new int[4];
 
-    [SerializeField] int[] projectilesLess = new int[4];
+    [SerializeField] int[] projectilesLess = new int[4] { 25, 25, 25, 25, };
     [SerializeField] int totalProjects;
 
     [SerializeField] sbyte[] indexProj = new sbyte[4];
@@ -31,13 +31,16 @@ public class MissionAvoidProjectiles : Missions
 
     public override void FixedUpdateNetwork()
     {
-        StartMission();
+        if (isInstantiate)
+        {
+          StartMission();
+            isInstantiate = false;
+        }
     }
 
     public override void CallStartMission()
     {
         //runner = FindObjectOfType<NetworkRunner>();
-        print("Begginng");
 
         StartMission();
     }
@@ -71,6 +74,7 @@ public class MissionAvoidProjectiles : Missions
         //RANDOM UP, RIGHT, DOWN, LEFT
         randomURDL = (sbyte)Random.Range(0, 4);
 
+        print("random" + randomURDL);
     }
 
     void RandonQuantProjectiles()
@@ -83,6 +87,8 @@ public class MissionAvoidProjectiles : Missions
         // or
 
         randomQuantProject[randomURDL] = Random.Range(0, 26);
+
+        print("randomQuant" +        randomQuantProject[randomURDL]);
     }
 
     void QuantProjectSpawn()
@@ -90,13 +96,17 @@ public class MissionAvoidProjectiles : Missions
         //total de bomba = 25 - valor sorteado 
         //projectilesLess[0] = quantityProjectiles[0] - randomQuantProject[0];
 
+        print("projetilless" +projectilesLess[randomURDL]);
+
         if (projectilesLess[randomURDL] - randomQuantProject[randomURDL] > 0)
         {
+            print("maior");
             projectilesLess[randomURDL] = quantityProjectiles[randomURDL] - randomQuantProject[randomURDL];
             totalProjects -= randomQuantProject[randomURDL];
         }
         else if (projectilesLess[randomURDL] - randomQuantProject[randomURDL] <= 0)
         {
+            print("menor");
             // se caso o valor do que falta - o valor sorteado for abaixo de 0 
             // deve pegar o valor sortedo e deccrescente em um ate que o valor que falta - o valor sorteado fique 0 
 
@@ -113,15 +123,15 @@ public class MissionAvoidProjectiles : Missions
         }
         else if (projectilesLess[randomURDL] - randomQuantProject[randomURDL] == 0)
         {
-            quantityProjectiles[randomURDL] = 0;
+            print("igual");
+            projectilesLess[randomURDL] = 0;
             FinishAllProjectiles();
 
             //Chamar metodo para sortear outro lado
         }
+
+        print("projetilless" + projectilesLess[randomURDL]);
     }
-    void QuantProjectSpawnRight() { }
-    void QuantProjectSpawnDown()  { }
-    void QuantProjectSpawnLeft()  { }
 
     void FinishAllProjectiles()
     {
@@ -243,6 +253,7 @@ public class MissionAvoidProjectiles : Missions
         for (int i = 0; i < quantityProjectiles.Length; i++)
         {
             indexProj[i] = 0;
+            projectilesLess[i] = 25;
         }
 
         Debug.Log("Avoid projéteis, Finish!");
