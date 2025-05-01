@@ -387,8 +387,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _stateAuthorityChangeErrorCorrectionDelta: 0
   SyncScale: 0
-  SyncParent: 1
-  _autoAOIOverride: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
   DisableSharedModeInterpolation: 0
 --- !u!1 &8526299751014317634
 GameObject:
