@@ -6,6 +6,7 @@ using UnityEngine;
 public class MissionStaySquare : Missions
 {
     [Header("Mission 7 - SS")]
+    SquareController squareController;
     [SerializeField] private NetworkRunner runner;
 
     [SerializeField] float TimeToArriveOnTheSquare = 15f;
@@ -16,6 +17,14 @@ public class MissionStaySquare : Missions
 
     bool isInicialized;
 
+    private void Awake()
+    {
+        runner = FindObjectOfType<NetworkRunner>();
+        squareController = GetComponentInChildren<SquareController>();
+
+        isInicialized = false;
+        squareController.SetFinishTask(false);
+    }
     void Start()
     {
         StartMission();
@@ -37,7 +46,8 @@ public class MissionStaySquare : Missions
 
         yield return new WaitForSeconds(TimeToArriveOnTheSquare);
 
-        controlPoint();
+        GetResults();
+        ControlScorePlayers();
     }
 
 
@@ -67,14 +77,34 @@ public class MissionStaySquare : Missions
         }
     }
 
-    void controlPoint()
+    void GetResults()
     {
+        squareController.SetFinishTask(true);
+    }
 
+    void ControlScorePlayers()
+    {
+        foreach (var player in runner.ActivePlayers)
+        {
+            NetworkObject playerObject = runner.GetPlayerObject(player);
+            if (playerObject != null)
+            {
+                var playerController = playerObject.GetComponent<PlayerController>(); ///////////Script que tera as informações
+                if (playerController != null)
+                {
+                    //se o player teve colissao com o quadrado 
+                    // ++score
+
+                    //se nao sem score a mais
+                }
+            }
+        }
     }
 
     protected override void StartMission()
     {
         Debug.Log("Stay Square, Beginning!");
+
         StartCoroutine(Countdown());
     }
     protected override void CompleteMission()

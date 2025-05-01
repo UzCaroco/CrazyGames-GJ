@@ -595,6 +595,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4bd34f5b900f1d4b9239fac1bff60a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runner: {fileID: 0}
+  TimeToArriveOnTheSquare: 10
+  squarePrefab: {fileID: 0}
+  posXSquare: 0
+  posYSquere: 0
 --- !u!114 &1563069021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -699,7 +704,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c646c56a8b1ea1458641fa774b90a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runner: {fileID: 531660912}
+  playerController: {fileID: 0}
 --- !u!1 &2052637918
 GameObject:
   m_ObjectHideFlags: 0
