@@ -25,7 +25,12 @@ public class MissionAvoidProjectiles : Missions
         StartMission();
     }
 
-    void SetupDirections()
+    public override void FixedUpdateNetwork()
+    {
+
+    }
+
+        void SetupDirections()
     {
 
     }

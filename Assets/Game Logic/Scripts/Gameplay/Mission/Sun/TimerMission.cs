@@ -21,6 +21,9 @@ public class TimerMission : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
+    }
+    private void FixedUpdate()
+    {
         StartTimerToWait();
         StartTimerToComplete();
     }

@@ -15,6 +15,10 @@ public class MissionCopyMovement : Missions
     {
         StartMission();
     }
+    public override void FixedUpdateNetwork()
+    {
+    }
+
     protected override void StartMission()
     {
         Debug.Log("COPY THE MOVEMENT, Beginning!");

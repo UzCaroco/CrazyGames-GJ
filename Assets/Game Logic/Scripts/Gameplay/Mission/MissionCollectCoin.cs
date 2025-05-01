@@ -20,6 +20,11 @@ public class MissionCollectCoin : Missions
     {
         StartMission();
     }
+    public override void FixedUpdateNetwork()
+    {
+       // base.FixedUpdateNetwork();
+    }
+
 
     protected override void StartMission()
     {

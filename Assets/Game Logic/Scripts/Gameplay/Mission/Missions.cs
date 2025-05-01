@@ -5,7 +5,7 @@ using UnityEngine;
 
 public abstract class Missions : NetworkBehaviour
 {
-    //protected abstract void FixedUpdateNetwork();
+    public override abstract void FixedUpdateNetwork();
 
     protected GameObject prefabObjects;
     protected abstract void StartMission();

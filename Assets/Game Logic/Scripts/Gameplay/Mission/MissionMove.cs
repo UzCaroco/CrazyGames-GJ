@@ -15,6 +15,10 @@ public class MissionMove : Missions
     {
         StartMission();
     }
+    public override void FixedUpdateNetwork()
+    {
+    }
+
     protected override void StartMission()
     {
         Debug.Log("MOVE, Beginning!");

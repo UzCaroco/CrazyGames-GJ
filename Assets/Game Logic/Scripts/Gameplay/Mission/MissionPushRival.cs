@@ -16,6 +16,11 @@ public class MissionPushRival : Missions
     {
         
     }
+    public override void FixedUpdateNetwork()
+    {
+
+    }
+
     protected override void StartMission()
     {
         Debug.Log("Push Rival, Beginning!");

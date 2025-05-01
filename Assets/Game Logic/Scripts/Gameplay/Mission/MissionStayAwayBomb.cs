@@ -7,6 +7,7 @@ using UnityEngine;
 public class MissionStayAwayBomb : Missions
 {
     [Header("Mission 6 - SAB")]
+
     [SerializeField] private GameObject prefabBomb;
 
     [SerializeField] private byte index;
@@ -17,7 +18,7 @@ public class MissionStayAwayBomb : Missions
     // [Networked] private Vector2 BombPosition { get; set; }
     private Vector2 BombPosition;
     //[Networked] private bool isInitialized { get; set; }
-    private bool isInitialized;
+    private bool isInicialized;
 
     [SerializeField] private bool isExploding;
 
@@ -30,15 +31,15 @@ public class MissionStayAwayBomb : Missions
     {
     }
 
-    private void FixedUpdate()
+    /*private void FixedUpdate()
     {
         print("Rodando Upfdate"); 
         StartMission();
-    }
+    }*/
 
     public override void FixedUpdateNetwork()
     {
-        print("Rodando Netork Upfdate");
+        Debug.Log("Rodando Netork Upfdate");
         if (!Object || !Object.IsValid || !Object.HasStateAuthority) return;
 
         StartMission();
@@ -66,14 +67,14 @@ public class MissionStayAwayBomb : Missions
 
     void initializeBomb()
     {
-        if (!isInitialized && index < 5)
+        if (!isInicialized && index < 5)
         {
             DrawPosition();
 
             Debug.Log("Spawndando em X:" + posXBomb + "em Y:" + posYBomb + "sendo a:" + index);
             NetworkObject bomb = Runner.Spawn(prefabBomb, BombPosition, Quaternion.identity);
             bomb.transform.SetParent(transform);
-            isInitialized = true;
+            isInicialized = true;
             
             StartCoroutine(CountDown());
         }
@@ -104,7 +105,7 @@ public class MissionStayAwayBomb : Missions
 
         yield return new WaitForSeconds(0.5f);
 
-        isInitialized = false;
+        isInicialized = false;
     }
 
     protected override void StartMission()

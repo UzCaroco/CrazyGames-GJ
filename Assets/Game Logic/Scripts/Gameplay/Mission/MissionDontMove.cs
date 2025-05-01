@@ -16,6 +16,11 @@ public class MissionDontMove : Missions
     {
         StartMission();
     }
+    public override void FixedUpdateNetwork()
+    {
+
+    }
+
     protected override void StartMission()
     {
         Debug.Log("DONT MOVE, Beginning!");
