@@ -7,7 +7,7 @@ using Cinemachine;
 
 public class PlayerController : NetworkBehaviour
 {
-    public GameObject cameraRoot;
+    //public GameObject cameraRoot;
     [SerializeField] public CinemachineVirtualCamera virtualCam;
 
     private Vector2 moveInput;
@@ -68,15 +68,12 @@ public class PlayerController : NetworkBehaviour
         {
             print("entrei aqui");
 
-            cameraRoot.gameObject.SetActive(true);
-            cameraRoot.tag = "MainCamera"; // se quiser usar Camera.main
+            Camera cam = GetComponentInChildren<Camera>(true); // true = busca em objetos inativos
+            cam.gameObject.SetActive(true);
+            //cameraRoot.tag = "MainCamera"; // se quiser usar Camera.main
 
             virtualCam.Follow = this.transform;
             virtualCam.LookAt = this.transform;
-        }
-        else
-        {
-            cameraRoot.SetActive(false);
         }
     }
 
