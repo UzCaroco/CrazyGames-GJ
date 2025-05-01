@@ -70,19 +70,19 @@ public class PlayerController : NetworkBehaviour
 
         if (moveDelta != Vector2.zero)
         {
-            //RaycastHit2D hit = Physics2D.BoxCast(transform.position, col.bounds.size, 0f, moveDelta.normalized, moveDelta.magnitude, collisionLayers);
+            RaycastHit2D hit = Physics2D.BoxCast(transform.position, col.bounds.size, 0f, moveDelta.normalized, moveDelta.magnitude, collisionLayers);
 
-            transform.Translate(moveDelta);
 
-            /*if (!hit)
+
+            if (!hit)
             {
-                
+                transform.Translate(moveDelta);
             }
             else
             {
                 // Opcional: pode fazer algo quando colidir, tipo logar
                 Debug.Log("Bateu em: " + hit.collider.name);
-            }*/
+            }
         }
 
     }
