@@ -130,16 +130,9 @@ public class MissionAvoidProjectiles : Missions
         }
         else if (totalProjects > 0)
         {
-            /*foreach(var projectile in projectilesLess)
-            {
-                do
-                {*/
-                    RandomDirInstanciete();
-                    RandonQuantProjectiles();
-                    StartCoroutine(CountDown());
-                //}
-                //while (projectile == 0);
-            //}
+            RandomDirInstanciete();
+            RandonQuantProjectiles();
+            StartCoroutine(CountDown());
         }
     }
 
@@ -236,6 +229,13 @@ public class MissionAvoidProjectiles : Missions
     }
     protected override void CompleteMission()
     {
+        totalProjects = 100;
+
+        for (int i = 0; i < quantityProjectiles.Length; i++)
+        {
+            indexProj[i] = 0;
+        }
+
         Debug.Log("Avoid projéteis, Finish!");
     }
 }
