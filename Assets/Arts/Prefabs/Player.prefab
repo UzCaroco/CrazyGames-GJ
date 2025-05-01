@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4146313219485811632}
   m_Layer: 0
   m_Name: Main Camera
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -175,6 +175,7 @@ MonoBehaviour:
   - {fileID: 8356827076473633321}
   - {fileID: 2707444379609546073}
   - {fileID: 5940313860153030767}
+  - {fileID: 4570222305168160865}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &8356827076473633321
 MonoBehaviour:
@@ -366,6 +367,7 @@ GameObject:
   - component: {fileID: 8571884054460199841}
   - component: {fileID: 2707444379609546073}
   - component: {fileID: 5940313860153030767}
+  - component: {fileID: 4570222305168160865}
   m_Layer: 0
   m_Name: Ex 1
   m_TagString: Player
@@ -524,3 +526,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 2707444379609546073}
+--- !u!114 &4570222305168160865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8526299751014317634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _stateAuthorityChangeErrorCorrectionDelta: 0
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
