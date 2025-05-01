@@ -38,6 +38,17 @@ public class PlayerController : NetworkBehaviour
     private void OnEnable()
     {
         playerInput.Player.Enable();
+
+        Camera cam = FindAnyObjectByType<Camera>();
+        if (cam != null)
+        {
+            cam.gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.LogError("Camera não encontrada!");
+        }
+
     }
 
     private void OnDisable()
