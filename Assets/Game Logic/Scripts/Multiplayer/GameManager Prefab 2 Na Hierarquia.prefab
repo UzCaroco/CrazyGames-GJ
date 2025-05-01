@@ -270,6 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 8791348976117388835, guid: 59588d8cfecb3174ea03c85413f0992b, type: 3}
+  totalProjects: 0
 --- !u!114 &3695284744361588157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -793,18 +794,20 @@ MonoBehaviour:
   - 2
   - 6
   - 7
-  - 11
-  - 5
-  - 8
-  - 10
-  timeCompleteMission:
   - 1
   - 5
   - 8
-  - 10
-  - 4
-  - 7
-  - 9
+  - 3
+  - 3
+  timeCompleteMission:
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
+  - 20
   isFinishWait: 0
   isFinishMission: 0
 --- !u!1 &8852612098296503133

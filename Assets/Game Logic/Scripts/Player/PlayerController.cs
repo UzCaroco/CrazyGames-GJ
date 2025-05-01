@@ -87,7 +87,20 @@ public class PlayerController : NetworkBehaviour
 
     }
 
-    
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Adicionou 1 ponto");
+
+        if (collision.CompareTag("Coin"))
+        {
+            // Adiciona 1 ponto ao jogador
+            gameManager.RPC_AddScore(Object.InputAuthority, 1);
+            Debug.Log("Adicionou 1 ponto");
+            Destroy(collision.gameObject);
+        }
+    }
+
+
 }
 
 
