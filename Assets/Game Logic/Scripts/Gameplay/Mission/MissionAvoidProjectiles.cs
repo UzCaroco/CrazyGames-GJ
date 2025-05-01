@@ -47,6 +47,7 @@ public class MissionAvoidProjectiles : Missions
         CompleteMission();
     }
 
+    
     IEnumerator CountDown()
     {
         InstacienteProjectiles();
@@ -55,7 +56,7 @@ public class MissionAvoidProjectiles : Missions
 
         LocalIntanciete();
     }
-
+    
 
     void SetupDirections()
     {
@@ -132,7 +133,7 @@ public class MissionAvoidProjectiles : Missions
         {
             RandomDirInstanciete();
             RandonQuantProjectiles();
-            //StartCoroutine(CountDown());
+            StartCoroutine(CountDown());
         }
     }
 
@@ -165,14 +166,11 @@ public class MissionAvoidProjectiles : Missions
             }
             else 
             {
-                if(indexProj[randomURDL] >= randomQuantProject[randomURDL])
+                if(indexProj[randomURDL] >= quantityProjectiles[randomURDL])
                 {
                     Debug.Log("Todos projéteis dessa direção foram instanciados.");
                     FinishAllProjectiles();
-                    //yield break;
                 }
-
-                //StartCoroutine(CountDown());
             }
         }
         else // 1 or 3
@@ -194,7 +192,11 @@ public class MissionAvoidProjectiles : Missions
             }
             else
             {
-                //StartCoroutine(CountDown());
+                if (indexProj[randomURDL] >= quantityProjectiles[randomURDL])
+                {
+                    Debug.Log("Todos projéteis dessa direção foram instanciados.");
+                    FinishAllProjectiles();
+                }
             }
         }
     }
