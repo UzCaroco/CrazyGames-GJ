@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MoveProjectiles : NetworkBehaviour
 {
-    Vector2 direction;
+    [SerializeField] Vector2 direction;
     [SerializeField] private Rigidbody2D rbProjectiles;
     private int speedObjects;
 

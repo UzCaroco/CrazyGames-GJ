@@ -18,13 +18,13 @@ public class MissionAvoidProjectiles : Missions
     //private sbyte posXSpawn, posYSpawn;
 
     sbyte randomURDL;
-    int[] randomQuantProject = new int[25];
+    [SerializeField] int[] randomQuantProject = new int[25];
 
-    int[] projectilesLess = new int[4];
+    [SerializeField] int[] projectilesLess = new int[4];
     [SerializeField] int totalProjects;
 
-    sbyte[] indexProj = new sbyte[4];
-    int[] quantityProjectiles = new int[4] { 25, 25, 25, 25, };
+    [SerializeField] sbyte[] indexProj = new sbyte[4];
+    [SerializeField] int[] quantityProjectiles = new int[4] { 25, 25, 25, 25, };
     void Update()
     {
         //StartMission();
