@@ -553,7 +553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d73b0a95be81246699cf0d9ecdc01863, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PreferredRunner: 3
+  PreferredRunner: 2
   Components:
   - {fileID: 1643511501733891368}
   _guid: 1c3a21a7-ce2a-4f6e-
