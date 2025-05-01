@@ -19,7 +19,7 @@ public class MissionStaySquare : Missions
 
     private void Awake()
     {
-        runner = FindObjectOfType<NetworkRunner>();
+        
     }
     void Start()
     {
@@ -38,6 +38,7 @@ public class MissionStaySquare : Missions
     }
     public override void CallStartMission()
     {
+        runner = FindObjectOfType<NetworkRunner>();
         StartMission();
         print("Begginng");
     }
