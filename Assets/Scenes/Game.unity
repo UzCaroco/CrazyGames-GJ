@@ -25540,6 +25540,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 7663681712904282676, guid: 20ac8fa624f79864bb1c38fd1cdc4efd, type: 3}
+  runner: {fileID: 531660912}
 --- !u!114 &531660911
 MonoBehaviour:
   m_ObjectHideFlags: 0
