@@ -52,7 +52,9 @@ public class GameManager : NetworkBehaviour, INetworkRunnerCallbacks
     [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
     public void RPC_AddScore(PlayerRef player, int amount)
     {
+        Debug.Log("cu");
         if (!HasStateAuthority) return;
+        Debug.Log("pica");
 
         if (!playerScores.ContainsKey(player))
             playerScores[player] = 0;

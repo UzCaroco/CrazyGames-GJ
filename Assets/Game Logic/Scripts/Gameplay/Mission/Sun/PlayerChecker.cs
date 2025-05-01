@@ -206,14 +206,14 @@ public class PlayerChecker : NetworkBehaviour
     private void AddScoreToSelf(int amount)
     {
         var gameManager = FindObjectOfType<GameManager>();
-        if (gameManager != null)
-        {
-            if (HasInputAuthority)
-            {
-                gameManager.RPC_AddScore(Runner.LocalPlayer, amount);
-            }
+        if (gameManager == null) return;
 
-            // IMPORTANTE: esse valor aqui é só o que o cliente local sabe por enquanto
+        if (HasInputAuthority)
+        {
+            gameManager.RPC_AddScore(Runner.LocalPlayer, amount);
+            Debug.Log("pontuação adicionada");
+
+            // Esse valor é local e pode estar desatualizado
             int pontuacaoLocal = gameManager.GetScore(Object.InputAuthority);
             Debug.Log($"[PlayerChecker] Pontuação local do player: {pontuacaoLocal}");
         }
