@@ -24,6 +24,10 @@ public class MissionPushRival : Missions
     {
         print("Begginng");
     }
+    public override void CallCompleteMission()
+    {
+        CompleteMission();
+    }
 
     protected override void StartMission()
     {

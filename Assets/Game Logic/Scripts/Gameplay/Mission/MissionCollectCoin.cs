@@ -29,6 +29,10 @@ public class MissionCollectCoin : Missions
     {
         print("Begginng");
     }
+    public override void CallCompleteMission()
+    {
+        CompleteMission();
+    }
     protected override void StartMission()
     {
         Debug.Log("Collect Coin, Beginning!");

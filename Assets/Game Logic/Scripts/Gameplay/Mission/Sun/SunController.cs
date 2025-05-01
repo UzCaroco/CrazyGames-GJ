@@ -115,8 +115,9 @@ public class SunController : NetworkBehaviour
     void DesactiveMission(){
         if (isFinishMission)
         {
-            mission[randomNumber].enabled = false;
+            mission[randomNumber].CallCompleteMission();
             isFinishMission = false;
+            mission[randomNumber].enabled = false;
 
             Draw();
         }

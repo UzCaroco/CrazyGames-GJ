@@ -28,19 +28,17 @@ public class MissionStaySquare : Missions
     private void FixedUpdate()
     {
         print("Update");
-        if (squareController != null)
-        {
-            if (squareController.stateMission())
-            {
-                CompleteMission();
-            }
-        }
     }
     public override void CallStartMission()
     {
         runner = FindObjectOfType<NetworkRunner>();
+
         StartMission();
         print("Begginng");
+    }
+    public override void CallCompleteMission()
+    {
+        CompleteMission();
     }
     public override void FixedUpdateNetwork()
     {
@@ -125,7 +123,8 @@ public class MissionStaySquare : Missions
     }
     protected override void CompleteMission()
     {
-        isInicialized = false;
         Debug.Log("Stay Square, Finish!");
+        isInicialized = false;
+        squareController.SetFinishTask(false);
     }
 }

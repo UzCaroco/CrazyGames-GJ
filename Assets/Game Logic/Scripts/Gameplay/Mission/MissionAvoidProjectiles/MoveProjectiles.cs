@@ -21,7 +21,12 @@ public class MoveProjectiles : NetworkBehaviour
         
     }
 
-    public void GetDirections(Vector2[] directions, int index)
+    public void GetDirAndIndex(Vector2[] directions, int index)
+    {
+        GetDirections(directions, index);
+    }
+
+    private void GetDirections(Vector2[] directions, int index)
     {
         for (int i = 0; i < directions.Length; i ++)
         {

@@ -33,6 +33,10 @@ public class MissionAvoidProjectiles : Missions
     {
         print("Begginng");
     }
+    public override void CallCompleteMission()
+    {
+        CompleteMission();
+    }
 
     void SetupDirections()
     {

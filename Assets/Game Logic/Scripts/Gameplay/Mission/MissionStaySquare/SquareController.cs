@@ -25,15 +25,9 @@ public class SquareController : NetworkBehaviour
         {
             if (Object.HasStateAuthority)
             {
-                missionComplete = true;
                 runner.Despawn(Object);
             }
         }
-    }
-
-    public bool stateMission()
-    {
-        return missionComplete;
     }
 
     public void SetFinishTask(bool valueFinish)

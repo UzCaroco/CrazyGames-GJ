@@ -10,5 +10,6 @@ public abstract class Missions : NetworkBehaviour
     protected GameObject prefabObjects;
     protected abstract void StartMission();
     public abstract void CallStartMission();
+    public abstract void CallCompleteMission();
     protected abstract void CompleteMission();
 }

@@ -36,10 +36,11 @@ public class MissionStayAwayBomb : Missions
 
         StartMission();
 
-        if (indexExplode >= totalBomb)
-        {
-            CompleteMission();
-        }
+    }
+
+    public override void CallCompleteMission()
+    {
+        CompleteMission();
     }
 
     public override void CallStartMission()
