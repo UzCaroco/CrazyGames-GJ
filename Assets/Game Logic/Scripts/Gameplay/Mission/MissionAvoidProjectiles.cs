@@ -13,8 +13,7 @@ public class MissionAvoidProjectiles : Missions
 
     [SerializeField] int totalProjects;
 
-    int[] quantityProjectiles = new int[4];
-    
+    int[] quantityProjectiles = new int[4] { 25, 25, 25, 25, };
 
     void Update()
     {
@@ -30,11 +29,13 @@ public class MissionAvoidProjectiles : Missions
     {
 
     }
+
     public override void CallStartMission()
     {
         StartMission();
         print("Begginng");
     }
+
     public override void CallCompleteMission()
     {
         CompleteMission();
@@ -53,6 +54,17 @@ public class MissionAvoidProjectiles : Missions
         //RANDOM UP, RIGHT, DOWN, LEFT
         sbyte randomURDL = (sbyte)Random.Range(0, 5);
 
+        RandonQuantProjectiles();
+    }
+
+    void RandonQuantProjectiles()
+    {
+        quantityProjectiles[0] = Random.Range(0, 26);
+        quantityProjectiles[1] = Random.Range(0, 26);
+        quantityProjectiles[2] = Random.Range(0, 26);
+        quantityProjectiles[3] = Random.Range(0, 26);
+
+        RandomDirInstanciete();
     }
 
     void RandomLocalIntanciete()
@@ -87,8 +99,8 @@ public class MissionAvoidProjectiles : Missions
     {
         RandomLocalIntanciete();
 
-        SetupDirections();
-        RandomDirInstanciete();
+        //SetupDirections();
+        //RandomDirInstanciete();
     }
     protected override void CompleteMission()
     {
