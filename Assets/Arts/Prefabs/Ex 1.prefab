@@ -152,14 +152,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1949261675349649587}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -177,18 +177,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe90f1ac677f25a4da21e78cfc08dcab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
   collisionLayers:
     serializedVersion: 2
     m_Bits: 0
-  missionProjectile: 0
-  missionCollectCoin: 0
-  missionCopyMoviment: 0
-  missionDontMove: 0
-  missionMove: 0
-  missionPushRival: 0
-  missionBomb: 0
-  missionStaySquare: 0
+  speed: 5
+  missionProjectile:
+    _value: 0
+  missionCollectCoin:
+    _value: 0
+  missionCopyMoviment:
+    _value: 0
+  missionDontMove:
+    _value: 0
+  missionMove:
+    _value: 0
+  missionPushRival:
+    _value: 0
+  missionBomb:
+    _value: 0
+  missionStaySquare:
+    _value: 0
 --- !u!114 &2047026937399922807
 MonoBehaviour:
   m_ObjectHideFlags: 0
