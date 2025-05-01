@@ -37,10 +37,10 @@ public class PlayerController : NetworkBehaviour
 
     private void OnEnable()
     {
-        /*
+        
         playerInput.Player.Enable();
 
-        Camera cam = FindAnyObjectByType<Camera>();
+        /*Camera cam = FindAnyObjectByType<Camera>();
         if (cam != null)
         {
             cam.gameObject.SetActive(false);
