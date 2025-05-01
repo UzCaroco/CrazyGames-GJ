@@ -1,10 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
+using System.Collections;
 
 public class PlayerChecker : NetworkBehaviour
 {
     [SerializeField] private PlayerController playerController;
+
+    private void OnEnable()
+    {
+        StartCoroutine(enumerator());
+    }
 
 
     //----------------------------------------------------------------------------------------------------------//
@@ -187,5 +193,30 @@ public class PlayerChecker : NetworkBehaviour
     //-----------------------------------------------------------------------//
     //----------------------------------------------------------------------------------------------------------//
 
+
+
+
+    IEnumerator enumerator()
+    {
+        yield return new WaitForSeconds(5f);
+        // Adiciona 1 ponto ao jogador
+        AddScoreToSelf(1);
+    }
+
+    private void AddScoreToSelf(int amount)
+    {
+        var gameManager = FindObjectOfType<GameManager>();
+        if (gameManager != null)
+        {
+            if (HasInputAuthority)
+            {
+                gameManager.RPC_AddScore(Runner.LocalPlayer, amount);
+            }
+
+            // IMPORTANTE: esse valor aqui é só o que o cliente local sabe por enquanto
+            int pontuacaoLocal = gameManager.GetScore(Object.InputAuthority);
+            Debug.Log($"[PlayerChecker] Pontuação local do player: {pontuacaoLocal}");
+        }
+    }
 
 }

@@ -34,10 +34,18 @@ public class GameSessionBootstrapper : MonoBehaviour
         {
             if (FindObjectOfType<GameManager>() == null)
             {
-                runner.Spawn(gameManagerPrefab, Vector3.zero, Quaternion.identity, null);
+                var obj = runner.Spawn(gameManagerPrefab, Vector3.zero, Quaternion.identity, null);
                 Debug.Log("[Bootstrapper] GameManager instanciado com sucesso.");
+
+                // Conecta o GameManager aos callbacks do runner
+                if (obj.TryGetBehaviour(out GameManager gameManager))
+                {
+                    runner.AddCallbacks(gameManager);
+                    Debug.Log("[Bootstrapper] GameManager conectado aos callbacks do runner.");
+                }
             }
-        }catch (System.Exception) {}
+        }
+        catch (System.Exception) {}
 
     }
 

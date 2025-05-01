@@ -1,10 +1,11 @@
 using Fusion;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ScoreUI : MonoBehaviour
 {
-    [SerializeField] private Text scoreText;
+    [SerializeField] TextMeshProUGUI first, second, third;
     [SerializeField] private PlayerRef trackedPlayer;
 
     private void OnEnable()
@@ -21,7 +22,7 @@ public class ScoreUI : MonoBehaviour
     {
         if (player == trackedPlayer)
         {
-            scoreText.text = $"Score: {score}";
+            first.text = $"Score: {score}";
         }
     }
 }
