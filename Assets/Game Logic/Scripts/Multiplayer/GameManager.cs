@@ -29,7 +29,7 @@ public class GameManager : NetworkBehaviour, INetworkRunnerCallbacks
 
     public virtual void OnPlayerJoined(PlayerRef player, PlayerController playerController)
     {
-        if (HasStateAuthority) return;
+        if (!HasStateAuthority) return;
 
         if (!playerScores.ContainsKey(player))
         {
