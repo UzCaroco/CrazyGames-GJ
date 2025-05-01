@@ -65,7 +65,7 @@ public class PlayerController : NetworkBehaviour
         {
             gameManager.OnPlayerJoined(Object.InputAuthority, this);
         }
-        if (HasInputAuthority) // Só ativa a câmera do jogador local
+        if (HasInputAuthority || HasStateAuthority) // Só ativa a câmera do jogador local
         {
             print("entrei aqui");
 
