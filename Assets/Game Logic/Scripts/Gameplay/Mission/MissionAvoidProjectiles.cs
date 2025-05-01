@@ -132,7 +132,7 @@ public class MissionAvoidProjectiles : Missions
         {
             RandomDirInstanciete();
             RandonQuantProjectiles();
-            StartCoroutine(CountDown());
+            //StartCoroutine(CountDown());
         }
     }
 
@@ -163,9 +163,16 @@ public class MissionAvoidProjectiles : Missions
                     projectileScript.GetDirAndIndex(directionsProjectitles, randomURDL);
                 }
             }
-            else
+            else 
             {
-                StartCoroutine(CountDown());
+                if(indexProj[randomURDL] >= randomQuantProject[randomURDL])
+                {
+                    Debug.Log("Todos projéteis dessa direção foram instanciados.");
+                    FinishAllProjectiles();
+                    //yield break;
+                }
+
+                //StartCoroutine(CountDown());
             }
         }
         else // 1 or 3
@@ -187,7 +194,7 @@ public class MissionAvoidProjectiles : Missions
             }
             else
             {
-                StartCoroutine(CountDown());
+                //StartCoroutine(CountDown());
             }
         }
     }
