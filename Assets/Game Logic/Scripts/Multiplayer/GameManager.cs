@@ -49,12 +49,11 @@ public class GameManager : NetworkBehaviour, INetworkRunnerCallbacks
         }
     }
 
-    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
+    //[Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
     public void RPC_AddScore(PlayerRef player, int amount)
     {
-        Debug.Log("cu");
+        Debug.Log("AEEEEEEEE entrou no RPC");
         if (!HasStateAuthority) return;
-        Debug.Log("pica");
 
         if (!playerScores.ContainsKey(player))
             playerScores[player] = 0;
