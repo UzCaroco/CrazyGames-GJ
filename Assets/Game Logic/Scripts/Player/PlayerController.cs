@@ -57,7 +57,7 @@ public class PlayerController : NetworkBehaviour
         {
             print("entrei aqui");
 
-            if (cameraRoot != null) cameraRoot.SetActive(true);
+            if (cameraRoot != null) cameraRoot.gameObject.SetActive(true);
             else print("nulo");
             virtualCam.Follow = this.transform;
             virtualCam.LookAt = this.transform;
