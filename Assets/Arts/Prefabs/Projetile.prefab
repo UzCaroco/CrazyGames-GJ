@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 478222406705302072}
   - component: {fileID: 8791348976117388835}
   - component: {fileID: 8604624649011268583}
+  - component: {fileID: -5234122345434963960}
   m_Layer: 0
   m_Name: Projetile
   m_TagString: Untagged
@@ -140,6 +141,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 478222406705302072}
   - {fileID: 8604624649011268583}
+  - {fileID: -5234122345434963960}
   ForceRemoteRenderTimeframe: 0
 --- !u!114 &8604624649011268583
 MonoBehaviour:
@@ -148,10 +150,24 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2147233385447397752}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05b9e999a64c4774786b46ecdb0e35f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   direction: {x: 0, y: 0}
   speed: 5
+--- !u!114 &-5234122345434963960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2147233385447397752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cecdbb771469194f9e10cc5311b9bf1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: {x: 0, y: 0}
+  rbProjectiles: {fileID: 0}

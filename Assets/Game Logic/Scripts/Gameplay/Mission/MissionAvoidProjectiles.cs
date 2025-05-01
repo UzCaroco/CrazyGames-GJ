@@ -8,7 +8,7 @@ public class MissionAvoidProjectiles : Missions
 {
     [Header("Mission 0 - A")]
     [SerializeField] NetworkObject projectilePrefab;
-    private NetworkRunner runner;
+    //private NetworkRunner runner;
 
     bool isInstantiate = false;
 
@@ -18,7 +18,7 @@ public class MissionAvoidProjectiles : Missions
     //private sbyte posXSpawn, posYSpawn;
 
     sbyte randomURDL;
-    [SerializeField] int[] randomQuantProject = new int[25];
+    [SerializeField] int[] randomQuantProject = new int[4];
 
     [SerializeField] int[] projectilesLess = new int[4];
     [SerializeField] int totalProjects;
@@ -27,7 +27,7 @@ public class MissionAvoidProjectiles : Missions
     [SerializeField] int[] quantityProjectiles = new int[4] { 25, 25, 25, 25, };
     void Update()
     {
-        //StartMission();
+        StartMission();
     }
 
     private void FixedUpdate()
@@ -42,7 +42,7 @@ public class MissionAvoidProjectiles : Missions
 
     public override void CallStartMission()
     {
-        runner = FindObjectOfType<NetworkRunner>();
+        //runner = FindObjectOfType<NetworkRunner>();
 
         StartMission();
         print("Begginng");
@@ -174,16 +174,16 @@ public class MissionAvoidProjectiles : Missions
         }
         else if (totalProjects > 0)
         {
-            foreach(var projectile in projectilesLess)
+            /*foreach(var projectile in projectilesLess)
             {
                 do
-                {
+                {*/
                     RandomDirInstanciete();
                     RandonQuantProjectiles();
                     InstacienteProjectiles();
-                }
-                while (projectile == 0);
-            }
+                //}
+                //while (projectile == 0);
+            //}
         }
     }
 

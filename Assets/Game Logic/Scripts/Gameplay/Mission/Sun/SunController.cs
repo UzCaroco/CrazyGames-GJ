@@ -84,7 +84,7 @@ public class SunController : NetworkBehaviour
     {
         while (random == randomNumber)
         {
-            random = Random.Range(4, 6); // Generate a random number between 0 and 9
+            random = Random.Range(6, 8); // Generate a random number between 0 and 9
         }
         
         randomNumber = random;
