@@ -12,7 +12,7 @@ public class MissionStaySquare : Missions
     [SerializeField] float TimeToArriveOnTheSquare = 15f;
 
     [SerializeField] private GameObject squarePrefab; 
-    [SerializeField] private int posXSquare, posYSquere;
+    [SerializeField] private float posXSquare, posYSquere;
     private Vector2 squarePos;
 
     [SerializeField] bool isInicialized;
@@ -61,7 +61,7 @@ public class MissionStaySquare : Missions
 
     void SquarePosDraw()
     {
-        posXSquare = Random.Range(-7, 7);
+        posXSquare = Random.Range(-10.5f, 10.5f);
         posYSquere = Random.Range(-7, 7);
 
         squarePos = new Vector2 (posXSquare, posYSquere);
