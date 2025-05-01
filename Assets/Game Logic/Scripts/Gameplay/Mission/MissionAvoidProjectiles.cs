@@ -27,13 +27,18 @@ public class MissionAvoidProjectiles : Missions
     [SerializeField] int[] quantityProjectiles = new int[4] { 25, 25, 25, 25, };
     void Update()
     {
+        if (isInstantiate)
+        {
+            StartMission();
+            isInstantiate = false;
+        }
     }
 
     public override void FixedUpdateNetwork()
     {
         if (isInstantiate)
         {
-          StartMission();
+            StartMission();
             isInstantiate = false;
         }
     }
@@ -135,6 +140,7 @@ public class MissionAvoidProjectiles : Missions
 
     void FinishAllProjectiles()
     {
+        
         if (totalProjects <= 0)
         {
             //Chamar metodo de finalizacao 
