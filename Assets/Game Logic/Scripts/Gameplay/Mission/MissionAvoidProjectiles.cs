@@ -29,8 +29,12 @@ public class MissionAvoidProjectiles : Missions
     {
 
     }
+    public override void CallStartMission()
+    {
+        print("Begginng");
+    }
 
-        void SetupDirections()
+    void SetupDirections()
     {
 
     }

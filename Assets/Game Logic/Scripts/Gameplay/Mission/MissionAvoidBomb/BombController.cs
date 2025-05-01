@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class BombController : NetworkBehaviour
 {
+    MissionStayAwayBomb awayBomb;
+
     private List<PlayerManager> playersCollided = new List<PlayerManager>();
     [SerializeField] private NetworkRunner runner;
     Animator animBomb;
@@ -17,6 +19,7 @@ public class BombController : NetworkBehaviour
     {
         animBomb = GetComponent<Animator>();
         runner = FindObjectOfType<NetworkRunner>();
+        awayBomb = GetComponentInParent<MissionStayAwayBomb>();
     }
 
     // Update is called once per frame
@@ -75,6 +78,7 @@ public class BombController : NetworkBehaviour
     {
         if (Object.HasStateAuthority)
         {
+            awayBomb.Conclusion(1);
             runner.Despawn(Object);
         }
     }

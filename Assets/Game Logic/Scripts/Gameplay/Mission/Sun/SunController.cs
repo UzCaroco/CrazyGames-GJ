@@ -107,6 +107,7 @@ public class SunController : NetworkBehaviour
         if (isFinishWait)
         {
             mission[randomNumber].enabled = true;
+            mission[randomNumber].CallStartMission();
             isFinishWait = false;
         }
     }

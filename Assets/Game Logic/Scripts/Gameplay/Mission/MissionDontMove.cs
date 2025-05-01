@@ -20,6 +20,10 @@ public class MissionDontMove : Missions
     {
 
     }
+    public override void CallStartMission()
+    {
+        print("Begginng");
+    }
 
     protected override void StartMission()
     {

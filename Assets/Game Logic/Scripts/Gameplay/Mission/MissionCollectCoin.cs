@@ -25,7 +25,10 @@ public class MissionCollectCoin : Missions
        // base.FixedUpdateNetwork();
     }
 
-
+    public override void CallStartMission()
+    {
+        print("Begginng");
+    }
     protected override void StartMission()
     {
         Debug.Log("Collect Coin, Beginning!");

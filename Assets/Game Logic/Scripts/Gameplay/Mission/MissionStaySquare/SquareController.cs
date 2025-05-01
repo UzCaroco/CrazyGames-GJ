@@ -6,14 +6,16 @@ using UnityEngine;
 public class SquareController : NetworkBehaviour
 {
     private List<PlayerManager> playersCollided = new List<PlayerManager>();
-    [SerializeField] private NetworkRunner runner;
+    private NetworkRunner runner;
 
-    bool isFinishMission;
+    [SerializeField] bool isFinishMission;
+    [SerializeField] bool missionComplete;
 
     // Start is called before the first frame update
     void Start()
     {
         runner = FindObjectOfType<NetworkRunner>();
+        missionComplete = false;
     }
 
     // Update is called once per frame
@@ -23,19 +25,20 @@ public class SquareController : NetworkBehaviour
         {
             if (Object.HasStateAuthority)
             {
+                missionComplete = true;
                 runner.Despawn(Object);
             }
         }
     }
 
-    public bool HaveCollision()
+    public bool stateMission()
     {
-        return isFinishMission;
+        return missionComplete;
     }
 
-    public void SetFinishTask(bool value)
+    public void SetFinishTask(bool valueFinish)
     {
-        isFinishMission = value;
+        isFinishMission = valueFinish;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

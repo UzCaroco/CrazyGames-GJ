@@ -1,3 +1,4 @@
+
 using System.Collections;
 using System.Collections.Generic;
 using CrazyGames;
@@ -10,7 +11,9 @@ public class MissionStayAwayBomb : Missions
 
     [SerializeField] private GameObject prefabBomb;
 
+    [SerializeField] private byte totalBomb;
     [SerializeField] private byte index;
+    private byte indexExplode = 0;
 
     [SerializeField] private int posXBomb, posYBomb;
     [SerializeField] private int lastXRandom, lastYRandom;
@@ -24,18 +27,33 @@ public class MissionStayAwayBomb : Missions
 
     void Start()
     {
-        
+
     }
 
     void Update()
     {
+        print("Rodando Upfdate");
+
+        StartMission();
+
+        if (indexExplode >= totalBomb)
+        {
+            CompleteMission();
+        }
     }
 
-    /*private void FixedUpdate()
+    public override void CallStartMission()
     {
-        print("Rodando Upfdate"); 
-        StartMission();
-    }*/
+        index = 0;
+        indexExplode = 0;
+        isInicialized = false;
+        print("Begginng");
+    }
+
+    private void FixedUpdate()
+    {
+        
+    }
 
     public override void FixedUpdateNetwork()
     {
@@ -52,12 +70,12 @@ public class MissionStayAwayBomb : Missions
 
         while (lastXRandom == posXBomb)
         {
-            lastXRandom = Random.Range(-7,7);
+            lastXRandom = Random.Range(-7, 7);
         }
 
-        while(lastYRandom == posYBomb)
+        while (lastYRandom == posYBomb)
         {
-            lastYRandom = Random.Range(-4,4);
+            lastYRandom = Random.Range(-4, 4);
         }
 
         posXBomb = lastXRandom;
@@ -67,7 +85,7 @@ public class MissionStayAwayBomb : Missions
 
     void initializeBomb()
     {
-        if (!isInicialized && index < 5)
+        if (!isInicialized && index < totalBomb)
         {
             DrawPosition();
 
@@ -75,7 +93,7 @@ public class MissionStayAwayBomb : Missions
             NetworkObject bomb = Runner.Spawn(prefabBomb, BombPosition, Quaternion.identity);
             bomb.transform.SetParent(transform);
             isInicialized = true;
-            
+
             StartCoroutine(CountDown());
         }
         else
@@ -91,7 +109,7 @@ public class MissionStayAwayBomb : Missions
 
     IEnumerator CountDown()
     {
-        if (index + 1 <= 6)
+        if (index + 1 <= (totalBomb + 1))
         {
             index++;
 
@@ -112,20 +130,26 @@ public class MissionStayAwayBomb : Missions
     {
         Debug.Log("Stay Away Bomb, Beginning!");
 
-        if (index == 5)
+        if (index == totalBomb)
         {
 
         }
-        else 
+        else
         {
             initializeBomb();
         }
+    }
+
+    public void Conclusion(byte totalBombExplode)
+    {
+        indexExplode += totalBombExplode;
     }
 
     protected override void CompleteMission()
     {
         Debug.Log("Stay Away Bomb, Finish!");
         index = 0;
+        indexExplode = 0;
     }
 
     /*protected override void LostMission()*/

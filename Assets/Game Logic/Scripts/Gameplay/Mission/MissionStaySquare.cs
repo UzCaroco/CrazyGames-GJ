@@ -6,7 +6,7 @@ using UnityEngine;
 public class MissionStaySquare : Missions
 {
     [Header("Mission 7 - SS")]
-    SquareController squareController;
+    [SerializeField] SquareController squareController;
     [SerializeField] private NetworkRunner runner;
 
     [SerializeField] float TimeToArriveOnTheSquare = 15f;
@@ -15,26 +15,35 @@ public class MissionStaySquare : Missions
     [SerializeField] private int posXSquare, posYSquere;
     private Vector2 squarePos;
 
-    bool isInicialized;
+    [SerializeField] bool isInicialized;
 
     private void Awake()
     {
         runner = FindObjectOfType<NetworkRunner>();
-        squareController = GetComponentInChildren<SquareController>();
-
-        isInicialized = false;
-        squareController.SetFinishTask(false);
     }
     void Start()
     {
-        StartMission();
+        //StartMission();
     }
     private void FixedUpdate()
     {
-        
+        print("Update");
+        if (squareController != null)
+        {
+            if (squareController.stateMission())
+            {
+                CompleteMission();
+            }
+        }
+    }
+    public override void CallStartMission()
+    {
+        StartMission();
+        print("Begginng");
     }
     public override void FixedUpdateNetwork()
     {
+        print("Update net");
         //base.FixedUpdateNetwork();
 
         //StartMission();
@@ -66,10 +75,14 @@ public class MissionStaySquare : Missions
             SquarePosDraw();
 
             Debug.Log("Spawndando em X:" + posXSquare + "em Y:" + posYSquere);
+
             NetworkObject square = Runner.Spawn(squarePrefab, squarePos, Quaternion.identity);
             square.transform.SetParent(transform);
-            isInicialized = true;
+            
+            squareController = square.GetComponent<SquareController>();
+            squareController.SetFinishTask(false);
 
+            isInicialized = true;
         }
         else
         {
@@ -103,12 +116,15 @@ public class MissionStaySquare : Missions
 
     protected override void StartMission()
     {
+        isInicialized = false;
+
         Debug.Log("Stay Square, Beginning!");
 
         StartCoroutine(Countdown());
     }
     protected override void CompleteMission()
     {
+        isInicialized = false;
         Debug.Log("Stay Square, Finish!");
     }
 }

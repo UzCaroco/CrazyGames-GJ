@@ -18,6 +18,10 @@ public class MissionMove : Missions
     public override void FixedUpdateNetwork()
     {
     }
+    public override void CallStartMission()
+    {
+        print("Begginng");
+    }
 
     protected override void StartMission()
     {
