@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 8791348976117388835, guid: 59588d8cfecb3174ea03c85413f0992b, type: 3}
-  totalProjects: 0
+  totalProjects: 100
 --- !u!114 &3695284744361588157
 MonoBehaviour:
   m_ObjectHideFlags: 0

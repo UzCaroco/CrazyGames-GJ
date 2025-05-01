@@ -14,7 +14,7 @@ public class MoveProjectiles : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rbProjectiles.velocity = direction * speedObjects;
+        //rbProjectiles.velocity = direction * speedObjects;
     }
 
     // Update is called once per frame
@@ -22,13 +22,26 @@ public class MoveProjectiles : NetworkBehaviour
     {
         
     }
+    public override void FixedUpdateNetwork()
+    {
+        base.FixedUpdateNetwork();
 
-    public void GetDirAndIndex(Vector2[] directions, int index)
+        Debug.Log($"Tem autoridade? {Object.HasStateAuthority}");
+        if (Object.HasStateAuthority)
+        {
+            transform.Translate(direction * speedObjects * Runner.DeltaTime);
+            if (transform.position.x > 10 || transform.position.x < -10 || transform.position.y > 10 || transform.position.y < -10)
+            {
+                Runner.Despawn(Object);
+            }
+        }
+    }
+    public void GetDirAndIndex(Vector2[] directions, sbyte index)
     {
         GetDirections(directions, index);
     }
 
-    private void GetDirections(Vector2[] directions, int index)
+    private void GetDirections(Vector2[] directions, sbyte index)
     {
         for (int i = 0; i < directions.Length; i ++)
         {
