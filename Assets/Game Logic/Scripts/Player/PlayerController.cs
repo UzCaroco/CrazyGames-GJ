@@ -57,8 +57,9 @@ public class PlayerController : NetworkBehaviour
         {
             print("entrei aqui");
 
-            if (cameraRoot != null) cameraRoot.gameObject.SetActive(true);
-            else print("nulo");
+            cameraRoot.gameObject.SetActive(true);
+            cameraRoot.tag = "MainCamera"; // se quiser usar Camera.main
+
             virtualCam.Follow = this.transform;
             virtualCam.LookAt = this.transform;
         }
