@@ -33,9 +33,9 @@ public class MissionStayAwayBomb : Missions
 
     void Update()
     {
-        print("Rodando Upfdate");
+        /*print("Rodando Upfdate");
 
-        StartMission();
+        StartMission();*/
 
     }
 
@@ -52,16 +52,10 @@ public class MissionStayAwayBomb : Missions
         print("Begginng");
     }
 
-    private void FixedUpdate()
-    {
-        
-    }
-
     public override void FixedUpdateNetwork()
     {
         Debug.Log("Rodando Netork Upfdate");
-        if (!Object || !Object.IsValid || !Object.HasStateAuthority) return;
-
+        
         StartMission();
     }
 

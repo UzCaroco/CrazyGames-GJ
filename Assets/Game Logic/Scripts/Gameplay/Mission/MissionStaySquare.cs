@@ -23,11 +23,12 @@ public class MissionStaySquare : Missions
     }
     void Start()
     {
-        //StartMission();
+
     }
-    private void FixedUpdate()
+    public override void FixedUpdateNetwork()
     {
-        print("Update");
+        print("Update net");
+
     }
     public override void CallStartMission()
     {
@@ -39,13 +40,6 @@ public class MissionStaySquare : Missions
     public override void CallCompleteMission()
     {
         CompleteMission();
-    }
-    public override void FixedUpdateNetwork()
-    {
-        print("Update net");
-        //base.FixedUpdateNetwork();
-
-        //StartMission();
     }
 
     IEnumerator Countdown()

@@ -27,25 +27,19 @@ public class MissionAvoidProjectiles : Missions
     [SerializeField] int[] quantityProjectiles = new int[4] { 25, 25, 25, 25, };
     void Update()
     {
-        StartMission();
-    }
-
-    private void FixedUpdate()
-    {
-        //StartMission();
     }
 
     public override void FixedUpdateNetwork()
     {
-
+        StartMission();
     }
 
     public override void CallStartMission()
     {
         //runner = FindObjectOfType<NetworkRunner>();
+        print("Begginng");
 
         StartMission();
-        print("Begginng");
     }
 
     public override void CallCompleteMission()
@@ -53,10 +47,13 @@ public class MissionAvoidProjectiles : Missions
         CompleteMission();
     }
 
-    IEnumerator CounDown()
+    IEnumerator CountDown()
     {
+        InstacienteProjectiles();
+
         yield return new WaitForSeconds(0.5f);
 
+        LocalIntanciete();
     }
 
 
@@ -104,7 +101,6 @@ public class MissionAvoidProjectiles : Missions
 
             int value = randomQuantProject[randomURDL]; // 9
 
-
                    //   5                        5           =  0
             while (projectilesLess[randomURDL] - randomQuantProject[randomURDL] <= 0)
             {
@@ -122,49 +118,9 @@ public class MissionAvoidProjectiles : Missions
             //Chamar metodo para sortear outro lado
         }
     }
-    void QuantProjectSpawnRight()
-    {
-        //total de bomba = 25 - valor sorteado 
-        //projectilesLess[0] = quantityProjectiles[0] - randomQuantProject[0];
-
-        if (projectilesLess[0] - randomQuantProject[0] > 0)
-        {
-            projectilesLess[0] = quantityProjectiles[0] - randomQuantProject[0];
-            totalProjects -= randomQuantProject[0];
-
-            LocalIntanciete();
-        }
-        else if (projectilesLess[0] - randomQuantProject[0] <= 0)
-        {
-            // se caso o valor do que falta - o valor sorteado for abaixo de 0 
-            // deve pegar o valor sortedo e deccrescente em um ate que o valor que falta - o valor sorteado fique 0 
-
-            int value = randomQuantProject[0]; // 9
-
-            //   5                        5           =  0
-            while (projectilesLess[0] - randomQuantProject[0] <= 0)
-            {
-                value--; // 8, 7, 6, 5, 4
-                randomQuantProject[0] = value; // 8, 7, 6, 5 , 4
-            }
-
-            projectilesLess[0] = quantityProjectiles[0] - randomQuantProject[0];
-            totalProjects -= randomQuantProject[0];
-
-            LocalIntanciete();
-        }
-        else if (projectilesLess[0] - randomQuantProject[0] == 0)
-        {
-            quantityProjectiles[0] = 0;
-            FinishAllProjectiles();
-
-            //Chamar metodo para sortear outro lado
-        }
-    }
-    void QuantProjectSpawnDown()
-    { }
-    void QuantProjectSpawnLeft()
-    { }
+    void QuantProjectSpawnRight() { }
+    void QuantProjectSpawnDown()  { }
+    void QuantProjectSpawnLeft()  { }
 
     void FinishAllProjectiles()
     {
@@ -180,7 +136,7 @@ public class MissionAvoidProjectiles : Missions
                 {*/
                     RandomDirInstanciete();
                     RandonQuantProjectiles();
-                    InstacienteProjectiles();
+                    StartCoroutine(CountDown());
                 //}
                 //while (projectile == 0);
             //}
@@ -216,7 +172,7 @@ public class MissionAvoidProjectiles : Missions
             }
             else
             {
-                InstacienteProjectiles();
+                StartCoroutine(CountDown());
             }
         }
         else // 1 or 3
@@ -238,7 +194,7 @@ public class MissionAvoidProjectiles : Missions
             }
             else
             {
-                InstacienteProjectiles();
+                StartCoroutine(CountDown());
             }
         }
     }
