@@ -21,11 +21,11 @@ public class MissionAvoidProjectiles : Missions
     sbyte randomURDL;
     [SerializeField] int[] randomQuantProject = new int[4];
 
-    [SerializeField] int[] projectilesLess = new int[4] { 25, 25, 25, 25, };
+    [SerializeField] int[] projectilesLess = new int[4] { 12, 12, 12, 12, };
     [SerializeField] int totalProjects;
 
     [SerializeField] sbyte[] indexProj = new sbyte[4];
-    [SerializeField] int[] quantityProjectiles = new int[4] { 25, 25, 25, 25, };
+    [SerializeField] int[] quantityProjectiles = new int[4] { 12, 12, 12, 12, };
     void Update()
     {
         /*if (isInstantiate)
@@ -69,7 +69,7 @@ public class MissionAvoidProjectiles : Missions
             totalProjects = 0;
 
             StopCoroutine(CountDown());
-            Debug.Log("Finalizou");
+            //Debug.Log("Finalizou");
             //Chamar metodo de finalizacao 
         }
         else if (totalProjects > 0)
@@ -101,9 +101,9 @@ public class MissionAvoidProjectiles : Missions
         // or
 
         indexProj[randomURDL] = 0;
-        randomQuantProject[randomURDL] = Random.Range(0, 26);
+        randomQuantProject[randomURDL] = Random.Range(0, quantityProjectiles[0] + 1);
 
-        print("randomQuant" + randomQuantProject[randomURDL]);
+        //print("randomQuant" + randomQuantProject[randomURDL]);
     }
 
     void QuantProjectSpawn()
@@ -111,17 +111,17 @@ public class MissionAvoidProjectiles : Missions
         //total de bomba = 25 - valor sorteado 
         //projectilesLess[0] = quantityProjectiles[0] - randomQuantProject[0];
 
-        print("projetilless" +projectilesLess[randomURDL]);
+        //print("projetilless" +projectilesLess[randomURDL]);
 
         if (projectilesLess[randomURDL] - randomQuantProject[randomURDL] > 0)
         {
-            print("maior");
+            //print("maior");
             projectilesLess[randomURDL] -= randomQuantProject[randomURDL];
             totalProjects -= randomQuantProject[randomURDL];
         }
         else if (projectilesLess[randomURDL] - randomQuantProject[randomURDL] <= 0)
         {
-            print("menor");
+            //print("menor");
             // se caso o valor do que falta - o valor sorteado for abaixo de 0 
             // deve pegar o valor sortedo e deccrescente em um ate que o valor que falta - o valor sorteado fique 0 
 
@@ -139,7 +139,7 @@ public class MissionAvoidProjectiles : Missions
         }
         else if (projectilesLess[randomURDL] - randomQuantProject[randomURDL] == 0)
         {
-            print("igual");
+            //print("igual");
             projectilesLess[randomURDL] = 0;
 
             //Chamar metodo para sortear outro lado
@@ -147,7 +147,7 @@ public class MissionAvoidProjectiles : Missions
 
         StartCoroutine(SpawnTime()); //////////////////////////////////////////////
 
-        print("projetilless" + projectilesLess[randomURDL]);
+       // print("projetilless" + projectilesLess[randomURDL]);
     }
 
     void InstaciateConfig()
@@ -191,7 +191,7 @@ public class MissionAvoidProjectiles : Missions
             else if (randomURDL == 2)
                 extremes = 14;
 
-            print("extremes" + extremes);
+            //print("extremes" + extremes);
             float randomPositionSpawn = Random.Range(-10.5f, 10.5f);
 
             if (indexProj[randomURDL] != randomQuantProject[randomURDL])
@@ -206,7 +206,7 @@ public class MissionAvoidProjectiles : Missions
             }
             else 
             {
-                if(projectilesLess[randomURDL] >= quantityProjectiles[randomURDL])
+                if(indexProj[randomURDL] >= quantityProjectiles[randomURDL])
                 {
                     indexProj[randomURDL] = (sbyte)quantityProjectiles[randomURDL];
                     
@@ -221,7 +221,7 @@ public class MissionAvoidProjectiles : Missions
             else if (randomURDL == 3)
                 extremes = 22;
 
-            print("extremes" + extremes);
+            //print("extremes" + extremes);
 
             float randomPositionSpawn = Random.Range(-7f, 7f);
 
