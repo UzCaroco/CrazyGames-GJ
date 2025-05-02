@@ -67,14 +67,13 @@ public class PlayerController : NetworkBehaviour
         {
             gameManager.OnPlayerJoined(Object.InputAuthority, this);
         }
-        if (HasInputAuthority || !HasStateAuthority) // Só ativa a câmera do jogador local
+        if (HasInputAuthority) // Só ativa a câmera do jogador local
         {
             print("entrei aqui");
 
-            /*Camera cam = GetComponentInChildren<Camera>(true); // true = busca em objetos inativos
+            Camera cam = GetComponentInChildren<Camera>(true); // true = busca em objetos inativos
             Debug.Log("Camera: " + cam);
-            cam.gameObject.SetActive(true);*/
-            //cameraRoot.tag = "MainCamera"; // se quiser usar Camera.main            
+            cam.enabled = true;
         }
     }
 
