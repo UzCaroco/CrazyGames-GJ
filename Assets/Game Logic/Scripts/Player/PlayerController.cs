@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using Fusion;
 using UnityEngine;
 using CrazyGames;
-using Cinemachine;
 
 public class PlayerController : NetworkBehaviour
 {
     //public GameObject cameraRoot;
-    [SerializeField] public CinemachineVirtualCamera virtualCam;
 
     private Vector2 moveInput;
     public LayerMask collisionLayers; // Define no Inspector os layers que vai colidir
@@ -76,12 +74,7 @@ public class PlayerController : NetworkBehaviour
             Camera cam = GetComponentInChildren<Camera>(true); // true = busca em objetos inativos
             Debug.Log("Camera: " + cam);
             cam.gameObject.SetActive(true);
-            //cameraRoot.tag = "MainCamera"; // se quiser usar Camera.main
-
-            virtualCam.Follow = this.transform;
-            virtualCam.LookAt = this.transform;
-
-            
+            //cameraRoot.tag = "MainCamera"; // se quiser usar Camera.main            
         }
     }
 
