@@ -206,7 +206,7 @@ public class MissionAvoidProjectiles : Missions
             }
             else 
             {
-                if(indexProj[randomURDL] >= quantityProjectiles[randomURDL])
+                if(projectilesLess[randomURDL] >= quantityProjectiles[randomURDL])
                 {
                     indexProj[randomURDL] = (sbyte)quantityProjectiles[randomURDL];
                     
