@@ -7,28 +7,23 @@ public class MoveProjectiles : NetworkBehaviour
 {
     [SerializeField] Vector2 direction;
     [SerializeField] private Rigidbody2D rbProjectiles;
-    private int speedObjects;
+    [SerializeField] private int speedObjects;
 
     private bool touchPlayer;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //rbProjectiles.velocity = direction * speedObjects;
-    }
 
     // Update is called once per frame
     void Update()
     {
-        Debug.Log($"Tem autoridade? {Object.HasStateAuthority}");
-        if (Object.HasStateAuthority)
-        {
+        /*Debug.Log($"Tem autoridade? {Object.HasStateAuthority}");
+        //if (Object.HasStateAuthority)
+        //{
             transform.Translate(direction * speedObjects * Runner.DeltaTime);
+
             if (transform.position.x > 30 || transform.position.x < -30 || transform.position.y > 30 || transform.position.y < -30)
             {
                 Runner.Despawn(Object);
             }
-        }
+        }*/
     }
     public override void FixedUpdateNetwork()
     {

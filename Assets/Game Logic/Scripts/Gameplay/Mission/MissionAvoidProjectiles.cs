@@ -28,11 +28,11 @@ public class MissionAvoidProjectiles : Missions
     [SerializeField] int[] quantityProjectiles = new int[4] { 25, 25, 25, 25, };
     void Update()
     {
-        if (isInstantiate)
+        /*if (isInstantiate)
         {
             StartMission();
             isInstantiate = false;
-        }
+        }*/
     }
 
     public override void FixedUpdateNetwork()
@@ -46,8 +46,6 @@ public class MissionAvoidProjectiles : Missions
 
     public override void CallStartMission()
     {
-        //runner = FindObjectOfType<NetworkRunner>();
-
         StartMission();
     }
 
@@ -55,25 +53,6 @@ public class MissionAvoidProjectiles : Missions
     {
         CompleteMission();
     }
-
-    
-    IEnumerator CountDown()
-    {
-        while(indexProj[randomURDL] != randomQuantProject[randomURDL])
-        {
-            InstacienteProjectiles();
-
-            yield return new WaitForSeconds(0.5f);
-
-            LocalIntanciete();
-        }
-
-        if(indexProj[randomURDL] == randomQuantProject[randomURDL])
-        {
-            FinishAllProjectiles();
-        }
-    }
-    
 
     void SetupDirections()
     {
@@ -83,10 +62,30 @@ public class MissionAvoidProjectiles : Missions
         directionsProjectitles[3] = Vector2.left;
     }
 
+    void FinishAllProjectiles()
+    {
+        if (totalProjects <= 0)
+        {
+            totalProjects = 0;
+
+            StopCoroutine(CountDown());
+            //Chamar metodo de finalizacao 
+        }
+        else if (totalProjects > 0)
+        {
+            InstaciateConfig();
+        }
+    }
+
     void RandomDirInstanciete()
     {
         //RANDOM UP, RIGHT, DOWN, LEFT
-        randomURDL = (sbyte)Random.Range(0, 4);
+        sbyte randomLast = randomURDL;
+
+        while (randomLast == randomURDL)
+        {
+            randomURDL = (sbyte)Random.Range(0, 4);
+        }
 
         print("random" + randomURDL);
     }
@@ -100,9 +99,10 @@ public class MissionAvoidProjectiles : Missions
 
         // or
 
+        indexProj[randomURDL] = 0;
         randomQuantProject[randomURDL] = Random.Range(0, 26);
 
-        print("randomQuant" +        randomQuantProject[randomURDL]);
+        print("randomQuant" + randomQuantProject[randomURDL]);
     }
 
     void QuantProjectSpawn()
@@ -139,32 +139,43 @@ public class MissionAvoidProjectiles : Missions
         {
             print("igual");
             projectilesLess[randomURDL] = 0;
-            FinishAllProjectiles();
 
             //Chamar metodo para sortear outro lado
         }
 
+        StartCoroutine(SpawnTime()); //////////////////////////////////////////////
+
         print("projetilless" + projectilesLess[randomURDL]);
     }
 
-    void FinishAllProjectiles()
+    void InstaciateConfig()
     {
-        
-        if (totalProjects <= 0)
+        RandomDirInstanciete();
+        RandonQuantProjectiles();
+        QuantProjectSpawn();
+    }
+    IEnumerator SpawnTime()
+    {
+        while (indexProj[randomURDL] != randomQuantProject[randomURDL])
         {
-            //Chamar metodo de finalizacao 
+            yield return new WaitForSeconds(0.5f);
+
+            LocalIntanciete();
         }
-        else if (totalProjects > 0)
+
+        if (indexProj[randomURDL] == randomQuantProject[randomURDL])
         {
-            RandomDirInstanciete();
-            RandonQuantProjectiles();
             StartCoroutine(CountDown());
         }
     }
 
-    void InstacienteProjectiles()
+    IEnumerator CountDown()
     {
-        QuantProjectSpawn();
+        StopCoroutine(SpawnTime());
+
+        yield return new WaitForSeconds(1f);
+
+        FinishAllProjectiles();
     }
 
     void LocalIntanciete() 
@@ -174,9 +185,9 @@ public class MissionAvoidProjectiles : Missions
         if (randomURDL % 2 == 0) // 0 or 2
         {
             if (randomURDL == 0)
-                extremes = 14;
-            else if (randomURDL == 2)
                 extremes = -14;
+            else if (randomURDL == 2)
+                extremes = 14;
 
             print("extremes" + extremes);
             float randomPositionSpawn = Random.Range(-10.5f, 10.5f);
@@ -195,17 +206,18 @@ public class MissionAvoidProjectiles : Missions
             {
                 if(indexProj[randomURDL] >= quantityProjectiles[randomURDL])
                 {
+                    indexProj[randomURDL] = (sbyte)quantityProjectiles[randomURDL];
+                    
                     Debug.Log("Todos projéteis dessa direção foram instanciados.");
-                    FinishAllProjectiles();
                 }
             }
         }
         else // 1 or 3
         {
             if (randomURDL == 1)
-                extremes = 22;
-            else if (randomURDL == 3)
                 extremes = -22;
+            else if (randomURDL == 3)
+                extremes = 22;
 
             print("extremes" + extremes);
 
@@ -225,14 +237,16 @@ public class MissionAvoidProjectiles : Missions
             {
                 if (indexProj[randomURDL] >= quantityProjectiles[randomURDL])
                 {
+                    indexProj[randomURDL] = (sbyte)quantityProjectiles[randomURDL];
+
                     Debug.Log("Todos projéteis dessa direção foram instanciados.");
-                    FinishAllProjectiles();
+                    
                 }
             }
         }
     }
 
-    void RandomLocalIntanciete()
+    /*void RandomLocalIntanciete()
     {
         sbyte randomHorizontalOrVertical = (sbyte)Random.Range(0, 2);
 
@@ -257,7 +271,7 @@ public class MissionAvoidProjectiles : Missions
                 projectileScript.Init(new Vector2(0, -1)); // cria um método Init na classe Projectile
             }
         }
-    }
+    }*/
 
     protected override void StartMission()
     {
@@ -265,7 +279,6 @@ public class MissionAvoidProjectiles : Missions
         //RandomLocalIntanciete();
 
         SetupDirections();
-        FinishAllProjectiles();
     }
     protected override void CompleteMission()
     {
@@ -276,7 +289,6 @@ public class MissionAvoidProjectiles : Missions
             indexProj[i] = 0;
             projectilesLess[i] = 25;
         }
-
         Debug.Log("Avoid projéteis, Finish!");
     }
 }
