@@ -285,12 +285,12 @@ public class MissionAvoidProjectiles : Missions
     }
     protected override void CompleteMission()
     {
-        totalProjects = 100;
+        totalProjects = 48;
 
         for (int i = 0; i < quantityProjectiles.Length; i++)
         {
             indexProj[i] = 0;
-            projectilesLess[i] = 25;
+            projectilesLess[i] = quantityProjectiles[0];
         }
         Debug.Log("Avoid projéteis, Finish!");
     }
