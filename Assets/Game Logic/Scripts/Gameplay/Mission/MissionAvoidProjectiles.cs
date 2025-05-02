@@ -69,6 +69,7 @@ public class MissionAvoidProjectiles : Missions
             totalProjects = 0;
 
             StopCoroutine(CountDown());
+            Debug.Log("Finalizou");
             //Chamar metodo de finalizacao 
         }
         else if (totalProjects > 0)
@@ -115,7 +116,7 @@ public class MissionAvoidProjectiles : Missions
         if (projectilesLess[randomURDL] - randomQuantProject[randomURDL] > 0)
         {
             print("maior");
-            projectilesLess[randomURDL] = quantityProjectiles[randomURDL] - randomQuantProject[randomURDL];
+            projectilesLess[randomURDL] -= randomQuantProject[randomURDL];
             totalProjects -= randomQuantProject[randomURDL];
         }
         else if (projectilesLess[randomURDL] - randomQuantProject[randomURDL] <= 0)
@@ -127,13 +128,14 @@ public class MissionAvoidProjectiles : Missions
             int value = randomQuantProject[randomURDL]; // 9
 
                    //   5                        5           =  0
-            while (projectilesLess[randomURDL] - randomQuantProject[randomURDL] <= 0)
+            while (projectilesLess[randomURDL] - randomQuantProject[randomURDL] < 0)
             {
                 value--; // 8, 7, 6, 5, 4
                 randomQuantProject[randomURDL] = value; // 8, 7, 6, 5 , 4
             }
 
-            projectilesLess[randomURDL] = quantityProjectiles[randomURDL] - randomQuantProject[randomURDL];
+            projectilesLess[randomURDL] -= randomQuantProject[randomURDL];
+            totalProjects -= randomQuantProject[randomURDL];
         }
         else if (projectilesLess[randomURDL] - randomQuantProject[randomURDL] == 0)
         {
@@ -279,6 +281,7 @@ public class MissionAvoidProjectiles : Missions
         //RandomLocalIntanciete();
 
         SetupDirections();
+        FinishAllProjectiles();
     }
     protected override void CompleteMission()
     {
