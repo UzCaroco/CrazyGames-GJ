@@ -42,7 +42,7 @@ public class PlayerController : NetworkBehaviour
 
         PlayerChecker playerChecker = GetComponent<PlayerChecker>();
         Debug.Log("PlayerChecker: " + playerChecker);
-        playerChecker.PegarPlayerControler(this);
+        playerChecker.PegarPlayerControler();
 
         /*Camera cam = FindAnyObjectByType<Camera>();
         if (cam != null)

@@ -32,24 +32,6 @@ public class GameChecker : NetworkBehaviour
         }*/
     }
 
-    public void AtualizarLista()
-    {
-        Debug.Log("Atualizando a lista de jogadores.");
-        playerCheckers.Clear(); // Limpa a lista antes de adicionar os novos jogadores
-        foreach (var player in runner.ActivePlayers)
-        {
-            var networkObject = runner.GetPlayerObject(player); //Percorre os objetos de rede ativos (Players)
-            if (networkObject != null) //Verifica se o objeto de rede não é nulo
-            {
-                PlayerChecker playerChecker = networkObject.GetComponent<PlayerChecker>(); //Pega o script PlayerController do objeto de rede
-                if (playerChecker != null)
-                {
-                    Debug.Log("Adicionando player " + playerChecker + " à lista de jogadores.");
-                    AdicionarPlayerALista(playerChecker); //Adiciona a lista
-                }
-            }
-        }
-    }
 
 
     
@@ -63,91 +45,102 @@ public class GameChecker : NetworkBehaviour
         {
             Debug.Log("Adicionando player " + playerChecker + " à lista de jogadores.");
             playerCheckers.Add(playerChecker);
-            Debug.Log("Total de players na lista: " + playerCheckers.Count);
-            Debug.Log("Total de players na lista: " + playerCheckers.Count);
-            Debug.Log("Total de players na lista: " + playerCheckers.Count);
-            Debug.Log("Total de players na lista: " + playerCheckers.Count);
         }
     }
 
     public void CheckPlayersInTheEndOfMission(sbyte mission)
     {
         Debug.Log("Verificando os jogadores no final da missão: " + mission);
+        Debug.Log("Total de jogadores na lista: " + playerCheckers.Count);
         switch (mission)
         {
             case 0:
-                Debug.Log("Verificando os jogadores na missão 0");
+                Debug.Log($"Verificando os jogadores {playerCheckers[0]} e {playerCheckers[1]} na missão 0");
                 foreach (PlayerChecker playerChecker in playerCheckers)
                 {
-                    Debug.Log(playerChecker + " Verificando se TODOS os player");
-                    playerChecker.MissionProjectile(true);
-                    /*if (playerChecker.MissionProjectile(true))
+                    if (playerChecker.playerController != null)
                     {
-                        Debug.Log("Player " + playerChecker + " completed the mission!");
+                        Debug.Log(playerChecker + " Verificando se TODOS os player");
+                        if (playerChecker.MissionProjectile(true))
+                        {
+                            Debug.Log("Player " + playerChecker + " completed the mission!");
+                        }
+                        else
+                        {
+                            Debug.Log("Player " + playerChecker + " failed the mission!");
+                        }
                     }
-                    else
-                    {
-                        Debug.Log("Player " + playerChecker + " failed the mission!");
-                    }*/
                 }
                 break;
             case 3:
-                Debug.Log("Verificando os jogadores na missão 3");
+                Debug.Log($"Verificando os jogadores {playerCheckers[0]} e {playerCheckers[1]} na missão 3");
                 foreach (var playerChecker in playerCheckers)
                 {
-                    Debug.Log(playerChecker + " Verificando se TODOS os player");
-                    if (playerChecker.MissionDontMove(true))
+                    if (playerChecker.playerController != null)
                     {
-                        Debug.Log("Player " + playerChecker + " completed the mission!");
-                    }
-                    else
-                    {
-                        Debug.Log("Player " + playerChecker + " failed the mission!");
+                        Debug.Log(playerChecker + " Verificando se TODOS os player");
+                        if (playerChecker.MissionDontMove(true))
+                        {
+                            Debug.Log("Player " + playerChecker + " completed the mission!");
+                        }
+                        else
+                        {
+                            Debug.Log("Player " + playerChecker + " failed the mission!");
+                        }
                     }
                 }
                 break;
             case 4:
-                Debug.Log("Verificando os jogadores na missão 4");
+                Debug.Log($"Verificando os jogadores {playerCheckers[0]} e {playerCheckers[1]} na missão 4");
                 foreach (var playerChecker in playerCheckers)
                 {
-                    Debug.Log(playerChecker + " Verificando se TODOS os player");
-                    if (playerChecker.MissionMove(true))
+                    if (playerChecker.playerController != null)
                     {
-                        Debug.Log("Player " + playerChecker + " completed the mission!");
-                    }
-                    else
-                    {
-                        Debug.Log("Player " + playerChecker + " failed the mission!");
+                        Debug.Log(playerChecker + " Verificando se TODOS os player");
+                        if (playerChecker.MissionMove(true))
+                        {
+                            Debug.Log("Player " + playerChecker + " completed the mission!");
+                        }
+                        else
+                        {
+                            Debug.Log("Player " + playerChecker + " failed the mission!");
+                        }
                     }
                 }
                 break;
             case 6:
-                Debug.Log("Verificando os jogadores na missão 6");
+                Debug.Log($"Verificando os jogadores {playerCheckers[0]} e {playerCheckers[1]} na missão 6");
                 foreach (var playerChecker in playerCheckers)
                 {
-                    Debug.Log(playerChecker + " Verificando se TODOS os player");
-                    if (playerChecker.MissionBomb(true))
+                    if (playerChecker.playerController != null)
                     {
-                        Debug.Log("Player " + playerChecker + " completed the mission!");
-                    }
-                    else
-                    {
-                        Debug.Log("Player " + playerChecker + " failed the mission!");
+                        Debug.Log(playerChecker + " Verificando se TODOS os player");
+                        if (playerChecker.MissionBomb(true))
+                        {
+                            Debug.Log("Player " + playerChecker + " completed the mission!");
+                        }
+                        else
+                        {
+                            Debug.Log("Player " + playerChecker + " failed the mission!");
+                        }
                     }
                 }
                 break;
             case 7:
-                Debug.Log("Verificando os jogadores na missão 7");
+                Debug.Log($"Verificando os jogadores {playerCheckers[0]} e {playerCheckers[1]} na missão 7");
                 foreach (var playerChecker in playerCheckers)
                 {
-                    Debug.Log(playerChecker + " Verificando se TODOS os player");
-                    if (playerChecker.MissionStaySquare(true))
+                    if (playerChecker.playerController != null)
                     {
-                        Debug.Log("Player " + playerChecker + " completed the mission!");
-                    }
-                    else
-                    {
-                        Debug.Log("Player " + playerChecker + " failed the mission!");
+                        Debug.Log(playerChecker + " Verificando se TODOS os player");
+                        if (playerChecker.MissionStaySquare(true))
+                        {
+                            Debug.Log("Player " + playerChecker + " completed the mission!");
+                        }
+                        else
+                        {
+                            Debug.Log("Player " + playerChecker + " failed the mission!");
+                        }
                     }
                 }
                 break;

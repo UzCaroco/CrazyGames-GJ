@@ -96,7 +96,7 @@ public class SunController : NetworkBehaviour
     {
         while (random == randomNumber)
         {
-            random = Random.Range(0, 2); // Generate a random number between 0 and 9
+            random = Random.Range(0, 8); // Generate a random number between 0 and 9
         }
         
         randomNumber = random;
@@ -131,7 +131,6 @@ public class SunController : NetworkBehaviour
 
             GameChecker gameChecker = FindAnyObjectByType<GameChecker>();
             Debug.Log("GameChecker: " + gameChecker);
-            gameChecker.AtualizarLista();
             gameChecker.CheckPlayersInTheEndOfMission((sbyte)randomNumber);
 
             isFinishMission = false;

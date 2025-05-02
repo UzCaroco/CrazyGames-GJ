@@ -15,7 +15,7 @@ public class TimerMission : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        sunController = FindAnyObjectByType<SunController>();
     }
 
     // Update is called once per frame
