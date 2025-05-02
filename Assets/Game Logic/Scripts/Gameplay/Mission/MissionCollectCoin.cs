@@ -9,10 +9,10 @@ public class MissionCollectCoin : Missions
     private List<PlayerController> playersActive = new List<PlayerController>();
 
     sbyte takeCoin;
-
+    [SerializeField] private GameObject CoinPrefab;
     // x = -10.5 até 10.5 y = - 7 ate 7 
     [Networked] private Vector2 coinPosition { get; set; }
-    [Networked] private bool isInitialized { get; set; }
+    [Networked] private bool isInicialized { get; set; }
 
     public override void FixedUpdateNetwork()
     {
@@ -47,7 +47,7 @@ public class MissionCollectCoin : Missions
 
     void ControlSpwnCoins()
     {
-        if (!isInitialized) 
+        if (!isInicialized) 
         { 
             while(takeCoin > 0)
             {
@@ -56,12 +56,16 @@ public class MissionCollectCoin : Missions
 
                 Instanciate();
             }
+            isInicialized = true;
         }
     }
 
     void Instanciate()
     {
-
+        //Debug.Log("Spawndando em X:" + posXBomb + "em Y:" + posYBomb + "sendo a:" + index);
+        NetworkObject coin = Runner.Spawn(CoinPrefab, coinPosition, Quaternion.identity);
+        coin.transform.SetParent(transform);
+        isInicialized = true;
     }
 
     protected override void StartMission()
@@ -70,9 +74,8 @@ public class MissionCollectCoin : Missions
     }
     protected override void CompleteMission()
     {
-
         takeCoin = 0;
-        isInitialized = false;
+        isInicialized = false;
         
         Debug.Log("Collect Coin, Finish!");
     }
