@@ -71,9 +71,9 @@ public class PlayerController : NetworkBehaviour
         {
             print("entrei aqui");
 
-            Camera cam = GetComponentInChildren<Camera>(true); // true = busca em objetos inativos
+            /*Camera cam = GetComponentInChildren<Camera>(true); // true = busca em objetos inativos
             Debug.Log("Camera: " + cam);
-            cam.gameObject.SetActive(true);
+            cam.gameObject.SetActive(true);*/
             //cameraRoot.tag = "MainCamera"; // se quiser usar Camera.main            
         }
     }
