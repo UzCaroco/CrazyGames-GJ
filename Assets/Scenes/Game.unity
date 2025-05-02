@@ -38992,11 +38992,11 @@ GameObject:
   - component: {fileID: 2132842896}
   m_Layer: 0
   m_Name: MainCamera
-  m_TagString: MainCamera
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &2132842896
 AudioListener:
   m_ObjectHideFlags: 0
