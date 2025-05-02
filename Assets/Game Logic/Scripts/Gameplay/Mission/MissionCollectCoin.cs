@@ -54,7 +54,7 @@ public class MissionCollectCoin : Missions
                 takeCoin--;
                 DrawPos();
 
-
+                Instanciate();
             }
         }
     }
