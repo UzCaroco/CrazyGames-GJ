@@ -49,7 +49,7 @@ public class GameChecker : NetworkBehaviour
         }
     }
 
-    //Quando acabar a missão, verifica os jogadores completaram
+    //SOMENTE NO FINAL quando acabar a missão, verifica os jogadores completaram
     public void CheckPlayersInTheEndOfMission(sbyte mission)
     {
         Debug.Log("Verificando os jogadores no final da missão: " + mission);
@@ -58,6 +58,10 @@ public class GameChecker : NetworkBehaviour
         if (mission == 0 || mission == 3 || mission == 4 || mission == 6 || mission == 7)
         {
             AddEqualScores(); // Adiciona pontuação igual para todos os jogadores que completaram a missão
+        }
+        else
+        {
+            AdicionarPontucaoEmSequencia(); // Adiciona pontuação em sequência para os jogadores que completaram a missão
         }
     }
 
