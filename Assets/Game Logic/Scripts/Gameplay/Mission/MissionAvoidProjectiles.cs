@@ -206,9 +206,9 @@ public class MissionAvoidProjectiles : Missions
             }
             else 
             {
-                if(indexProj[randomURDL] >= quantityProjectiles[randomURDL])
+                if(indexProj[randomURDL] > randomQuantProject[randomURDL])
                 {
-                    indexProj[randomURDL] = (sbyte)quantityProjectiles[randomURDL];
+                    indexProj[randomURDL] = (sbyte)randomQuantProject[randomURDL];
                     
                     Debug.Log("Todos projéteis dessa direção foram instanciados.");
                 }
@@ -239,7 +239,7 @@ public class MissionAvoidProjectiles : Missions
             {
                 if (indexProj[randomURDL] >= quantityProjectiles[randomURDL])
                 {
-                    indexProj[randomURDL] = (sbyte)quantityProjectiles[randomURDL];
+                    indexProj[randomURDL] = (sbyte)randomQuantProject[randomURDL];
 
                     Debug.Log("Todos projéteis dessa direção foram instanciados.");
                     
