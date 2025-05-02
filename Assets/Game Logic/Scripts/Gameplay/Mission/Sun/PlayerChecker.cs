@@ -5,11 +5,24 @@ using System.Collections;
 
 public class PlayerChecker : NetworkBehaviour
 {
-    [SerializeField] private PlayerController playerController;
 
+    [SerializeField] PlayerController playerController;
     private void OnEnable()
     {
         StartCoroutine(enumerator());
+
+        
+    }
+
+    public void PegarPlayerControler(PlayerController playerController)
+    {
+        this.playerController = playerController;
+        Debug.Log("PlayerController: " + playerController);
+    }
+
+    public override void Spawned()
+    {
+        
     }
 
 
@@ -19,6 +32,11 @@ public class PlayerChecker : NetworkBehaviour
 
     public NetworkBool MissionProjectile(bool expectedResult)
     {
+        Debug.Log("PlayerController: " + playerController);
+
+        PlayerController ppppp = gameObject.GetComponent<PlayerController>();
+        Debug.Log("pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp: " + ppppp);
+
         if (playerController.missionProjectile == expectedResult)
         {
             Debug.Log("Player " + playerController + " completed the mission!");
@@ -48,6 +66,9 @@ public class PlayerChecker : NetworkBehaviour
     }
     public void CheckAndNotifyMissionCollectCoin()
     {
+        Debug.Log("PlayerController: " + playerController);
+        PlayerController ppppp = gameObject.GetComponent<PlayerController>();
+        Debug.Log("pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp: " + ppppp);
         if (playerController.missionCollectCoin)
         {
             Rpc_NotifyMissionCompletedCollectCoin(); // Pede pro Host registrar
@@ -74,6 +95,9 @@ public class PlayerChecker : NetworkBehaviour
     }
     public void CheckAndNotifyMissionCopyMoviment()
     {
+        Debug.Log("PlayerController: " + playerController);
+        PlayerController ppppp = gameObject.GetComponent<PlayerController>();
+        Debug.Log("pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp: " + ppppp);
         if (playerController.missionCollectCoin)
         {
             Rpc_NotifyMissionCompletedCollectCoin(); // Pede pro Host registrar
@@ -92,6 +116,9 @@ public class PlayerChecker : NetworkBehaviour
 
     public NetworkBool MissionDontMove(bool expectedResult)
     {
+        Debug.Log("PlayerController: " + playerController);
+        PlayerController ppppp = gameObject.GetComponent<PlayerController>();
+        Debug.Log("pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp: " + ppppp);
         if (playerController.missionDontMove == expectedResult)
         {
             Debug.Log("Player " + playerController + " completed the mission!");
@@ -113,8 +140,12 @@ public class PlayerChecker : NetworkBehaviour
 
     public NetworkBool MissionMove(bool expectedResult)
     {
+        Debug.Log("PlayerController: " + playerController);
+
         if (playerController.missionMove == expectedResult)
         {
+            PlayerController ppppp = gameObject.GetComponent<PlayerController>();
+            Debug.Log("pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp: " + ppppp);
             Debug.Log("Player " + playerController + " completed the mission!");
             return true;
         }
@@ -141,6 +172,9 @@ public class PlayerChecker : NetworkBehaviour
     }
     public void CheckAndNotifyMissionPushRival()
     {
+        Debug.Log("PlayerController: " + playerController);
+        PlayerController ppppp = gameObject.GetComponent<PlayerController>();
+        Debug.Log("pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp: " + ppppp);
         if (playerController.missionCollectCoin)
         {
             Rpc_NotifyMissionCompletedCollectCoin(); // Pede pro Host registrar
@@ -157,8 +191,11 @@ public class PlayerChecker : NetworkBehaviour
     //----------------Verificando se o player fugiu da bomba-----------------//
     //--------------------------------------------//
 
-    public NetworkBool MissionBomb(bool expectedResult)
+    public bool MissionBomb(bool expectedResult)
     {
+        Debug.Log("PlayerController: " + playerController);
+        PlayerController ppppp = gameObject.GetComponent<PlayerController>();
+        Debug.Log("pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp: " + ppppp);
         if (playerController.missionBomb == expectedResult)
         {
             Debug.Log("Player " + playerController + " completed the mission!");
@@ -180,6 +217,9 @@ public class PlayerChecker : NetworkBehaviour
 
     public NetworkBool MissionStaySquare(bool expectedResult)
     {
+        Debug.Log("PlayerController: " + playerController);
+        PlayerController ppppp = gameObject.GetComponent<PlayerController>();
+        Debug.Log("pppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp: " + ppppp);
         if (playerController.missionStaySquare == expectedResult)
         {
             Debug.Log("Player " + playerController + " completed the mission!");
@@ -198,6 +238,7 @@ public class PlayerChecker : NetworkBehaviour
 
     IEnumerator enumerator()
     {
+
         yield return new WaitForSeconds(5f);
         // Adiciona 1 ponto ao jogador
         AddScoreToSelf(1);

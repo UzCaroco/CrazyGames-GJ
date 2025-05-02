@@ -22,7 +22,7 @@ public class PlayerController : NetworkBehaviour
     [Header("Missions Bool")]
 
     
-    public NetworkBool missionProjectile, missionCollectCoin, missionCopyMoviment, missionDontMove, missionMove, missionPushRival, missionBomb, missionStaySquare;
+    public bool missionProjectile = true, missionCollectCoin = true, missionCopyMoviment = true, missionDontMove = true, missionMove = true, missionPushRival = true, missionBomb = true, missionStaySquare = true;
 
     
 
@@ -39,6 +39,10 @@ public class PlayerController : NetworkBehaviour
     {
         
         playerInput.Player.Enable();
+
+        PlayerChecker playerChecker = GetComponent<PlayerChecker>();
+        Debug.Log("PlayerChecker: " + playerChecker);
+        playerChecker.PegarPlayerControler(this);
 
         /*Camera cam = FindAnyObjectByType<Camera>();
         if (cam != null)
@@ -76,6 +80,8 @@ public class PlayerController : NetworkBehaviour
 
             virtualCam.Follow = this.transform;
             virtualCam.LookAt = this.transform;
+
+            
         }
     }
 

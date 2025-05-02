@@ -39,7 +39,13 @@ public class SunController : NetworkBehaviour
     
     private float beginning =  0;
 
-#region GetComponents
+
+
+    
+
+
+
+    #region GetComponents
     void Awake()
     {
         timerMission = GetComponent<TimerMission>(); // Get the TimerMission component attached to the same GameObject
@@ -53,12 +59,18 @@ public class SunController : NetworkBehaviour
         mission[6] = GetComponentInChildren<MissionStayAwayBomb>();
         mission[7] = GetComponentInChildren<MissionStaySquare>();
 
+        
+
         //missionStayAwayBomb = GetComponentInChildren<MissionStayAwayBomb>();
     }
 
 
 
-#endregion GetComponent
+    #endregion GetComponent
+
+
+    
+
 
     // Start is called before the first frame update
     void Start()
@@ -84,7 +96,7 @@ public class SunController : NetworkBehaviour
     {
         while (random == randomNumber)
         {
-            random = Random.Range(6, 8); // Generate a random number between 0 and 9
+            random = Random.Range(0, 2); // Generate a random number between 0 and 9
         }
         
         randomNumber = random;
@@ -116,6 +128,12 @@ public class SunController : NetworkBehaviour
         if (isFinishMission)
         {
             mission[randomNumber].CallCompleteMission();
+
+            GameChecker gameChecker = FindAnyObjectByType<GameChecker>();
+            Debug.Log("GameChecker: " + gameChecker);
+            gameChecker.AtualizarLista();
+            gameChecker.CheckPlayersInTheEndOfMission((sbyte)randomNumber);
+
             isFinishMission = false;
             mission[randomNumber].enabled = false;
 

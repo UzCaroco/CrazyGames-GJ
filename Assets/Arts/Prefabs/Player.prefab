@@ -217,9 +217,9 @@ GameObject:
   m_Component:
   - component: {fileID: 3531259414004453148}
   - component: {fileID: 5308285357592077276}
+  - component: {fileID: 2942862363892137499}
   - component: {fileID: 5616251057289849434}
   - component: {fileID: 7709088043970064343}
-  - component: {fileID: 4151082779698110767}
   - component: {fileID: 5654663375719015449}
   - component: {fileID: 2550705769389089815}
   - component: {fileID: 1769435188017924948}
@@ -299,6 +299,31 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &2942862363892137499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7663681712904282676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe90f1ac677f25a4da21e78cfc08dcab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  virtualCam: {fileID: 458617765047153428}
+  collisionLayers:
+    serializedVersion: 2
+    m_Bits: 32
+  speed: 5
+  missionProjectile: 1
+  missionCollectCoin: 1
+  missionCopyMoviment: 1
+  missionDontMove: 1
+  missionMove: 1
+  missionPushRival: 1
+  missionBomb: 1
+  missionStaySquare: 1
 --- !u!70 &5616251057289849434
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -336,39 +361,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &4151082779698110767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7663681712904282676}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe90f1ac677f25a4da21e78cfc08dcab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  virtualCam: {fileID: 458617765047153428}
-  collisionLayers:
-    serializedVersion: 2
-    m_Bits: 32
-  speed: 5
-  missionProjectile:
-    _value: 0
-  missionCollectCoin:
-    _value: 0
-  missionCopyMoviment:
-    _value: 0
-  missionDontMove:
-    _value: 0
-  missionMove:
-    _value: 0
-  missionPushRival:
-    _value: 0
-  missionBomb:
-    _value: 0
-  missionStaySquare:
-    _value: 0
 --- !u!114 &5654663375719015449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -381,7 +373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7c646c56a8b1ea1458641fa774b90a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 4151082779698110767}
+  playerController: {fileID: 2942862363892137499}
 --- !u!114 &2550705769389089815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -416,7 +408,7 @@ MonoBehaviour:
   Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
-  - {fileID: 4151082779698110767}
+  - {fileID: 2942862363892137499}
   - {fileID: 5654663375719015449}
   - {fileID: 2550705769389089815}
   ForceRemoteRenderTimeframe: 0
