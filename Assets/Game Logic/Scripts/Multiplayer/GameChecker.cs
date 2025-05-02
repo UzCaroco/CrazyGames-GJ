@@ -10,7 +10,8 @@ public class GameChecker : NetworkBehaviour
 
      List<PlayerChecker> playerCheckers = new List<PlayerChecker>();
 
-     List<PlayerChecker> playersSequence = new List<PlayerChecker>();
+    Dictionary<PlayerRef, int> playersSequence = new Dictionary<PlayerRef, int>();
+    Dictionary<PlayerRef, int> playerScores = new Dictionary<PlayerRef, int>();
 
     private void OnEnable()
     {
@@ -48,103 +49,42 @@ public class GameChecker : NetworkBehaviour
         }
     }
 
+    //Quando acabar a missão, verifica os jogadores completaram
     public void CheckPlayersInTheEndOfMission(sbyte mission)
     {
         Debug.Log("Verificando os jogadores no final da missão: " + mission);
         Debug.Log("Total de jogadores na lista: " + playerCheckers.Count);
-        switch (mission)
+
+        if (mission == 0 || mission == 3 || mission == 4 || mission == 6 || mission == 7)
         {
-            case 0:
-                Debug.Log($"Verificando os jogadores {playerCheckers[0]} e {playerCheckers[1]} na missão 0");
-                foreach (PlayerChecker playerChecker in playerCheckers)
-                {
-                    if (playerChecker.playerController != null)
-                    {
-                        Debug.Log(playerChecker + " Verificando se TODOS os player");
-                        if (playerChecker.MissionProjectile(true))
-                        {
-                            Debug.Log("Player " + playerChecker + " completed the mission!");
-                        }
-                        else
-                        {
-                            Debug.Log("Player " + playerChecker + " failed the mission!");
-                        }
-                    }
-                }
-                break;
-            case 3:
-                Debug.Log($"Verificando os jogadores {playerCheckers[0]} e {playerCheckers[1]} na missão 3");
-                foreach (var playerChecker in playerCheckers)
-                {
-                    if (playerChecker.playerController != null)
-                    {
-                        Debug.Log(playerChecker + " Verificando se TODOS os player");
-                        if (playerChecker.MissionDontMove(true))
-                        {
-                            Debug.Log("Player " + playerChecker + " completed the mission!");
-                        }
-                        else
-                        {
-                            Debug.Log("Player " + playerChecker + " failed the mission!");
-                        }
-                    }
-                }
-                break;
-            case 4:
-                Debug.Log($"Verificando os jogadores {playerCheckers[0]} e {playerCheckers[1]} na missão 4");
-                foreach (var playerChecker in playerCheckers)
-                {
-                    if (playerChecker.playerController != null)
-                    {
-                        Debug.Log(playerChecker + " Verificando se TODOS os player");
-                        if (playerChecker.MissionMove(true))
-                        {
-                            Debug.Log("Player " + playerChecker + " completed the mission!");
-                        }
-                        else
-                        {
-                            Debug.Log("Player " + playerChecker + " failed the mission!");
-                        }
-                    }
-                }
-                break;
-            case 6:
-                Debug.Log($"Verificando os jogadores {playerCheckers[0]} e {playerCheckers[1]} na missão 6");
-                foreach (var playerChecker in playerCheckers)
-                {
-                    if (playerChecker.playerController != null)
-                    {
-                        Debug.Log(playerChecker + " Verificando se TODOS os player");
-                        if (playerChecker.MissionBomb(true))
-                        {
-                            Debug.Log("Player " + playerChecker + " completed the mission!");
-                        }
-                        else
-                        {
-                            Debug.Log("Player " + playerChecker + " failed the mission!");
-                        }
-                    }
-                }
-                break;
-            case 7:
-                Debug.Log($"Verificando os jogadores {playerCheckers[0]} e {playerCheckers[1]} na missão 7");
-                foreach (var playerChecker in playerCheckers)
-                {
-                    if (playerChecker.playerController != null)
-                    {
-                        Debug.Log(playerChecker + " Verificando se TODOS os player");
-                        if (playerChecker.MissionStaySquare(true))
-                        {
-                            Debug.Log("Player " + playerChecker + " completed the mission!");
-                        }
-                        else
-                        {
-                            Debug.Log("Player " + playerChecker + " failed the mission!");
-                        }
-                    }
-                }
-                break;
+            AddEqualScores(); // Adiciona pontuação igual para todos os jogadores que completaram a missão
         }
+    }
+
+    private void AddEqualScores()
+    {
+        Debug.Log($"Verificando os jogadores {playerCheckers[0]} e {playerCheckers[1]} na missão 7");
+
+        foreach (PlayerChecker playerChecker in playerCheckers)
+        {
+            if (playerChecker.playerController != null)
+            {
+                Debug.Log(playerChecker + " Verificando se TODOS os player");
+
+                PlayerRef playerRef = playerChecker.Object.InputAuthority;
+
+                if (playerChecker.MissionProjectile(true))
+                {
+                    playerScores.Add(playerRef, 600);
+                }
+            }
+        }
+
+        foreach (var pair in playerScores) // Envia a pontuação para o GameManager
+        {
+            gameManager.RPC_AddScore(pair.Key, pair.Value);
+        }
+        playerScores.Clear(); // Limpa a lista após enviar as pontuações
     }
 
 
@@ -153,25 +93,57 @@ public class GameChecker : NetworkBehaviour
         if (playerCheckers.Contains(playerChecker))
         {
             playerCheckers.Remove(playerChecker);
+            Debug.Log("Removendo player " + playerChecker + " da lista de jogadores.");
         }
     }
 
 
     // Missões onde os players recebem pontuações diferentes dependendo da ordem que completaram
-
     public void NotifyMissionCompleted(PlayerChecker player)
     {
         if (!Runner.IsServer) return; // Só o Host pode registrar!
 
-        if (!playersSequence.Contains(player))
+        if (!playerScores.ContainsKey(player.Object.InputAuthority))
         {
-            playersSequence.Add(player);
             Debug.Log("Player " + player + " foi adicionado à lista na posição " + playersSequence.Count);
 
 
-
-
-            //gameManager.AtualizarPontuacao(player, completedPlayers.Count);
+            playersSequence.Add(player.Object.InputAuthority, 1);
         }
+    }
+
+
+    public void AdicionarPontucaoEmSequencia()
+    {
+        Debug.Log("Adicionando pontuação em sequência para os jogadores.");
+
+        foreach (KeyValuePair<PlayerRef, int> player in playersSequence)
+        {
+            if (player.Value == 1)
+            {
+                playerScores.Add(player.Key, 1200);
+            }
+            else if (player.Value == 2)
+            {
+                playerScores.Add(player.Key, 1000);
+            }
+            else if (player.Value == 3)
+            {
+                playerScores.Add(player.Key, 800);
+            }
+            else if (player.Value > 3)
+            {
+                playerScores.Add(player.Key, 600);
+            }
+        }
+        playersSequence.Clear(); // Limpa a lista após adicionar as pontuações
+
+
+        foreach (var pair in playerScores) // Envia a pontuação para o GameManager
+        {
+            gameManager.RPC_AddScore(pair.Key, pair.Value);
+        } 
+
+        playerScores.Clear(); // Limpa a lista após enviar as pontuações
     }
 }
