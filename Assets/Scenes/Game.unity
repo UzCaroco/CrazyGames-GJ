@@ -1741,6 +1741,17 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!114 &150924366 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2828872367965865189, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+  m_PrefabInstance: {fileID: 1767128026}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &300253565
 GameObject:
   m_ObjectHideFlags: 0
@@ -38600,6 +38611,30 @@ PrefabInstance:
       propertyPath: NestedObjects.Array.data[1]
       value: 
       objectReference: {fileID: 1767128037}
+    - target: {fileID: 788963258626657909, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+      propertyPath: imageMovement
+      value: 
+      objectReference: {fileID: 150924366}
+    - target: {fileID: 788963258626657909, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+      propertyPath: NetworkInputHandler
+      value: 
+      objectReference: {fileID: 1767128038}
+    - target: {fileID: 788963258626657909, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+      propertyPath: spritesMovement.Array.data[0]
+      value: 
+      objectReference: {fileID: -149392108, guid: 165a31350a3e9cf4885272422a375b9c, type: 3}
+    - target: {fileID: 788963258626657909, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+      propertyPath: spritesMovement.Array.data[1]
+      value: 
+      objectReference: {fileID: -984277093, guid: 165a31350a3e9cf4885272422a375b9c, type: 3}
+    - target: {fileID: 788963258626657909, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+      propertyPath: spritesMovement.Array.data[2]
+      value: 
+      objectReference: {fileID: -971706111, guid: 165a31350a3e9cf4885272422a375b9c, type: 3}
+    - target: {fileID: 788963258626657909, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+      propertyPath: spritesMovement.Array.data[3]
+      value: 
+      objectReference: {fileID: -1665666206, guid: 165a31350a3e9cf4885272422a375b9c, type: 3}
     - target: {fileID: 2341561903966689788, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -38813,6 +38848,18 @@ MonoBehaviour:
   - {fileID: 1767128029}
   - {fileID: 1767128027}
   ForceRemoteRenderTimeframe: 0
+--- !u!114 &1767128038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1767128028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ee0a25cd00d944b8a57b6078beb6ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2052637918
 GameObject:
   m_ObjectHideFlags: 0
@@ -39049,7 +39096,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!81 &2132842896
 AudioListener:
   m_ObjectHideFlags: 0

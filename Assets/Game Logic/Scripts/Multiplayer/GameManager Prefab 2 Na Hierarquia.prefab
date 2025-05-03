@@ -118,7 +118,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &807798179767881996
 CanvasRenderer:
@@ -329,8 +329,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 287.87732, y: 382.05762}
+  m_AnchoredPosition: {x: 0, y: -225}
+  m_SizeDelta: {x: 250, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4090683013558000444
 CanvasRenderer:
@@ -454,6 +454,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d579ee26e93c524e9c6d4771222a564, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  NetworkInputHandler: {fileID: 0}
+  imageMovement: {fileID: 0}
+  spritesMovement:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &2463647774658576703
 MonoBehaviour:
   m_ObjectHideFlags: 0
