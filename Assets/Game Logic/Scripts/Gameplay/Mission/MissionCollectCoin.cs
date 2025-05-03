@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using CrazyGames;
 using Fusion;
 using UnityEngine;
 
 public class MissionCollectCoin : Missions
 {
     [Header("Mission 1 - CC")]
-    private List<PlayerController> playersActive = new List<PlayerController>();
+    NetworkRunner runner;
 
-    sbyte takeCoin;
+    sbyte totalPlayers;
+    sbyte spawnedCoins = 0;
     [SerializeField] private GameObject CoinPrefab;
     // x = -10.5 até 10.5 y = - 7 ate 7 
     [Networked] private Vector2 coinPosition { get; set; }
-    [Networked] private bool isInicialized { get; set; }
 
     public override void FixedUpdateNetwork()
     {
@@ -30,55 +32,46 @@ public class MissionCollectCoin : Missions
 
     void GetTotalPlayers()
     {
-        foreach (var playerController in playersActive)
-        {
-            if (playerController != null)
-            {
-                playersActive.Add(playerController);
-                takeCoin++;
-            }
-        }
+        runner = FindObjectOfType<NetworkRunner>(); //Pega o NetworkRunner na cena
+        Debug.Log(runner + "EXISTE");
+
+        totalPlayers = sbyte.Parse(runner.ActivePlayers.Count().ToString());
+        Debug.Log("Quantidade de players ativos: " + runner.ActivePlayers.Count());
     }
 
     void DrawPos()
     {
         coinPosition = new Vector2((float)Random.Range(-10.5f, 10.5f), (float)Random.Range(-7f, 7f));
+        Instanciate();
     }
 
-    void ControlSpwnCoins()
+    void ControlSpawnCoins()
     {
-        if (!isInicialized) 
-        { 
-            while(takeCoin > 0)
-            {
-                takeCoin--;
-                DrawPos();
 
-                Instanciate();
-            }
-            isInicialized = true;
+        while (spawnedCoins < totalPlayers) // enquanto a quantidade de moedas for menor que a quantidade de players
+        {
+            spawnedCoins++;
+            DrawPos();
         }
     }
 
     void Instanciate()
     {
-        //Debug.Log("Spawndando em X:" + posXBomb + "em Y:" + posYBomb + "sendo a:" + index);
-        NetworkObject coin = Runner.Spawn(CoinPrefab, coinPosition, Quaternion.identity);
+        NetworkObject coin = Runner.Spawn(CoinPrefab, coinPosition, Quaternion.identity, null);
         coin.transform.SetParent(transform);
-        isInicialized = true;
     }
 
     protected override void StartMission()
     {
+        spawnedCoins = 0;
+
         GetTotalPlayers();
-        ControlSpwnCoins(); 
+        ControlSpawnCoins(); 
 
         Debug.Log("Collect Coin, Beginning!");
     }
     protected override void CompleteMission()
     {
-        takeCoin = 0;
-        isInicialized = false;
         
         Debug.Log("Collect Coin, Finish!");
     }
