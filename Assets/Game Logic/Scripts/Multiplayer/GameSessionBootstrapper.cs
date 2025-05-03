@@ -6,20 +6,20 @@ using UnityEngine.SceneManagement;
 
 public class GameSessionBootstrapper : MonoBehaviour
 {
-    [SerializeField] private NetworkInputHandler inputHandler; // arraste no inspetor
-    [SerializeField] private NetworkPrefabRef gameManagerPrefab;
+    //[SerializeField] private NetworkInputHandler inputHandler; // arraste no inspetor
+    //[SerializeField] private NetworkPrefabRef gameManagerPrefab;
 
-    private NetworkRunner runner;
+    //private NetworkRunner runner;
 
     private void Start()
     {
-        runner = FindObjectOfType<NetworkRunner>();
-        runner.ProvideInput = true;
+        //runner = FindObjectOfType<NetworkRunner>();
+        //runner.ProvideInput = true;
 
         //runner.AddInput(FindObjectOfType<NetworkInputHandler>());
         //runner.AddInput(inputHandler);
 
-        print("runner.ProvideInput " + runner.ProvideInput);
+        //print("runner.ProvideInput " + runner.ProvideInput);
         /*runner.StartGame(new StartGameArgs
         {
             GameMode = GameMode.Server,
@@ -30,7 +30,7 @@ public class GameSessionBootstrapper : MonoBehaviour
         //StartCoroutine(WaitAndSpawnGameManager());
     }
 
-    private IEnumerator WaitAndSpawnGameManager()
+    /*private IEnumerator WaitAndSpawnGameManager()
     {
         while (runner == null || !runner.IsRunning || runner.LocalPlayer == null)
         {
@@ -62,6 +62,6 @@ public class GameSessionBootstrapper : MonoBehaviour
         }
         catch (System.Exception) {}
 
-    }
+    }*/
 
 }

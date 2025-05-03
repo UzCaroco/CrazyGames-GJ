@@ -35,6 +35,24 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""CopyMovimentX"",
+                    ""type"": ""Button"",
+                    ""id"": ""a488ac18-f03f-49eb-b640-e6f48b56a566"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""CopyMovimentY"",
+                    ""type"": ""Button"",
+                    ""id"": ""c62d12eb-2edb-4fdc-ac4b-db11ef4515f1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -92,6 +110,72 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""X"",
+                    ""id"": ""a0b15d20-d2fc-49b7-b394-aa63ef960dfb"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CopyMovimentX"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""74f7dda1-b573-4b10-a0dd-685cb2dc7b15"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CopyMovimentX"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""2f620567-1d2d-4dcd-9174-7f916f5c56ee"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CopyMovimentX"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Y"",
+                    ""id"": ""fec934e1-069d-46e1-baf3-46363fb2b25d"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CopyMovimentY"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""c24bd08d-e3ae-4416-926b-67a99fa63892"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CopyMovimentY"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""d8119569-483a-4b45-abec-24e614b16922"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CopyMovimentY"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -113,6 +197,8 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
+        m_Player_CopyMovimentX = m_Player.FindAction("CopyMovimentX", throwIfNotFound: true);
+        m_Player_CopyMovimentY = m_Player.FindAction("CopyMovimentY", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -175,11 +261,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
+    private readonly InputAction m_Player_CopyMovimentX;
+    private readonly InputAction m_Player_CopyMovimentY;
     public struct PlayerActions
     {
         private @PlayerInputs m_Wrapper;
         public PlayerActions(@PlayerInputs wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Player_Move;
+        public InputAction @CopyMovimentX => m_Wrapper.m_Player_CopyMovimentX;
+        public InputAction @CopyMovimentY => m_Wrapper.m_Player_CopyMovimentY;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -192,6 +282,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Move.started += instance.OnMove;
             @Move.performed += instance.OnMove;
             @Move.canceled += instance.OnMove;
+            @CopyMovimentX.started += instance.OnCopyMovimentX;
+            @CopyMovimentX.performed += instance.OnCopyMovimentX;
+            @CopyMovimentX.canceled += instance.OnCopyMovimentX;
+            @CopyMovimentY.started += instance.OnCopyMovimentY;
+            @CopyMovimentY.performed += instance.OnCopyMovimentY;
+            @CopyMovimentY.canceled += instance.OnCopyMovimentY;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -199,6 +295,12 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @Move.started -= instance.OnMove;
             @Move.performed -= instance.OnMove;
             @Move.canceled -= instance.OnMove;
+            @CopyMovimentX.started -= instance.OnCopyMovimentX;
+            @CopyMovimentX.performed -= instance.OnCopyMovimentX;
+            @CopyMovimentX.canceled -= instance.OnCopyMovimentX;
+            @CopyMovimentY.started -= instance.OnCopyMovimentY;
+            @CopyMovimentY.performed -= instance.OnCopyMovimentY;
+            @CopyMovimentY.canceled -= instance.OnCopyMovimentY;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -228,5 +330,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnCopyMovimentX(InputAction.CallbackContext context);
+        void OnCopyMovimentY(InputAction.CallbackContext context);
     }
 }

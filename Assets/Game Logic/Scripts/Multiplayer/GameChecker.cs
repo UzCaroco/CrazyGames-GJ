@@ -57,7 +57,7 @@ public class GameChecker : NetworkBehaviour
 
         if (mission == 0 || mission == 3 || mission == 4 || mission == 6 || mission == 7)
         {
-            AddEqualScores(); // Adiciona pontuação igual para todos os jogadores que completaram a missão
+            AddEqualScores(mission); // Adiciona pontuação igual para todos os jogadores que completaram a missão
         }
         else
         {
@@ -65,7 +65,7 @@ public class GameChecker : NetworkBehaviour
         }
     }
 
-    private void AddEqualScores()
+    private void AddEqualScores(sbyte mission)
     {
         Debug.Log($"Verificando os jogadores {playerCheckers[0]} e {playerCheckers[1]} na missão 7");
 
@@ -77,9 +77,38 @@ public class GameChecker : NetworkBehaviour
 
                 PlayerRef playerRef = playerChecker.Object.InputAuthority;
 
-                if (playerChecker.MissionProjectile(true))
+                switch (mission)
                 {
-                    playerScores.Add(playerRef, 600);
+                    case 0:
+                        if (playerChecker.MissionProjectile(true))
+                        {
+                            playerScores.Add(playerRef, 600);
+                        }
+                        break;
+                    case 3:
+                        if (playerChecker.MissionDontMove(true))
+                        {
+                            playerScores.Add(playerRef, 600);
+                        }
+                        break;
+                    case 4:
+                        if (playerChecker.MissionMove(true))
+                        {
+                            playerScores.Add(playerRef, 600);
+                        }
+                        break;
+                    case 6:
+                        if (playerChecker.MissionBomb(true))
+                        {
+                            playerScores.Add(playerRef, 600);
+                        }
+                        break;
+                    case 7:
+                        if (playerChecker.MissionStaySquare(true))
+                        {
+                            playerScores.Add(playerRef, 600);
+                        }
+                        break;
                 }
             }
         }
@@ -105,7 +134,7 @@ public class GameChecker : NetworkBehaviour
     // Missões onde os players recebem pontuações diferentes dependendo da ordem que completaram
     public void NotifyMissionCompleted(PlayerChecker player)
     {
-        if (!Runner.IsServer) return; // Só o Host pode registrar!
+        //if (!Runner.IsServer) return; // Só o Host pode registrar!
 
         if (!playerScores.ContainsKey(player.Object.InputAuthority))
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Fusion;
 using UnityEngine;
 using CrazyGames;
+using System.Linq;
 
 public class PlayerController : NetworkBehaviour
 {
@@ -17,9 +18,21 @@ public class PlayerController : NetworkBehaviour
 
     public sbyte speed = 5;
 
+    [HideInInspector] public bool timeToCopyTheMovements = false;
+    [HideInInspector] public byte[] copyThisMovement = new byte[4];
+
+    List<sbyte> listCopyThisMovement = new List<sbyte>();
+    bool wasPressingX = false;
+    bool wasPressingY = false;
+
+
+
     [Header("Missions Bool")]
 
     
+
+
+
     public bool missionProjectile = true, missionCollectCoin = true, missionCopyMoviment = true, missionDontMove = true, missionMove = true, missionPushRival = true, missionBomb = true, missionStaySquare = true;
 
     
@@ -41,17 +54,6 @@ public class PlayerController : NetworkBehaviour
         PlayerChecker playerChecker = GetComponent<PlayerChecker>();
         Debug.Log("PlayerChecker: " + playerChecker);
         playerChecker.PegarPlayerControler();
-
-        /*Camera cam = FindAnyObjectByType<Camera>();
-        if (cam != null)
-        {
-            cam.gameObject.SetActive(false);
-        }
-        else
-        {
-            Debug.LogError("Camera não encontrada!");
-        }
-        */
     }
 
     private void OnDisable()
@@ -111,6 +113,12 @@ public class PlayerController : NetworkBehaviour
                 Debug.Log("Bateu em: " + hit.collider.name);
             }
         }
+
+        if (timeToCopyTheMovements)
+        {
+            CopyMoviment();
+        }
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -125,6 +133,86 @@ public class PlayerController : NetworkBehaviour
             Destroy(collision.gameObject);
         }
     }
+
+
+    private void CopyMoviment()
+    {
+        
+        float x = playerInput.Player.CopyMovimentX.ReadValue<float>();
+        float y = playerInput.Player.CopyMovimentY.ReadValue<float>();
+
+        if (listCopyThisMovement.Count < 4)
+        {
+            // Eixo X
+            if (x != 0 && !wasPressingX)
+            {
+                wasPressingX = true;
+
+                if (x > 0)
+                    listCopyThisMovement.Add(2); // Direita
+                else
+                    listCopyThisMovement.Add(4); // Esquerda
+            }
+            else if (x == 0)
+            {
+                wasPressingX = false;
+            }
+
+            // Eixo Y
+            if (y != 0 && !wasPressingY)
+            {
+                wasPressingY = true;
+
+                if (y > 0)
+                    listCopyThisMovement.Add(1); // Cima
+                else
+                    listCopyThisMovement.Add(3); // Baixo
+            }
+            else if (y == 0)
+            {
+                wasPressingY = false;
+            }
+
+            // Debug só se tiver movimento copiado
+            if (listCopyThisMovement.Count > 0)
+            {
+                Debug.Log("Copiou o movimento: " + string.Join(", ", listCopyThisMovement));
+            }
+        }
+
+        else
+        {
+            if (listCopyThisMovement[0] == copyThisMovement[0] && listCopyThisMovement[1] == copyThisMovement[1] && listCopyThisMovement[2] == copyThisMovement[2] && listCopyThisMovement[3] == copyThisMovement[3])
+            {
+                Debug.Log("Copiou o movimento certo");
+
+                PlayerChecker playerChecker = GetComponent<PlayerChecker>();
+                Debug.Log("PlayerChecker ESTÁ VAZIO???: " + playerChecker);
+                GameChecker gameChecker = FindObjectOfType<GameChecker>();
+
+                gameChecker.NotifyMissionCompleted(playerChecker); // Envia notificação de missão completa para o GameChecker
+
+                timeToCopyTheMovements = false; // Para de copiar o movimento
+                listCopyThisMovement.Clear(); // Limpa a lista de movimentos copiados
+                copyThisMovement = new byte[4]; // Limpa a lista de movimentos a serem copiados
+            }
+            else
+            {
+                Debug.Log("Copiou o movimento certo");
+
+                PlayerChecker playerChecker = GetComponent<PlayerChecker>();
+                Debug.Log("PlayerChecker ESTÁ VAZIO???: " + playerChecker);
+                GameChecker gameChecker = FindObjectOfType<GameChecker>();
+
+                gameChecker.NotifyMissionCompleted(playerChecker); // Envia notificação de missão completa para o GameChecker
+
+                timeToCopyTheMovements = false; // Para de copiar o movimento
+                listCopyThisMovement.Clear(); // Limpa a lista de movimentos copiados
+                copyThisMovement = new byte[4]; // Limpa a lista de movimentos a serem copiados
+            }
+        }
+    }
+
 }
 
 
