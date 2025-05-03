@@ -8,11 +8,11 @@ using static PlayerCopyMovementController;
 public class MissionCopyMovement : Missions
 {
     [Header("Mission 2 - CM")]
-    [SerializeField] GameObject painelmovement;
+    [SerializeField] private GameObject painelmovement;
 
-    [SerializeField] NetworkInputHandler networkInputHandler;
-    [SerializeField] Image imageMovement;
-    [SerializeField] Sprite[] spritesMovement = new Sprite[4];
+    [SerializeField] private NetworkInputHandler networkInputHandler;
+    [SerializeField] private Image imageMovement;
+    [SerializeField] private Sprite[] spritesMovement = new Sprite[4];
 
     sbyte[] copyThisMovement = new sbyte[4];
     sbyte[] playerMovementCopy = new sbyte[4];
@@ -82,6 +82,7 @@ public class MissionCopyMovement : Missions
     protected override void StartMission()
     {
         painelmovement.SetActive(true);
+        networkInputHandler = GetComponent<NetworkInputHandler>();
         networkInputHandler.enabled = true;
         Debug.Log("COPY THE MOVEMENT, Beginning!");
     }
