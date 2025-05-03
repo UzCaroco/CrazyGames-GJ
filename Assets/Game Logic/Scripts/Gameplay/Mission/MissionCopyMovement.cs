@@ -102,11 +102,8 @@ public class MissionCopyMovement : Missions
 
                 for (int i = 0; i < 4; i++)
                 {
-                    while (player.Movements.Get(i) == 0)
-                    {
-                        if (player.Movements.Get(i) == copyThisMovement[i])
+                    if (player.Movements.Get(i) == copyThisMovement[i])
                             correct++;
-                    }
                 }
 
                 if (correct == 4)
