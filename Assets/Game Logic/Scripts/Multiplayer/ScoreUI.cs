@@ -18,11 +18,22 @@ public class ScoreUI : MonoBehaviour
         GameManager.OnScoreChanged -= HandleScoreChanged;
     }
 
-    private void HandleScoreChanged(PlayerRef player, int score)
+    private void HandleScoreChanged(PlayerRef _, int __)
     {
-        if (player == trackedPlayer)
-        {
-            first.text = $"Score: {score}";
-        }
+        UpdateRankingUI();
+    }
+
+    private void UpdateRankingUI()
+    {
+        var rankedList = FindObjectOfType<GameManager>().GetRankedList(); // ou guarda uma referência ao GameManager
+
+        if (rankedList.Count > 0)
+            first.text = $"1º: {rankedList[0].Item1.PlayerId} - {rankedList[0].Item2}";
+
+        if (rankedList.Count > 1)
+            second.text = $"2º: {rankedList[1].Item1.PlayerId} - {rankedList[1].Item2}";
+
+        if (rankedList.Count > 2)
+            third.text = $"3º: {rankedList[2].Item1.PlayerId} - {rankedList[2].Item2}";
     }
 }
