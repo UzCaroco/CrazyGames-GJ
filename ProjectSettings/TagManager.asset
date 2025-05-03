@@ -7,6 +7,9 @@ TagManager:
   - Coin
   - Missions
   - Sun
+  - Bomb
+  - Projetile
+  - Square
   layers:
   - Default
   - TransparentFX

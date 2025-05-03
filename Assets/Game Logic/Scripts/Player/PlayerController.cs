@@ -12,6 +12,7 @@ public class PlayerController : NetworkBehaviour
     private Vector2 moveInput;
     public LayerMask collisionLayers; // Define no Inspector os layers que vai colidir
 
+    PlayerChecker playerChecker;
     private PlayerInputs playerInput;
     private Collider2D col;
     private GameManager gameManager;
@@ -21,7 +22,7 @@ public class PlayerController : NetworkBehaviour
     [HideInInspector] public bool timeToCopyTheMovements = false;
     [HideInInspector] public byte[] copyThisMovement = new byte[4];
 
-    List<sbyte> listCopyThisMovement = new List<sbyte>();
+    public List<sbyte> listCopyThisMovement = new List<sbyte>();
     bool wasPressingX = false;
     bool wasPressingY = false;
 
@@ -121,18 +122,7 @@ public class PlayerController : NetworkBehaviour
 
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Debug.Log("Adicionou 1 ponto");
-
-        if (collision.CompareTag("Coin"))
-        {
-            // Adiciona 1 ponto ao jogador
-            gameManager.RPC_AddScore(Object.InputAuthority, 1);
-            Debug.Log("Adicionou 1 ponto");
-            Destroy(collision.gameObject);
-        }
-    }
+   
 
 
     private void CopyMoviment()
@@ -186,7 +176,7 @@ public class PlayerController : NetworkBehaviour
             {
                 Debug.Log("Copiou o movimento certo");
 
-                PlayerChecker playerChecker = GetComponent<PlayerChecker>();
+                playerChecker = GetComponent<PlayerChecker>();
                 Debug.Log("PlayerChecker ESTÁ VAZIO???: " + playerChecker);
                 GameChecker gameChecker = FindObjectOfType<GameChecker>();
 
@@ -198,9 +188,7 @@ public class PlayerController : NetworkBehaviour
             }
             else
             {
-                Debug.Log("Copiou o movimento certo");
-
-                PlayerChecker playerChecker = GetComponent<PlayerChecker>();
+                playerChecker = GetComponent<PlayerChecker>();
                 Debug.Log("PlayerChecker ESTÁ VAZIO???: " + playerChecker);
                 GameChecker gameChecker = FindObjectOfType<GameChecker>();
 
@@ -210,6 +198,49 @@ public class PlayerController : NetworkBehaviour
                 listCopyThisMovement.Clear(); // Limpa a lista de movimentos copiados
                 copyThisMovement = new byte[4]; // Limpa a lista de movimentos a serem copiados
             }
+        }
+    }
+
+
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Coin"))
+        {
+            playerChecker = GetComponent<PlayerChecker>();
+            Debug.Log("PlayerChecker ESTÁ VAZIO???: " + playerChecker);
+
+            GameChecker gameChecker = FindObjectOfType<GameChecker>();
+            gameChecker.NotifyMissionCompleted(playerChecker); // Envia notificação de missão completa para o GameChecker
+
+            missionCollectCoin = true;
+
+            Destroy(collision.gameObject);
+        }
+        else if (collision.CompareTag("Projectile"))
+        {
+            missionProjectile = true;
+        }
+        else if (collision.CompareTag("Bomb"))
+        {
+            missionBomb = true;
+        }
+        else if (collision.CompareTag("Square"))
+        {
+            missionStaySquare = true;
+        }
+        else if (collision.CompareTag("Player") && playerInput.Player.PushRival.triggered)
+        {
+            missionPushRival = true;
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Square"))
+        {
+            missionStaySquare = false;
         }
     }
 

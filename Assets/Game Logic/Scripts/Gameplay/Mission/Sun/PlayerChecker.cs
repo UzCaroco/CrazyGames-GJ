@@ -54,60 +54,6 @@ public class PlayerChecker : NetworkBehaviour
 
 
     //----------------------------------------------------------------------------------------------------------//
-    //----------Verificando de maneira segura se o player coletou a moeda----------//
-    //--------------------------------------------//
-
-
-    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
-    public void Rpc_NotifyMissionCompletedCollectCoin()
-    {
-        // Apenas quem tem autoridade do State (o Host) vai rodar isso
-        GameChecker gameChecker = FindObjectOfType<GameChecker>();
-        gameChecker.NotifyMissionCompleted(this);
-    }
-    public void CheckAndNotifyMissionCollectCoin()
-    {
-        Debug.Log("PlayerController: " + playerController + "SE NÃO TIVER NADA ANTES É NULO");
-        if (playerController.missionCollectCoin)
-        {
-            Rpc_NotifyMissionCompletedCollectCoin(); // Pede pro Host registrar
-        }
-    }
-
-
-    //--------------------------------------------//
-    //-----------------------------------------------------------------------//
-    //----------------------------------------------------------------------------------------------------------//
-
-
-
-    //----------------------------------------------------------------------------------------------------------//
-    //----------Verificando de maneira segura se o player copiou os movimentos----------//
-    //--------------------------------------------//
-
-    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
-    public void Rpc_NotifyMissionCompletedCopyMoviment()
-    {
-        // Apenas quem tem autoridade do State (o Host) vai rodar isso
-        GameChecker gameChecker = FindObjectOfType<GameChecker>();
-        gameChecker.NotifyMissionCompleted(this);
-    }
-    public void CheckAndNotifyMissionCopyMoviment()
-    {
-        Debug.Log("PlayerController: " + playerController + "SE NÃO TIVER NADA ANTES É NULO");
-        if (playerController.missionCollectCoin)
-        {
-            Rpc_NotifyMissionCompletedCollectCoin(); // Pede pro Host registrar
-        }
-    }
-
-    //--------------------------------------------//
-    //-----------------------------------------------------------------------//
-    //----------------------------------------------------------------------------------------------------------//
-
-
-
-    //----------------------------------------------------------------------------------------------------------//
     //----------------Verificando se o player não se moveu-----------------//
     //--------------------------------------------//
 
@@ -144,32 +90,6 @@ public class PlayerChecker : NetworkBehaviour
         }
 
         return false;
-    }
-
-    //--------------------------------------------//
-    //-----------------------------------------------------------------------//
-    //----------------------------------------------------------------------------------------------------------//
-
-
-
-    //----------------------------------------------------------------------------------------------------------//
-    //----------Verificando de maneira segura se o player empurrou o rival----------//
-    //--------------------------------------------//
-
-    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
-    public void Rpc_NotifyMissionCompletedPushRival()
-    {
-        // Apenas quem tem autoridade do State (o Host) vai rodar isso
-        GameChecker gameChecker = FindObjectOfType<GameChecker>();
-        gameChecker.NotifyMissionCompleted(this);
-    }
-    public void CheckAndNotifyMissionPushRival()
-    {
-        Debug.Log("PlayerController: " + playerController + "SE NÃO TIVER NADA ANTES É NULO");
-        if (playerController.missionCollectCoin)
-        {
-            Rpc_NotifyMissionCompletedCollectCoin(); // Pede pro Host registrar
-        }
     }
 
     //--------------------------------------------//
@@ -221,6 +141,30 @@ public class PlayerChecker : NetworkBehaviour
     //----------------------------------------------------------------------------------------------------------//
 
 
+
+    //----------------------------------------------------------------------------------------------------------//
+    //----------Enviando para o GameManager que o player terminou a missão----------//
+    //--------------------------------------------//
+
+    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
+    public void Rpc_NotifyMissionCompletedTheMission()
+    {
+        // Apenas quem tem autoridade do State (o Host) vai rodar isso
+        GameChecker gameChecker = FindObjectOfType<GameChecker>();
+        gameChecker.NotifyMissionCompleted(this);
+    }
+    public void CheckAndNotifyMissionCopyMoviment()
+    {
+        Debug.Log("PlayerController: " + playerController + "SE NÃO TIVER NADA ANTES É NULO");
+        if (playerController.missionCollectCoin)
+        {
+            Rpc_NotifyMissionCompletedTheMission(); // Pede pro Host registrar
+        }
+    }
+
+    //--------------------------------------------//
+    //-----------------------------------------------------------------------//
+    //----------------------------------------------------------------------------------------------------------//
 
 
     IEnumerator enumerator()

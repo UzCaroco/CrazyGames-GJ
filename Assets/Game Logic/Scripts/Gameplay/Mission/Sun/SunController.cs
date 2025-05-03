@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
+using CrazyGames;
 using Fusion;
 using UnityEngine;
 
@@ -40,8 +42,8 @@ public class SunController : NetworkBehaviour
     private float beginning =  0;
 
 
+    private NetworkRunner runner;
 
-    
 
 
 
@@ -135,6 +137,49 @@ public class SunController : NetworkBehaviour
 
             isFinishMission = false;
             mission[randomNumber].enabled = false;
+
+            //--------------------------------------------------------------------------------------------------------------------------------//
+            //-----------Envia os comandos para todos os player resetarem os valores dos booleanos-----------//
+            //---------------------------------------------------------------//
+
+            
+            runner = FindObjectOfType<NetworkRunner>(); //Pega o NetworkRunner na cena
+            Debug.Log(runner + "EXISTE");
+            Debug.Log("Quantidade de players ativos: " + runner.ActivePlayers.Count());
+
+
+            foreach (var player in runner.ActivePlayers)
+            {
+                Debug.Log("Checando player: " + player);
+
+                var networkObject = runner.GetPlayerObject(player); //Percorre os objetos de rede ativos (Players)
+
+                Debug.Log("NETWORKOBJECT VAZIO??: " + networkObject);
+                if (networkObject != null) //Verifica se o objeto de rede não é nulo
+                {
+                    Debug.Log("EXISTE O NETWORKOBJECT");
+
+                    PlayerController playerController = networkObject.GetComponent<PlayerController>(); //Pega o script PlayerController do objeto de rede
+
+                    if (playerController != null)
+                    {
+                        playerController.missionProjectile = false; // Reseta a missão do player
+                        playerController.missionCollectCoin = false; // Reseta a missão do player
+                        playerController.missionCopyMoviment = false; // Reseta a missão do player
+                        playerController.missionDontMove = false; // Reseta a missão do player
+                        playerController.missionMove = false; // Reseta a missão do player
+                        playerController.missionPushRival = false; // Reseta a missão do player
+                        playerController.missionBomb = false; // Reseta a missão do player
+                        playerController.missionStaySquare = false; // Reseta a missão do player
+
+                        playerController.timeToCopyTheMovements = false; // Reseta o tempo para copiar os movimentos
+                        playerController.copyThisMovement = new byte[4]; // Limpa a lista de movimentos copiados
+                        playerController.listCopyThisMovement.Clear(); // Limpa a lista de movimentos copiados
+
+                        Debug.Log("APAGOU TUDO DE TODOS");
+                    }
+                }
+            }
 
             Draw();
         }

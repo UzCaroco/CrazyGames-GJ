@@ -53,6 +53,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""PushRival"",
+                    ""type"": ""Button"",
+                    ""id"": ""0727939a-e9db-48e2-b161-bd24e45d00fe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -176,6 +185,17 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""CopyMovimentY"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b53e6ab9-af6d-40d6-901a-19bfa6757560"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""PushRival"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -199,6 +219,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_CopyMovimentX = m_Player.FindAction("CopyMovimentX", throwIfNotFound: true);
         m_Player_CopyMovimentY = m_Player.FindAction("CopyMovimentY", throwIfNotFound: true);
+        m_Player_PushRival = m_Player.FindAction("PushRival", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -263,6 +284,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_CopyMovimentX;
     private readonly InputAction m_Player_CopyMovimentY;
+    private readonly InputAction m_Player_PushRival;
     public struct PlayerActions
     {
         private @PlayerInputs m_Wrapper;
@@ -270,6 +292,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @CopyMovimentX => m_Wrapper.m_Player_CopyMovimentX;
         public InputAction @CopyMovimentY => m_Wrapper.m_Player_CopyMovimentY;
+        public InputAction @PushRival => m_Wrapper.m_Player_PushRival;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -288,6 +311,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @CopyMovimentY.started += instance.OnCopyMovimentY;
             @CopyMovimentY.performed += instance.OnCopyMovimentY;
             @CopyMovimentY.canceled += instance.OnCopyMovimentY;
+            @PushRival.started += instance.OnPushRival;
+            @PushRival.performed += instance.OnPushRival;
+            @PushRival.canceled += instance.OnPushRival;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -301,6 +327,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @CopyMovimentY.started -= instance.OnCopyMovimentY;
             @CopyMovimentY.performed -= instance.OnCopyMovimentY;
             @CopyMovimentY.canceled -= instance.OnCopyMovimentY;
+            @PushRival.started -= instance.OnPushRival;
+            @PushRival.performed -= instance.OnPushRival;
+            @PushRival.canceled -= instance.OnPushRival;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -332,5 +361,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnCopyMovimentX(InputAction.CallbackContext context);
         void OnCopyMovimentY(InputAction.CallbackContext context);
+        void OnPushRival(InputAction.CallbackContext context);
     }
 }

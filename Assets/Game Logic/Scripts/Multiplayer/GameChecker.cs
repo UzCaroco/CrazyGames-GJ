@@ -80,7 +80,7 @@ public class GameChecker : NetworkBehaviour
                 switch (mission)
                 {
                     case 0:
-                        if (playerChecker.MissionProjectile(true))
+                        if (playerChecker.MissionProjectile(false))
                         {
                             playerScores.Add(playerRef, 600);
                         }
