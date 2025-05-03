@@ -44,7 +44,7 @@ public class MissionCopyMovement : Missions
         }
     }
 
-    void WaitInput()
+    void ResultMovement()
     {
         foreach (var player in PlayerCopyMovementController.AllPlayers)
         {
@@ -54,8 +54,11 @@ public class MissionCopyMovement : Missions
 
                 for (int i = 0; i < 4; i++)
                 {
-                    if (player.Movements.Get(i) == copyThisMovement[i])
-                        correct++;
+                    while (player.Movements.Get(i) == 0)
+                    {
+                        if (player.Movements.Get(i) == copyThisMovement[i])
+                            correct++;
+                    }
                 }
 
                 if (correct == 4)
@@ -65,6 +68,20 @@ public class MissionCopyMovement : Missions
                 else
                 {
                     Debug.Log($"Jogador {player.Object.InputAuthority} errou {4 - correct}.");
+                }
+            }
+        }
+    }
+
+    void WaitInput()
+    {
+        foreach (var player in PlayerCopyMovementController.AllPlayers)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                while (player.Movements.Get(i) == 0)
+                {
+
                 }
             }
         }
