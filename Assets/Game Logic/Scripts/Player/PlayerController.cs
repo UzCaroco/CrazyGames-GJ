@@ -111,7 +111,6 @@ public class PlayerController : NetworkBehaviour
                 Debug.Log("Bateu em: " + hit.collider.name);
             }
         }
-
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -126,8 +125,6 @@ public class PlayerController : NetworkBehaviour
             Destroy(collision.gameObject);
         }
     }
-
-
 }
 
 
