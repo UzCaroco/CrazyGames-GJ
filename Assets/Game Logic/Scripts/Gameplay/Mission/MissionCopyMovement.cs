@@ -9,8 +9,8 @@ public class MissionCopyMovement : Missions
 {
     [Header("Mission 2 - CM")]
     [SerializeField] NetworkInputHandler NetworkInputHandler;
-    Image imageMovement;
-    SpriteRenderer[] spritesMovement = new SpriteRenderer[4];
+    [SerializeField] Image imageMovement;
+    [SerializeField] Sprite[] spritesMovement = new Sprite[4];
 
     sbyte[] copyThisMovement = new sbyte[4];
     sbyte[] playerMovementCopy = new sbyte[4];
@@ -38,12 +38,13 @@ public class MissionCopyMovement : Missions
         {
             copyThisMovement[i] = (sbyte)Random.Range(0, 5);
 
+            imageMovement.sprite = spritesMovement[copyThisMovement[i]];
         }
     }
 
     void WaitInput()
     {
-        foreach (var player in MissionCopyMovement.AllPlayers)
+        foreach (var player in PlayerCopyMovementController.AllPlayers)
         {
             if (player.MovementIndex >= 4) // jogador terminou
             {
