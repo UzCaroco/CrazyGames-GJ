@@ -23,7 +23,7 @@ public class ScoreUI : MonoBehaviour
         UpdateRankingUI();
     }
 
-    private void UpdateRankingUI()
+    public void UpdateRankingUI()
     {
         var rankedList = FindObjectOfType<GameManager>().GetRankedList(); // ou guarda uma referência ao GameManager
 

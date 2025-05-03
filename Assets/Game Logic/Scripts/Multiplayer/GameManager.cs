@@ -8,9 +8,10 @@ using UnityEngine;
 public class GameManager : NetworkBehaviour, INetworkRunnerCallbacks
 {
     // Score por jogador
-    private Dictionary<PlayerRef, int> playerScores = new Dictionary<PlayerRef, int>();
+    [Networked, Capacity(10)]
+    private NetworkDictionary<PlayerRef, int> playerScores { get; } = default;
 
-    
+
 
     // Eventos locais para UI
     public static event Action<PlayerRef, int> OnScoreChanged;
@@ -33,7 +34,7 @@ public class GameManager : NetworkBehaviour, INetworkRunnerCallbacks
 
         if (!playerScores.ContainsKey(player))
         {
-            playerScores[player] = 0;
+            playerScores.Set(player, 0); // Usar Set() em vez de indexador
             Debug.Log($"[GameManager] Player {player.PlayerId} entrou e foi adicionado ao ranking.");
         }
     }
@@ -52,22 +53,38 @@ public class GameManager : NetworkBehaviour, INetworkRunnerCallbacks
     //[Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
     public void RPC_AddScore(PlayerRef player, int amount)
     {
-        Debug.Log("AEEEEEEEE entrou no RPC");
         if (!HasStateAuthority) return;
 
-        if (!playerScores.ContainsKey(player))
-            playerScores[player] = 0;
+        if (!playerScores.TryGet(player, out int currentScore))
+            currentScore = 0;
 
-        playerScores[player] += amount;
-        Debug.Log($"[GameManager] Score do player {player.PlayerId} é agora {playerScores[player]}");
+        playerScores.Set(player, currentScore + amount);
+        Debug.Log($"[GameManager] Score do player {player.PlayerId} é agora {currentScore + amount}");
 
-        OnScoreChanged?.Invoke(player, playerScores[player]);
+        // Atualiza todos os clientes
+        RPC_UpdateScores();
+    }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_UpdateScores()
+    {
+        // Dispara evento para atualizar UIs
+        UpdateAllUIs();
+    }
+
+    private void UpdateAllUIs()
+    {
+        var scoreUIs = FindObjectsOfType<ScoreUI>();
+        foreach (var ui in scoreUIs)
+        {
+            ui.UpdateRankingUI();
+        }
     }
 
     // Para acessar scores localmente (apenas para exibição)
     public int GetScore(PlayerRef player)
     {
-        return playerScores.TryGetValue(player, out int score) ? score : 0;
+        return playerScores.TryGet(player, out int score) ? score : 0;
     }
 
     // Ranking ordenado
