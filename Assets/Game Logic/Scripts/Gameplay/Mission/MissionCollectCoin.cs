@@ -70,6 +70,8 @@ public class MissionCollectCoin : Missions
 
     protected override void StartMission()
     {
+        ControlSpwnCoins(); 
+
         Debug.Log("Collect Coin, Beginning!");
     }
     protected override void CompleteMission()
