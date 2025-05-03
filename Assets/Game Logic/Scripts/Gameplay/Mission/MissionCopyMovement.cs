@@ -17,11 +17,11 @@ public class MissionCopyMovement : Missions
     [SerializeField] private Image imageMovement;
     [SerializeField] private Sprite[] spritesMovement = new Sprite[4];
 
-    sbyte[] copyThisMovement = new sbyte[4];
-    sbyte totalImages = 0;
+    byte[] copyThisMovement = new byte[4];
+    byte totalImages = 0;
     //sbyte[] playerMovementCopy = new sbyte[4];
 
-    Dictionary<PlayerRef, sbyte[]> playerInputs = new();
+    Dictionary<PlayerRef, byte[]> playerInputs = new();
     Dictionary<PlayerRef, int> playerCorrectCount = new();
 
     [SerializeField] bool isMission = false;
@@ -63,7 +63,7 @@ public class MissionCopyMovement : Missions
     {
         for (int i = 0; i < copyThisMovement.Length; i++)
         {
-            copyThisMovement[i] = (sbyte)Random.Range(0, 4);
+            copyThisMovement[i] = (byte)Random.Range(0, 4);
         }
 
         StartCoroutine(TimeForSeeMovement());
@@ -102,8 +102,12 @@ public class MissionCopyMovement : Missions
 
                 for (int i = 0; i < 4; i++)
                 {
+                    print(player.Movements.Get(i));
                     if (player.Movements.Get(i) == copyThisMovement[i])
-                            correct++;
+                    {
+                        print(player.Movements.Get(i) + " = " + copyThisMovement[i]);
+                        correct++;
+                    }
                 }
 
                 if (correct == 4)
@@ -123,7 +127,7 @@ public class MissionCopyMovement : Missions
         runner = FindObjectOfType<NetworkRunner>();
         painelmovement.SetActive(true);
         networkInputHandler = GetComponent<NetworkInputHandler>();
-        networkInputHandler.enabled = true;
+        //networkInputHandler.enabled = true;
 
         DrawSequence();
         Debug.Log("COPY THE MOVEMENT, Beginning!");
@@ -136,7 +140,7 @@ public class MissionCopyMovement : Missions
         }
         isMission = false;
         painelmovement.SetActive(false);
-        networkInputHandler.enabled = false;
+        //networkInputHandler.enabled = false;
         Debug.Log("COPY THE MOVEMENT, Finish!");
     }
 }

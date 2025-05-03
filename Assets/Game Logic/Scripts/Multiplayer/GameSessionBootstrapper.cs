@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using Fusion;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameSessionBootstrapper : MonoBehaviour
 {
+    [SerializeField] private NetworkInputHandler inputHandler; // arraste no inspetor
     [SerializeField] private NetworkPrefabRef gameManagerPrefab;
 
     private NetworkRunner runner;
@@ -12,6 +14,19 @@ public class GameSessionBootstrapper : MonoBehaviour
     private void Start()
     {
         runner = FindObjectOfType<NetworkRunner>();
+        runner.ProvideInput = true;
+
+        //runner.AddInput(FindObjectOfType<NetworkInputHandler>());
+        //runner.AddInput(inputHandler);
+
+        print("runner.ProvideInput " + runner.ProvideInput);
+        /*runner.StartGame(new StartGameArgs
+        {
+            GameMode = GameMode.Server,
+            SessionName = default,
+            Scene = SceneRef.FromIndex(SceneManager.GetActiveScene().buildIndex),
+            SceneManager = runner.GetComponent<NetworkSceneManagerDefault>()
+        });*/
         //StartCoroutine(WaitAndSpawnGameManager());
     }
 

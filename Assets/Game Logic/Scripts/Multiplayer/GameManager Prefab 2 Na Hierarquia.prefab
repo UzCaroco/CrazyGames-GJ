@@ -390,7 +390,7 @@ GameObject:
   - component: {fileID: 6456106406888569077}
   m_Layer: 0
   m_Name: MissionController
-  m_TagString: Untagged
+  m_TagString: Missions
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -454,13 +454,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d579ee26e93c524e9c6d4771222a564, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NetworkInputHandler: {fileID: 0}
+  runner: {fileID: 0}
+  painelmovement: {fileID: 0}
+  networkInputHandler: {fileID: 0}
   imageMovement: {fileID: 0}
   spritesMovement:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  isMission: 0
 --- !u!114 &2463647774658576703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -879,7 +882,7 @@ GameObject:
   - component: {fileID: 8894191357013397404}
   m_Layer: 0
   m_Name: MasterSun
-  m_TagString: Untagged
+  m_TagString: Sun
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

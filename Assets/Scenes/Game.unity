@@ -25326,6 +25326,7 @@ GameObject:
   - component: {fileID: 531660911}
   - component: {fileID: 531660910}
   - component: {fileID: 531660909}
+  - component: {fileID: 531660914}
   m_Layer: 0
   m_Name: Prototype Runner
   m_TagString: Untagged
@@ -25455,6 +25456,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &531660914
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531660908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ee0a25cd00d944b8a57b6078beb6ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &655408518 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7162263204998228569, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
@@ -38560,6 +38573,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager Prefab 2 Na Hierarquia
       objectReference: {fileID: 0}
+    - target: {fileID: 19053805543826193, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 19053805543826194, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -38647,11 +38664,11 @@ PrefabInstance:
     - target: {fileID: 788963258626657909, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: NetworkInputHandler
       value: 
-      objectReference: {fileID: 1767128038}
+      objectReference: {fileID: 0}
     - target: {fileID: 788963258626657909, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: networkInputHandler
       value: 
-      objectReference: {fileID: 1767128038}
+      objectReference: {fileID: 0}
     - target: {fileID: 788963258626657909, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: spritesMovement.Array.data[0]
       value: 
@@ -38670,7 +38687,7 @@ PrefabInstance:
       objectReference: {fileID: -1665666206, guid: 165a31350a3e9cf4885272422a375b9c, type: 3}
     - target: {fileID: 2341561903966689788, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3108194950587201866, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: m_IsActive
@@ -38680,6 +38697,10 @@ PrefabInstance:
       propertyPath: CoinPrefab
       value: 
       objectReference: {fileID: 3339179606883994461, guid: 0ec068e18e61af144a0ce4adb1bf2308, type: 3}
+    - target: {fileID: 4087724282759456513, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+      propertyPath: m_TagString
+      value: Missions
+      objectReference: {fileID: 0}
     - target: {fileID: 5262487590616239899, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -38755,6 +38776,10 @@ PrefabInstance:
     - target: {fileID: 8635712204153360074, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8635712204153360074, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+      propertyPath: m_TagString
+      value: Sun
       objectReference: {fileID: 0}
     - target: {fileID: 8894191357013397404, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: m_Enabled
@@ -38897,18 +38922,6 @@ MonoBehaviour:
   - {fileID: 1767128029}
   - {fileID: 1767128027}
   ForceRemoteRenderTimeframe: 0
---- !u!114 &1767128038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1767128028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4ee0a25cd00d944b8a57b6078beb6ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2052637918
 GameObject:
   m_ObjectHideFlags: 0

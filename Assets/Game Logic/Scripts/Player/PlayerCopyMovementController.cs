@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCopyMovementController : NetworkBehaviour
+public class PlayerCopyMovementController : NetworkBehaviour, INetworkInput
 {
-    [Networked] public NetworkArray<sbyte> Movements => default; // tamanho fixo de 4
+    MissionCopyMovement copyMovement;
+    [Networked] public NetworkArray<byte> Movements => default; // tamanho fixo de 4
     [Networked] public int MovementIndex { get; set; }
 
     public static List<PlayerCopyMovementController> AllPlayers = new();
@@ -13,23 +14,33 @@ public class PlayerCopyMovementController : NetworkBehaviour
     public override void Spawned()
     {
         if (Object.HasStateAuthority)
+        {
             AllPlayers.Add(this);
+            copyMovement = FindObjectOfType<MissionCopyMovement>();
+        }
     }
 
     private void FixedUpdate()
     {
-        if (GetInput(out NetworkInputData input))
+        if (copyMovement.isActiveAndEnabled)
         {
-            if (input.Movement != 0 && MovementIndex < 4)
+            print(" Is Active");
+            if (GetInput(out NetworkInputData input))
             {
-                Movements.Set(MovementIndex, input.Movement);
-                MovementIndex++;
+                if (input.Movement != 0 && MovementIndex < 4)
+                {
+                    Movements.Set(MovementIndex, input.Movement);
+                    MovementIndex++;
+                    print("Movent Index " + MovementIndex);
+                    /*Movements[MovementIndex].Set(MovementIndex, input.Movement);
+                    MovementIndex++;*/
+                }
             }
         }
-    }
-
-    public struct NetworkInputData : INetworkInput
-    {
-        public sbyte Movement; // 1 = cima, 2 = baixo, 3 = esquerda, 4 = direita
+        else
+        {
+            MovementIndex = 0;
+            print("Not Active");
+        }
     }
 }
