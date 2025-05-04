@@ -10,7 +10,7 @@ public class PlayerSpawner : SimulationBehaviour, IPlayerJoined
     public void PlayerJoined(PlayerRef player)
     {
         // Todos os players (inclusive o host) serão instanciados pelo host
-        NetworkObject playerObj = Runner.Spawn(playerPrefab, Vector3.zero, Quaternion.identity, inputAuthority: player);
+        NetworkObject playerObj = Runner.Spawn(playerPrefab, Vector3.zero, Quaternion.identity);
 
         runner.SetPlayerObject(player, playerObj); // Agora sim vai funcionar o GetPlayerObject
     }
