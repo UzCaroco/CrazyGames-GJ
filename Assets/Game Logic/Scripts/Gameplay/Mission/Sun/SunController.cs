@@ -6,7 +6,6 @@ using CrazyGames;
 using Fusion;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class SunController : NetworkBehaviour
 {
@@ -15,21 +14,25 @@ public class SunController : NetworkBehaviour
     /// </summary>/
     /// 
 
-    // Score por jogador
-    [Networked, Capacity(10)]
-    private NetworkDictionary<PlayerRef, string> playerTextSee { get; } = default;
+    // Text Mission por jogador
     
+    [SerializeField] private TextMeshProUGUI textPainel;
 
-    private PlayerRef playerTextSunSays; 
+    //[Networked(OnChanged = nameof(OnTextChanged))]
+    private NetworkString<_64> playerTextSee { get; set; }   
+    public static SunController local { get; set; }
+
+    [SerializeField] private SunSaysUi sharedUITextInstance;
+    
+    //SunSaysUi uiSun;
+    //private PlayerRef playerTextSunSays; 
 
     [SerializeField] private GameObject painelText;
-    [SerializeField] private TextMeshProUGUI textPainel;
 
     private string[] taskSunSays = new string[2] { "Sun Says:\r\n", "Sun Don't Says:\r\n"};
     private string[] nameTheMission = new string[7] { "Avoid The Projectiles", "Collect a Coin", "Copy the Movement", "Don't Move" , "Move" /*, "Push a Rival" */, "Stay Away From the Bomb" , "Go to the Square"};
     public string message;
 
-    [SerializeField] private SunSaysUi sharedUITextInstance;
 
     private TimerMission timerMission; // Reference to the TimerMission script
     private Missions[] mission = new Missions[7];
@@ -138,7 +141,39 @@ public class SunController : NetworkBehaviour
          }
      }*/
     
+    /*void GetSomeStats()
+    {
+        if(Object.HasInputAuthority && sharedUITextInstance != null)
+        {
+            sharedUITextInstance.SetConnectionType(runner.CurrentConnectionType.ToString());
+            sharedUITextInstance.SetRtt($"RTT {Mathf.RoundToInt((float)runner.GetPlayerRtt(Object.InputAuthority) * 100)} ms");
+        }
+    }
 
+    static void OnTextChanged(Changed<SunController> changed)
+    {
+        changed.Behaviour.OnTextChanged();
+    }
+
+    void OnTextChanged()
+    {
+        Utils.DebugLog($"Text Sun Chaged to {playerTextSee}");
+
+        textPainel.text = playerTextSee.ToString();
+    }
+
+    public void ApplyUI(string playerTextSee)
+    {
+        RPC_ApplyText(playerTextSee);
+    }
+   
+
+    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
+    void RPC_ApplyText(string text, RpcInfo info = default)
+    {
+        Utils.DebugLog($"[RPC] RPX_ApllayText {playerTextSee}");
+        this.playerTextSee = text;
+    */
     #endregion CanvaText
 
     #region Draw
@@ -146,7 +181,7 @@ public class SunController : NetworkBehaviour
     {
         while (random == randomNumber)
         {
-            random = Random.Range(0, 2); // Generate a random number between 0 and 9
+            random = Random.Range(2, 4); // Generate a random number between 0 and 9
         }
         
         randomNumber = random;
@@ -222,5 +257,6 @@ public class SunController : NetworkBehaviour
     public void SetupConclusion(bool fWait){
         isFinishMission = fWait;
     }
+
 #endregion Time
 }
