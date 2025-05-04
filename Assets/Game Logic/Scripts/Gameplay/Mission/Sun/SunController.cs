@@ -99,14 +99,22 @@ public class SunController : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 0; i < mission.Length; i ++)
+       
+
+    }
+
+    public override void Spawned()
+    {
+        base.Spawned();
+
+        for (int i = 0; i < mission.Length; i++)
         {
             mission[i].enabled = false;
         }
 
         print("Beginning the draw");
-        Invoke("Draw", 5f);
 
+        Invoke("Draw", 5f); // Só chame aqui, após o Spawned
     }
 
     // Update is called once per frame
