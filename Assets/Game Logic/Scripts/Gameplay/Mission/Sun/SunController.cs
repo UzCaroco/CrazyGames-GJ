@@ -30,7 +30,13 @@ public class SunController : NetworkBehaviour
     //SunSaysUi uiSun;
     //private PlayerRef playerTextSunSays; 
 
+<<<<<<< HEAD
     //[SerializeField] private NetworkObject painelText;
+=======
+    [SerializeField] private NetworkObject TextSays;
+    [SerializeField] private NetworkObject TextMission;
+
+>>>>>>> 121bf87737cadd8be996602eb50bd6721fdc21a0
 
     private string[] taskSunSays = new string[2] { "Sun Says:\n", "Sun Don't Says:\n" };
     private string[] nameTheMission = new string[7] { "Avoid The Projectiles", "Collect a Coin", "Copy the Movement", "Don't Move", "Move" /*, "Push a Rival" */, "Stay Away From the Bomb", "Go to the Square" };
@@ -195,7 +201,20 @@ public class SunController : NetworkBehaviour
 
                 timerMission.InitializeTimeToGet(startMission, completeMission, this);
 
+<<<<<<< HEAD
                 //painelText.enabled = true; 
+=======
+                if (HasStateAuthority) // Só ativa a câmera do jogador local
+                {
+                    TextMeshProUGUI textS = TextSays.GetComponent<TextMeshProUGUI>(); // true = busca em objetos inativos;
+                    textS.enabled = true;
+                    TextMeshProUGUI textM = TextMission.GetComponent<TextMeshProUGUI>(); // true = busca em objetos inativos;
+                    textM.enabled = true;
+                }
+               // TextSays.enabled = true;
+               // TextMission.enabled = true;
+
+>>>>>>> 121bf87737cadd8be996602eb50bd6721fdc21a0
                 messageS = taskSunSays[0];
                 messageM = nameTheMission[index];
                 ApplyUI(messageS, messageM);
@@ -225,7 +244,19 @@ public class SunController : NetworkBehaviour
     {
         if (isFinishWait)
         {
+<<<<<<< HEAD
             //painelText.enabled = false;
+=======
+            if (HasStateAuthority) // Só ativa a câmera do jogador local
+            {
+                TextMeshProUGUI textS = TextSays.GetComponent<TextMeshProUGUI>(); // true = busca em objetos inativos;
+                textS.enabled = false;
+                TextMeshProUGUI textM = TextMission.GetComponent<TextMeshProUGUI>(); // true = busca em objetos inativos;
+                textM.enabled = false;
+            }
+            //TextSays.enabled = false;
+            //TextMission.enabled = false;
+>>>>>>> 121bf87737cadd8be996602eb50bd6721fdc21a0
 
             mission[randomNumber].enabled = true;
             mission[randomNumber].CallStartMission();
