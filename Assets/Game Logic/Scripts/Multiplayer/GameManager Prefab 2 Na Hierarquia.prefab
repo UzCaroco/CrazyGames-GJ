@@ -53,6 +53,8 @@ MonoBehaviour:
   Flags: 131073
   NestedObjects:
   - {fileID: 5588663556972665792}
+  - {fileID: 6528084104354241003}
+  - {fileID: 4775484186991008377}
   NetworkedBehaviours:
   - {fileID: 19053805543826192}
   - {fileID: 2495088106577844586}
@@ -69,6 +71,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52694b1ab8cce8048a164be7e74f5f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _CurrentSays: 
+  _CurrentMission: 
 --- !u!114 &2495088106577844586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -93,6 +97,7 @@ GameObject:
   - component: {fileID: 9127348211500232380}
   - component: {fileID: 8852624990085263719}
   - component: {fileID: 6850864688820440371}
+  - component: {fileID: 6528084104354241003}
   m_Layer: 5
   m_Name: Says
   m_TagString: Untagged
@@ -135,7 +140,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 122308770894897475}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -217,6 +222,24 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &6528084104354241003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122308770894897475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 2899886436
+  ObjectInterest: 1
+  Flags: 1
+  NestedObjects: []
+  NetworkedBehaviours: []
+  ForceRemoteRenderTimeframe: 0
 --- !u!1 &1335403757191526648
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,7 +468,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2931577332697607341
 RectTransform:
   m_ObjectHideFlags: 0
@@ -805,10 +828,10 @@ MonoBehaviour:
   painelmovement: {fileID: 0}
   imageMovement: {fileID: 0}
   spritesMovement:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 1765644143, guid: 9441dae3d4c302a4982dfcf0032d9e10, type: 3}
+  - {fileID: -596602273, guid: 9441dae3d4c302a4982dfcf0032d9e10, type: 3}
+  - {fileID: -1476922940, guid: 9441dae3d4c302a4982dfcf0032d9e10, type: 3}
+  - {fileID: 2067751680, guid: 9441dae3d4c302a4982dfcf0032d9e10, type: 3}
   isMission: 0
 --- !u!114 &2463647774658576703
 MonoBehaviour:
@@ -897,6 +920,7 @@ GameObject:
   - component: {fileID: 1474439329668683668}
   - component: {fileID: 1193061748056028951}
   - component: {fileID: 1241396422495428156}
+  - component: {fileID: 4775484186991008377}
   m_Layer: 5
   m_Name: Mission
   m_TagString: Untagged
@@ -939,7 +963,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4112293952400286571}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
@@ -1023,6 +1047,24 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4775484186991008377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4112293952400286571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 2715588809
+  ObjectInterest: 1
+  Flags: 1
+  NestedObjects: []
+  NetworkedBehaviours: []
+  ForceRemoteRenderTimeframe: 0
 --- !u!1 &4574719012822565395
 GameObject:
   m_ObjectHideFlags: 0
@@ -1648,7 +1690,8 @@ MonoBehaviour:
   textSays: {fileID: 6850864688820440371}
   textMission: {fileID: 1241396422495428156}
   sharedUITextInstance: {fileID: 0}
-  painelText: {fileID: 2402274185337619672}
+  TextSays: {fileID: 6528084104354241003}
+  TextMission: {fileID: 4775484186991008377}
   messageS: 
   messageM: 
   timerForStartTheMission:

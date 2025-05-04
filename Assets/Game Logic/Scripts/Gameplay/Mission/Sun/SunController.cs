@@ -198,9 +198,9 @@ public class SunController : NetworkBehaviour
 
                 if (HasStateAuthority) // Só ativa a câmera do jogador local
                 {
-                    TextMeshProUGUI textS = TextSays.GetComponentInChildren<TextMeshProUGUI>(true); // true = busca em objetos inativos;
+                    TextMeshProUGUI textS = TextSays.GetComponent<TextMeshProUGUI>(); // true = busca em objetos inativos;
                     textS.enabled = true;
-                    TextMeshProUGUI textM = TextMission.GetComponentInChildren<TextMeshProUGUI>(true); // true = busca em objetos inativos;
+                    TextMeshProUGUI textM = TextMission.GetComponent<TextMeshProUGUI>(); // true = busca em objetos inativos;
                     textM.enabled = true;
                 }
                // TextSays.enabled = true;
@@ -237,10 +237,10 @@ public class SunController : NetworkBehaviour
         {
             if (HasStateAuthority) // Só ativa a câmera do jogador local
             {
-                TextMeshProUGUI textS = TextSays.GetComponentInChildren<TextMeshProUGUI>(true); // true = busca em objetos inativos;
-                textS.enabled = true;
-                TextMeshProUGUI textM = TextMission.GetComponentInChildren<TextMeshProUGUI>(true); // true = busca em objetos inativos;
-                textM.enabled = true;
+                TextMeshProUGUI textS = TextSays.GetComponent<TextMeshProUGUI>(); // true = busca em objetos inativos;
+                textS.enabled = false;
+                TextMeshProUGUI textM = TextMission.GetComponent<TextMeshProUGUI>(); // true = busca em objetos inativos;
+                textM.enabled = false;
             }
             //TextSays.enabled = false;
             //TextMission.enabled = false;

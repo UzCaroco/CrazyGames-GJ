@@ -27497,8 +27497,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SortKey: 2954448684
   ObjectInterest: 1
-  Flags: 1
-  NestedObjects: []
+  Flags: 262145
+  NestedObjects:
+  - {fileID: 1393574897}
+  - {fileID: 1138781348}
   NetworkedBehaviours: []
   ForceRemoteRenderTimeframe: 0
 --- !u!1 &1013882865
@@ -39009,6 +39011,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _PlayerSpawn: 0
   _numeros: 
+--- !u!114 &1138781348 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4775484186991008377, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+  m_PrefabInstance: {fileID: 1767128026}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1179588641
 GameObject:
   m_ObjectHideFlags: 0
@@ -39094,6 +39107,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3108194950587201866, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
   m_PrefabInstance: {fileID: 1767128026}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1393574897 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6528084104354241003, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+  m_PrefabInstance: {fileID: 1767128026}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1675196869
 GameObject:
   m_ObjectHideFlags: 0
@@ -39323,7 +39347,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19053805543826195, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: NestedObjects.Array.size
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 19053805543826195, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: NestedObjects.Array.data[1]
@@ -39336,11 +39360,11 @@ PrefabInstance:
     - target: {fileID: 19053805543826195, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: NestedObjects.Array.data[3]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1393574897}
     - target: {fileID: 19053805543826195, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: NestedObjects.Array.data[4]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1138781348}
     - target: {fileID: 19053805543826195, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: NestedObjects.Array.data[5]
       value: 
@@ -39357,6 +39381,10 @@ PrefabInstance:
       propertyPath: NetworkedBehaviours.Array.data[2]
       value: 
       objectReference: {fileID: 1103647763}
+    - target: {fileID: 122308770894897475, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 122308770894897475, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: m_TagString
       value: TextSays
@@ -39393,6 +39421,10 @@ PrefabInstance:
       propertyPath: spritesMovement.Array.data[3]
       value: 
       objectReference: {fileID: 2067751680, guid: 9441dae3d4c302a4982dfcf0032d9e10, type: 3}
+    - target: {fileID: 1241396422495428156, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1241396422495428156, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
@@ -39431,7 +39463,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2402274185337619672, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3108194950587201866, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: m_IsActive
@@ -39482,6 +39514,10 @@ PrefabInstance:
       value: Missions
       objectReference: {fileID: 0}
     - target: {fileID: 4112293952400286571, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4112293952400286571, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: m_TagString
       value: TextMission
       objectReference: {fileID: 0}
@@ -39493,6 +39529,10 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: -7144695304587850186, guid: 2ab0d95c0488489498cfbc5b00d55ec1, type: 2}
+    - target: {fileID: 4775484186991008377, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+      propertyPath: SortKey
+      value: 242208617
+      objectReference: {fileID: 0}
     - target: {fileID: 5262487590616239899, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -39569,6 +39609,18 @@ PrefabInstance:
       propertyPath: NetworkedBehaviours.Array.data[2]
       value: 
       objectReference: {fileID: 771529340}
+    - target: {fileID: 6528084104354241003, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+      propertyPath: SortKey
+      value: 426506244
+      objectReference: {fileID: 0}
+    - target: {fileID: 6819535550634255950, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+      propertyPath: m_Color.a
+      value: 0.07058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 6850864688820440371, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6850864688820440371, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: m_hasFontAssetChanged
       value: 0
