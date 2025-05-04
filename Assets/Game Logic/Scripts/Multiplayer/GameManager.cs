@@ -99,6 +99,24 @@ public class GameManager : NetworkBehaviour, INetworkRunnerCallbacks
         return list;
     }
 
+
+
+
+
+
+
+    public static event Action<string, string> OnNewMission;
+
+    public void TriggerNewMission(string says, string mission)
+    {
+        OnNewMission?.Invoke(says, mission);
+        Debug.Log($"[GameManager] Nova missão: {says} {mission}");
+    }
+
+
+
+
+
     public void OnObjectExitAOI(NetworkRunner runner, NetworkObject obj, PlayerRef player)
     {
         throw new NotImplementedException();
