@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7779076161003631018}
   - component: {fileID: 6400541064413239655}
   m_Layer: 0
-  m_Name: Triangle
+  m_Name: Bomb
   m_TagString: Bomb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
