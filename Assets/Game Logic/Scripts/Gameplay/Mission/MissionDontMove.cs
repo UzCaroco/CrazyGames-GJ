@@ -30,7 +30,7 @@ public class MissionDontMove : Missions
 
     protected override void StartMission()
     {
-        Debug.Log("DONT MOVE, Beginning!");
+        
     }
     protected override void CompleteMission()
     {

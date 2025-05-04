@@ -110,7 +110,6 @@ public class PlayerController : NetworkBehaviour
             else
             {
                 // Opcional: pode fazer algo quando colidir, tipo logar
-                Debug.Log("Bateu em: " + hit.collider.name);
             }
         }
 
