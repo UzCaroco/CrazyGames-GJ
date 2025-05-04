@@ -117,55 +117,7 @@ public class SunController : NetworkBehaviour
         //GetSomeStats();
     }
     #region CanvaText
-    //[Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
-    /* public void RPC_SeeTextMission(PlayerRef player, string text)
-     {
-         if (!HasStateAuthority) return;
-
-         playerTextSee.Set(player, text);
-         Debug.Log($"O texto é agora {text}");
-
-         // Atualiza todos os clientes
-         RPC_UpdateTextMission();
-     }
-
-     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-     private void RPC_UpdateTextMission()
-     {
-         // Dispara evento para atualizar UIs
-         UpdateAllUIs();
-     }
-     private void UpdateAllUIs()
-     {
-         var textSunUIs = FindObjectsOfType<SunSaysUi>();
-         foreach (var ui in textSunUIs)
-         {
-             ui.UpdateRankingUI(taskSunSays[0] + nameTheMission[random]);
-         }
-     }*/
     
-    
-    /*void GetSomeStats()
-    {
-        if(Object.HasInputAuthority && sharedUITextInstance != null)
-        {
-            sharedUITextInstance.SetConnectionType(runner.CurrentConnectionType.ToString());
-            sharedUITextInstance.SetRtt($"RTT {Mathf.RoundToInt((float)runner.GetPlayerRtt(Object.InputAuthority) * 100)} ms");
-        }
-    }*/
-
-    /*static void OnTextChanged(Changed<SunController> changed)
-    {
-        changed.Behaviour.OnTextChanged();
-    }
-
-    void OnTextChanged()
-    {
-        Debug.Log($"Text Sun Chaged to {playerTextSee}");
-
-        textPainel.text = playerTextSee.ToString();
-    }*/
-
     public void ApplyUI(string textS, string textM)
     {
         RPC_UpdateUIText(textS, textM);
@@ -179,11 +131,7 @@ public class SunController : NetworkBehaviour
         playerTextSee = textS + textM;
         textSays.text = textS.ToString();
         textMission.text = textM.ToString();
-
-        /*if (sharedUITextInstance != null)
-        {
-            sharedUITextInstance.SetMessage(textS, textM);
-        }*/
+        
     }
 
     #endregion CanvaText
@@ -224,7 +172,6 @@ public class SunController : NetworkBehaviour
 
             }
         }
-
     }
     void ActiveTheMission()
     {
