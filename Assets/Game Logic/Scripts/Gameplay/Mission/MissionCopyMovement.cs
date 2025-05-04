@@ -52,7 +52,6 @@ public class MissionCopyMovement : Missions
     public override void CallStartMission()
     {
         StartMission();
-        print("Begginng");
     }
     public override void CallCompleteMission()
     {
