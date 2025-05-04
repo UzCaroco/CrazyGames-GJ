@@ -21,11 +21,11 @@ public class MissionAvoidProjectiles : Missions
     sbyte randomURDL;
     [SerializeField] int[] randomQuantProject = new int[4];
 
-    [SerializeField] int[] projectilesLess = new int[4] { 6, 6, 6, 6, };
+    [SerializeField] int[] projectilesLess = new int[4] { 5, 5, 5, 5, };
     [SerializeField] int totalProjects;
 
     [SerializeField] sbyte[] indexProj = new sbyte[4];
-    [SerializeField] int[] quantityProjectiles = new int[4] { 6, 6, 6, 6, };
+    [SerializeField] int[] quantityProjectiles = new int[4] { 5, 5, 5, 5, };
     void Update()
     {
         /*if (isInstantiate)
@@ -285,7 +285,7 @@ public class MissionAvoidProjectiles : Missions
     }
     protected override void CompleteMission()
     {
-        totalProjects = 24;
+        totalProjects = 20;
 
         for (int i = 0; i < quantityProjectiles.Length; i++)
         {

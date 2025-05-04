@@ -4,7 +4,9 @@ using System.Linq;
 using System.Threading;
 using CrazyGames;
 using Fusion;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SunController : NetworkBehaviour
 {
@@ -12,8 +14,19 @@ public class SunController : NetworkBehaviour
     /// Scipts to Control the Missions
     /// </summary>/
     /// 
+
+    // Score por jogador
+    private PlayerRef playerTextSunSays;
+
+    [SerializeField] private GameObject painelText;
+    [SerializeField] private TextMeshProUGUI textPainel;
+
+    private string[] taskSunSays = new string[2] { "Sun Says: \r\n", "Sun Don't Says: \r\n"};
+    private string[] nameTheMission = new string[7] { "Avoid The Projectiles", "Collect a Coin", "Copy the Movement", "Don't Move" , "Move" /*, "Push a Rival" */, "Stay Away From the Bomb" , "Go to the Square"};
+    
+
     private TimerMission timerMission; // Reference to the TimerMission script
-    private Missions[] mission = new Missions[8];
+    private Missions[] mission = new Missions[7];
 
     /*private MissionAvoidProjectiles missionAvoidProjectiles; // SCRIPT AVOID PROJECTILES 0
     private MissionCollectCoin missionCollectCoin; // SCRIPT COLLECT THE COIN 1
@@ -30,8 +43,8 @@ public class SunController : NetworkBehaviour
 
     int randomNumber = -1; // Variable to store the random number
     int random = -1;
-    [SerializeField] private float[] timerForStartTheMission = new float[8]; // Array to store time for each mission
-    [SerializeField] private float[] timeCompleteMission = new float[6]; // Array to store time for each mission
+    [SerializeField] private float[] timerForStartTheMission = new float[7]; // Array to store time for each mission
+    [SerializeField] private float[] timeCompleteMission = new float[7]; // Array to store time for each mission
 
     [SerializeField] private bool isFinishWait, isFinishMission;
 
@@ -44,9 +57,6 @@ public class SunController : NetworkBehaviour
 
     private NetworkRunner runner;
 
-
-
-
     #region GetComponents
     void Awake()
     {
@@ -57,9 +67,9 @@ public class SunController : NetworkBehaviour
         mission[2] = GetComponentInChildren<MissionCopyMovement>();
         mission[3] = GetComponentInChildren<MissionDontMove>();
         mission[4] = GetComponentInChildren<MissionMove>();
-        mission[5] = GetComponentInChildren<MissionPushRival>();
-        mission[6] = GetComponentInChildren<MissionStayAwayBomb>();
-        mission[7] = GetComponentInChildren<MissionStaySquare>();
+        //mission[5] = GetComponentInChildren<MissionPushRival>();
+        mission[5] = GetComponentInChildren<MissionStayAwayBomb>();
+        mission[6] = GetComponentInChildren<MissionStaySquare>();
 
         
 
@@ -92,13 +102,34 @@ public class SunController : NetworkBehaviour
         ActiveTheMission();
         DesactiveMission();
     }
-    
-#region Draw
+
+#region CanvaText
+
+    void ControllerText()
+    {
+
+    }
+
+    /* private void HandleScoreChanged(PlayerRef _, int __)
+    {
+        UpdateRankingUI();
+    }
+
+    public void UpdateRankingUI()
+    {
+        var rankedList = FindObjectOfType<GameManager>().GetRankedList(); // ou guarda uma referência ao GameManager
+        textPainel.text = $"1º: {rankedList[0].Item1.PlayerId} - {rankedList[0].Item2}";
+
+    }*/
+
+    #endregion CanvaText
+
+    #region Draw
     void Draw()
     {
         while (random == randomNumber)
         {
-            random = Random.Range(0, 8); // Generate a random number between 0 and 9
+            random = Random.Range(0, 7); // Generate a random number between 0 and 9
         }
         
         randomNumber = random;
@@ -112,7 +143,12 @@ public class SunController : NetworkBehaviour
         for(byte index = 0; index < timerForStartTheMission.Length; index++)
         {
             if (index == randomNumber){
+
                 timerMission.InitializeTimeToGet(timerForStartTheMission[index], timeCompleteMission[index], this);
+
+                painelText.SetActive(true);
+                textPainel.text = (taskSunSays[0] + nameTheMission[index]).ToString();
+                Debug.Log(taskSunSays[0] + nameTheMission[index]);
             }
         }
     }
@@ -120,6 +156,8 @@ public class SunController : NetworkBehaviour
     {
         if (isFinishWait)
         {
+            painelText.SetActive(false);
+
             mission[randomNumber].enabled = true;
             mission[randomNumber].CallStartMission();
             isFinishWait = false;

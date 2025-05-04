@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Fusion;
 using UnityEngine;
 
-public class MissionPushRival : Missions
+public class MissionPushRival : NetworkBehaviour
 {
-    [Header("Mission 5 - PR")]
+    /*[Header("Mission 5 - PR")]
     byte any;
 
     void Start()
@@ -36,5 +36,5 @@ public class MissionPushRival : Missions
     protected override void CompleteMission()
     {
         Debug.Log("Push Rival, Finish!");
-    }
+    }*/
 }
