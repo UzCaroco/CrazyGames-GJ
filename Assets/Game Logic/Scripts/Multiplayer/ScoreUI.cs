@@ -8,19 +8,32 @@ public class ScoreUI : MonoBehaviour
     [SerializeField] TextMeshProUGUI first, second, third;
     [SerializeField] private PlayerRef trackedPlayer;
 
+    [SerializeField] private TextMeshProUGUI textSays;
+    [SerializeField] private TextMeshProUGUI textMission;
+    [SerializeField] private GameObject painelText;
+
     private void OnEnable()
     {
         GameManager.OnScoreChanged += HandleScoreChanged;
+        GameManager.OnNewMission += UpdateMissionUI;
     }
 
     private void OnDisable()
     {
         GameManager.OnScoreChanged -= HandleScoreChanged;
+        GameManager.OnNewMission -= UpdateMissionUI;
     }
 
     private void HandleScoreChanged(PlayerRef _, int __)
     {
         UpdateRankingUI();
+    }
+
+    private void UpdateMissionUI(string says, string mission)
+    {
+        textSays.text = says;
+        textMission.text = mission;
+        painelText.SetActive(true);
     }
 
     public void UpdateRankingUI()
