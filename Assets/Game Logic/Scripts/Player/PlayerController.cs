@@ -7,6 +7,9 @@ using System.Linq;
 
 public class PlayerController : NetworkBehaviour
 {
+    Vector2 CurrentPos;
+    Camera camPlayer;
+    SunController SunController;
     //public GameObject cameraRoot;
     Animator animPlayer;
     private Vector2 moveInput;
@@ -74,6 +77,7 @@ public class PlayerController : NetworkBehaviour
         {
             Camera cam = GetComponentInChildren<Camera>(true); // true = busca em objetos inativos
             //Debug.Log("Camera: " + cam);
+            camPlayer = cam;
             cam.enabled = true;
         }
     }
@@ -145,10 +149,16 @@ public class PlayerController : NetworkBehaviour
             }
         }
 
+        if (SunController != null)
+        {
+            if (SunController.isFinishMission)
+            {
+                transform.position = CurrentPos;
+                camPlayer.enabled = true;
+                SunController = null;
+            }
+        }
     }
-
-   
-
 
     private void CopyMoviment()
     {
@@ -231,6 +241,9 @@ public class PlayerController : NetworkBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        SunController = FindObjectOfType<SunController>();
+        CurrentPos = new Vector2(transform.position.x, transform.position.y);
+
         if (collision.CompareTag("Coin"))
         {
             Debug.Log("MOEDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
@@ -248,11 +261,16 @@ public class PlayerController : NetworkBehaviour
         {
             Debug.Log("PROJETIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIL");
             missionProjectile = true;
+            camPlayer.enabled = false;
+            transform.position = new Vector2(transform.position.x, transform.position.y - 100);
+
         }
         else if (collision.CompareTag("Bomb"))
         {
             Debug.Log("BOMBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             missionBomb = true;
+            camPlayer.enabled = false;
+            transform.position = new Vector2(transform.position.x, transform.position.y - 100);
         }
         else if (collision.CompareTag("Square"))
         {
