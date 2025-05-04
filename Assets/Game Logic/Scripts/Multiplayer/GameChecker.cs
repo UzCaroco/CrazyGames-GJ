@@ -56,7 +56,7 @@ public class GameChecker : NetworkBehaviour
         Debug.Log("Verificando os jogadores no final da missão: " + mission);
         Debug.Log("Total de jogadores na lista: " + playerCheckers.Count);
 
-        if (mission == 0 || mission == 3 || mission == 4 || mission == 6 || mission == 7)
+        if (mission == 0 || mission == 3 || mission == 4 || mission == 5 || mission == 6)
         {
             AddEqualScores(mission); // Adiciona pontuação igual para todos os jogadores que completaram a missão
         }
@@ -207,19 +207,19 @@ public class GameChecker : NetworkBehaviour
         {
             if (player.Value == 1)
             {
-                playerScores.Add(player.Key, 1200);
+                playerScores.Add(player.Key, 1);
             }
             else if (player.Value == 2)
             {
-                playerScores.Add(player.Key, 1000);
+                playerScores.Add(player.Key, 1);
             }
             else if (player.Value == 3)
             {
-                playerScores.Add(player.Key, 800);
+                playerScores.Add(player.Key, 1);
             }
             else if (player.Value > 3)
             {
-                playerScores.Add(player.Key, 600);
+                playerScores.Add(player.Key, 1);
             }
         }
         playersSequence.Clear(); // Limpa a lista após adicionar as pontuações

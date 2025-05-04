@@ -40,7 +40,7 @@ public class PlayerChecker : NetworkBehaviour
 
         if (playerController.missionProjectile == expectedResult)
         {
-            Debug.Log("Player " + playerController + " completed the mission!");
+            Debug.Log("Player COMPLETOOOOOOOOOOOOOOOOOOOOOOOU the mission!");
             return true;
         }
 
@@ -62,7 +62,7 @@ public class PlayerChecker : NetworkBehaviour
         Debug.Log("PlayerController: " + playerController + "SE NÃO TIVER NADA ANTES É NULO");
         if (playerController.missionDontMove == expectedResult)
         {
-            Debug.Log("Player " + playerController + " completed the mission!");
+            Debug.Log("Player COMPLETOOOOOOOOOOOOOOOOOOOOOOOU the mission!");
             return true;
         }
 
@@ -85,7 +85,7 @@ public class PlayerChecker : NetworkBehaviour
 
         if (playerController.missionMove == expectedResult)
         {
-            Debug.Log("Player " + playerController + " completed the mission!");
+            Debug.Log("Player COMPLETOOOOOOOOOOOOOOOOOOOOOOOU the mission!");
             return true;
         }
 
@@ -107,7 +107,7 @@ public class PlayerChecker : NetworkBehaviour
         Debug.Log("PlayerController: " + playerController + "SE NÃO TIVER NADA ANTES É NULO");
         if (playerController.missionBomb == expectedResult)
         {
-            Debug.Log("Player " + playerController + " completed the mission!");
+            Debug.Log("Player COMPLETOOOOOOOOOOOOOOOOOOOOOOOU the mission!");
             return true;
         }
 
@@ -129,7 +129,7 @@ public class PlayerChecker : NetworkBehaviour
         Debug.Log("PlayerController: " + playerController + "SE NÃO TIVER NADA ANTES É NULO");
         if (playerController.missionStaySquare == expectedResult)
         {
-            Debug.Log("Player " + playerController + " completed the mission!");
+            Debug.Log("Player COMPLETOOOOOOOOOOOOOOOOOOOOOOOU the mission!");
             return true;
         }
 
@@ -178,35 +178,24 @@ public class PlayerChecker : NetworkBehaviour
     private void AddScoreToSelf(int amount)
     {
         var gameManager = FindAnyObjectByType<GameManager>();
-        Debug.Log(gameManager + "ta falso");
         if (gameManager == null) return;
-        Debug.Log(gameManager + "ta ok");
 
-        Debug.Log("HasInputAuthority: " + HasInputAuthority);
         if (HasInputAuthority)
         {
-            Debug.Log(gameManager + "ta de brincadeira");
 
             gameManager.RPC_AddScore(Runner.LocalPlayer, amount);
-            Debug.Log("pontuação adicionada");
 
             // Esse valor é local e pode estar desatualizado
             int pontuacaoLocal = gameManager.GetScore(Object.InputAuthority);
-            Debug.Log($"[PlayerChecker] Pontuação local do player: {pontuacaoLocal}");
         }
         else if (HasStateAuthority)
         {
-            Debug.Log("HasStateAuthority: " + HasStateAuthority);
 
-
-            Debug.Log(gameManager + "ta de brincadeira");
 
             gameManager.RPC_AddScore(Runner.LocalPlayer, amount);
-            Debug.Log("pontuação adicionada");
 
             // Esse valor é local e pode estar desatualizado
             int pontuacaoLocal = gameManager.GetScore(Object.InputAuthority);
-            Debug.Log($"[PlayerChecker] Pontuação local do player: {pontuacaoLocal}");
         }
     }
 
