@@ -523,7 +523,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &8119088447134508170
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1282,8 +1282,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _timeToWaitTheMission: 0
   _timerToCompleteThMission: 0
-  isTimerActiveToStart: 0
-  isTimerActiveToComplete: 0
+  _isTimerActiveToStart: 0
+  _isTimerActiveToComplete: 0
 --- !u!114 &8894191357013397404
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1319,8 +1319,8 @@ MonoBehaviour:
   - 20
   - 20
   - 20
-  isFinishWait: 0
-  isFinishMission: 0
+  _isFinishMission: 0
+  _isFinishWait: 0
 --- !u!1 &8852612098296503133
 GameObject:
   m_ObjectHideFlags: 0
