@@ -27,8 +27,8 @@ public class PlayerSpawner : SimulationBehaviour, IPlayerJoined
 
         if (player == Runner.LocalPlayer) // ou Runner.IsServer se tiver usando Server/Client
         {
-            randomSkin.PlayerIsSpawned();
-            anim.runtimeAnimatorController = animatorOverrideController[randomSkin.SetNumRandom()];
+            //randomSkin.PlayerIsSpawned();
+            //anim.runtimeAnimatorController = animatorOverrideController[randomSkin.SetNumRandom()];
             /*print("TA O QUE" + gameManager);
 
 
