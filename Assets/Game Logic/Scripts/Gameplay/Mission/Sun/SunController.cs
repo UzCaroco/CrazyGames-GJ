@@ -98,7 +98,7 @@ public class SunController : NetworkBehaviour
     {
         while (random == randomNumber)
         {
-            random = Random.Range(1, 3); // Generate a random number between 0 and 9
+            random = Random.Range(0, 8); // Generate a random number between 0 and 9
         }
         
         randomNumber = random;
@@ -175,6 +175,10 @@ public class SunController : NetworkBehaviour
                         playerController.timeToCopyTheMovements = false; // Reseta o tempo para copiar os movimentos
                         playerController.copyThisMovement = new byte[4]; // Limpa a lista de movimentos copiados
                         playerController.listCopyThisMovement.Clear(); // Limpa a lista de movimentos copiados
+
+                        playerController.dontMove = false; // Reseta o booleano
+                        playerController.move = false; // Reseta o booleano
+                        playerController.moveu = false; // Reseta o booleano
 
                         Debug.Log("APAGOU TUDO DE TODOS");
                     }
