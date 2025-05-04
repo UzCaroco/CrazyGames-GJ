@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class RandomSkinAnimator : NetworkBehaviour
 {
-    int PlayerSpawn = 0;
+    int PlayerSpawn = 1;
     [Networked] int numRandom { get; set; }
 
-     List<int> numeros = new List<int>() ;
+    List<int> numeros = new List<int>() ;
     int minPlayer = 0;
     int maxPlayer = 8;
 
@@ -20,7 +20,7 @@ public class RandomSkinAnimator : NetworkBehaviour
     {
         while (numeros.Count <  8)
         {
-            int numeroAleatorio = Random.Range(minPlayer, maxPlayer + 1);
+            int numeroAleatorio = Random.Range(minPlayer, maxPlayer);
             if (!numeros.Contains(numeroAleatorio))
             {
                 numeros.Add(numeroAleatorio);
@@ -31,7 +31,7 @@ public class RandomSkinAnimator : NetworkBehaviour
     {
         numRandom = numeros[PlayerSpawn];
 
-        if (PlayerSpawn <= 7) 
+        if (PlayerSpawn < 7) 
             PlayerSpawn++;
     }
 

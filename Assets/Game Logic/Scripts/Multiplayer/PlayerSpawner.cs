@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlayerSpawner : SimulationBehaviour, IPlayerJoined
 {
-    RandomSkinAnimator randomSkin;
+    [SerializeField] RandomSkinAnimator randomSkin;
 
     [SerializeField] private GameObject sunControllerPrefab;
     NetworkObject gameManager;
@@ -18,7 +18,7 @@ public class PlayerSpawner : SimulationBehaviour, IPlayerJoined
     [SerializeField] private NetworkRunner runner;
     void Start()
     {
-        randomSkin = FindObjectOfType<RandomSkinAnimator>();
+        
     }
 
     public void PlayerJoined(PlayerRef player)
@@ -27,8 +27,7 @@ public class PlayerSpawner : SimulationBehaviour, IPlayerJoined
 
         if (player == Runner.LocalPlayer) // ou Runner.IsServer se tiver usando Server/Client
         {
-            //randomSkin.PlayerIsSpawned();
-            //anim.runtimeAnimatorController = animatorOverrideController[randomSkin.SetNumRandom()];
+            randomSkin.PlayerIsSpawned();
             /*print("TA O QUE" + gameManager);
 
 
@@ -44,6 +43,7 @@ public class PlayerSpawner : SimulationBehaviour, IPlayerJoined
             Runner.SetPlayerObject(player, playerObj);
             
             anim = playerObj.GetComponent<Animator>();
+            anim.runtimeAnimatorController = animatorOverrideController[randomSkin.SetNumRandom()];
         }
     }
 }
