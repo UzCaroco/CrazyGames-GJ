@@ -244,7 +244,7 @@ public class PlayerController : NetworkBehaviour
 
             Destroy(collision.gameObject);
         }
-        else if (collision.CompareTag("ProjeCtile"))
+        else if (collision.CompareTag("Projectile"))
         {
             Debug.Log("PROJETIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIL");
             missionProjectile = true;
