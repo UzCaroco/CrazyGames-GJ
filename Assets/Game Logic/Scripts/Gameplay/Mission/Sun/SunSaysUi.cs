@@ -10,16 +10,9 @@ public class SunSaysUi : MonoBehaviour
 {
     private PlayerRef playerTextSunSays;
     [SerializeField] private TextMeshProUGUI textPainel;
-    // Start is called before the first frame update
-    void Start()
+    public void UpdateRankingUI(string textToSay)
     {
-        
-    }
+        textPainel.text = textToSay.ToString();
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
-    
 }

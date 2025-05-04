@@ -7,6 +7,7 @@ using Fusion;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static System.Net.Mime.MediaTypeNames;
 
 public class SunController : NetworkBehaviour
 {
@@ -16,6 +17,10 @@ public class SunController : NetworkBehaviour
     /// 
 
     // Score por jogador
+    [Networked, Capacity(10)]
+    private NetworkDictionary<PlayerRef, string> playerTextSee { get; } = default;
+    
+
     private PlayerRef playerTextSunSays;
 
     [SerializeField] private GameObject painelText;
@@ -103,24 +108,36 @@ public class SunController : NetworkBehaviour
         DesactiveMission();
     }
 
-#region CanvaText
-
-    void ControllerText()
+    #region CanvaText
+    //[Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
+    public void RPC_SeeTextMission(PlayerRef player, string text)
     {
+        if (!HasStateAuthority) return;
 
+        if (!playerTextSee.TryGet(player, out string currentText))
+            currentText = taskSunSays[0] + nameTheMission[randomNumber];
+
+        playerTextSee.Set(player, currentText);
+        Debug.Log($"O texto é agora {currentText}");
+
+        // Atualiza todos os clientes
+        RPC_UpdateTextMission();
     }
 
-    /* private void HandleScoreChanged(PlayerRef _, int __)
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_UpdateTextMission()
     {
-        UpdateRankingUI();
+        // Dispara evento para atualizar UIs
+        UpdateAllUIs();
     }
-
-    public void UpdateRankingUI()
+    private void UpdateAllUIs()
     {
-        var rankedList = FindObjectOfType<GameManager>().GetRankedList(); // ou guarda uma referência ao GameManager
-        textPainel.text = $"1º: {rankedList[0].Item1.PlayerId} - {rankedList[0].Item2}";
-
-    }*/
+        var textSunUIs = FindObjectsOfType<SunSaysUi>();
+        foreach (var ui in textSunUIs)
+        {
+            ui.UpdateRankingUI(taskSunSays[0] + nameTheMission[random]);
+        }
+    }
 
     #endregion CanvaText
 
@@ -147,7 +164,15 @@ public class SunController : NetworkBehaviour
                 timerMission.InitializeTimeToGet(timerForStartTheMission[index], timeCompleteMission[index], this);
 
                 painelText.SetActive(true);
-                textPainel.text = (taskSunSays[0] + nameTheMission[index]).ToString();
+
+                /*foreach(var player in PlayerController)
+                {
+                    if (player != null)
+                    {
+                        RPC_SeeTextMission(player, taskSunSays[0] + nameTheMission[index]);
+                    }
+                }*/
+                //textPainel.text = (taskSunSays[0] + nameTheMission[index]).ToString();
                 Debug.Log(taskSunSays[0] + nameTheMission[index]);
             }
         }
