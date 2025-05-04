@@ -16,6 +16,31 @@ public class GameManager : NetworkBehaviour, INetworkRunnerCallbacks
     // Eventos locais para UI
     public static event Action<PlayerRef, int> OnScoreChanged;
 
+
+    [Networked]
+    public string CurrentSays { get; set; }
+
+    [Networked]
+    public string CurrentMission { get; set; }
+
+    private string lastSays, lastMission;
+
+
+
+    public void SetNewMission(string says, string mission)
+    {
+        if (!HasStateAuthority) return;
+
+        CurrentSays = says;
+        CurrentMission = mission;
+    }
+
+
+
+
+
+
+
     public override void Spawned()
     {
         Debug.Log("[GameManager] Spawned no Network. StateAuthority: " + HasStateAuthority);
@@ -23,6 +48,15 @@ public class GameManager : NetworkBehaviour, INetworkRunnerCallbacks
 
     public override void FixedUpdateNetwork()
     {
+        // Todos podem ver as mudanças (não só o Host)
+        if (CurrentSays != lastSays || CurrentMission != lastMission)
+        {
+            lastSays = CurrentSays;
+            lastMission = CurrentMission;
+            OnNewMission?.Invoke(CurrentSays, CurrentMission);
+        }
+
+        // Outras lógicas de host ficam depois
         if (!HasStateAuthority) return;
 
         // Coloque aqui a lógica de partida (timer, fases, etc.)
@@ -112,6 +146,8 @@ public class GameManager : NetworkBehaviour, INetworkRunnerCallbacks
         OnNewMission?.Invoke(says, mission);
         Debug.Log($"[GameManager] Nova missão: {says} {mission}");
     }
+
+
 
 
 
