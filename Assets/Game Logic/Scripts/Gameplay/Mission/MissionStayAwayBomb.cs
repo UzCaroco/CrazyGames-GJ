@@ -93,7 +93,6 @@ public class MissionStayAwayBomb : Missions
         }
         else
         {
-            print("nao");
         }
     }
 
