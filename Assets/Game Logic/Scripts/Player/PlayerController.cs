@@ -19,13 +19,12 @@ public class PlayerController : NetworkBehaviour
 
     public sbyte speed = 5;
 
-    [HideInInspector] public bool timeToCopyTheMovements = false;
+    [HideInInspector] public bool timeToCopyTheMovements = false, dontMove = false, move = false, moveu = false;
     [HideInInspector] public byte[] copyThisMovement = new byte[4];
 
     public List<sbyte> listCopyThisMovement = new List<sbyte>();
     bool wasPressingX = false;
     bool wasPressingY = false;
-
 
 
     [Header("Missions Bool")]
@@ -118,6 +117,28 @@ public class PlayerController : NetworkBehaviour
         if (timeToCopyTheMovements)
         {
             CopyMoviment();
+        }
+
+        if (dontMove)
+        {
+            if (moveInput != Vector2.zero && !moveu)
+            {
+                moveu = true; // Se o jogador se mover, a missão de não se mover falha
+                missionDontMove = false; // Se o jogador se mover, a missão de não se mover falha
+            }
+            else if (moveInput == Vector2.zero && !moveu)
+            {
+                missionDontMove = true; // Se o jogador não se mover, a missão de não se mover é completada
+            }
+        }
+
+        if (move)
+        {
+            if (moveInput != Vector2.zero)
+            {
+                moveu = true; // Se o jogador se mover, a missão de não se mover falha
+                missionMove = true; // Se o jogador se mover, a missão de não se mover falha
+            }
         }
 
     }

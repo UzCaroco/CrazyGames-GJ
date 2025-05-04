@@ -176,6 +176,10 @@ public class SunController : NetworkBehaviour
                         playerController.copyThisMovement = new byte[4]; // Limpa a lista de movimentos copiados
                         playerController.listCopyThisMovement.Clear(); // Limpa a lista de movimentos copiados
 
+                        playerController.dontMove = false; // Reseta o booleano
+                        playerController.move = false; // Reseta o booleano
+                        playerController.moveu = false; // Reseta o booleano
+
                         Debug.Log("APAGOU TUDO DE TODOS");
                     }
                 }
