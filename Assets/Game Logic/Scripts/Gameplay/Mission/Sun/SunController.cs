@@ -83,19 +83,7 @@ public class SunController : NetworkBehaviour
     {
         if (HasStateAuthority)
         {
-            timerMission = GetComponent<TimerMission>(); // Get the TimerMission component attached to the same GameObject
-
-            mission[0] = GetComponentInChildren<MissionAvoidProjectiles>();
-            mission[1] = GetComponentInChildren<MissionCollectCoin>();
-            mission[2] = GetComponentInChildren<MissionCopyMovement>();
-            mission[3] = GetComponentInChildren<MissionDontMove>();
-            mission[4] = GetComponentInChildren<MissionMove>();
-            //mission[5] = GetComponentInChildren<MissionPushRival>();
-            mission[5] = GetComponentInChildren<MissionStayAwayBomb>();
-            mission[6] = GetComponentInChildren<MissionStaySquare>();
-
-            sharedUITextInstance = FindObjectOfType<SunSaysUi>();
-            runner = FindObjectOfType<NetworkRunner>();
+           
 
             //missionStayAwayBomb = GetComponentInChildren<MissionStayAwayBomb>();
         }
@@ -114,6 +102,20 @@ public class SunController : NetworkBehaviour
     {
         if (HasStateAuthority)
         {
+            timerMission = GetComponent<TimerMission>(); // Get the TimerMission component attached to the same GameObject
+
+            mission[0] = GetComponentInChildren<MissionAvoidProjectiles>();
+            mission[1] = GetComponentInChildren<MissionCollectCoin>();
+            mission[2] = GetComponentInChildren<MissionCopyMovement>();
+            mission[3] = GetComponentInChildren<MissionDontMove>();
+            mission[4] = GetComponentInChildren<MissionMove>();
+            //mission[5] = GetComponentInChildren<MissionPushRival>();
+            mission[5] = GetComponentInChildren<MissionStayAwayBomb>();
+            mission[6] = GetComponentInChildren<MissionStaySquare>();
+
+            sharedUITextInstance = FindObjectOfType<SunSaysUi>();
+            runner = FindObjectOfType<NetworkRunner>();
+
             base.Spawned();
 
             for (int i = 0; i < mission.Length; i++)
