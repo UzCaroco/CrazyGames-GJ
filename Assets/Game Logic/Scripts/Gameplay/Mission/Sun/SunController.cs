@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using CrazyGames;
+using ExitGames.Client.Photon.StructWrapping;
 using Fusion;
 using TMPro;
 using Unity.VisualScripting;
@@ -130,7 +131,8 @@ public class SunController : NetworkBehaviour
     //[Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     void RPC_UpdateUIText(string textS, string textM,  RpcInfo info = default)
     {
-        Debug.Log($"[Fusion RPC] RANDOM É:{randomNum}");
+        Debug.Log($"[RPC] RANDOM É:{randomNum}");
+
         Debug.Log($"[RPC] RPX_ApllayText {playerTextSee}");
         playerTextSee = textS + textM;
         textSays.text = textS.ToString();
