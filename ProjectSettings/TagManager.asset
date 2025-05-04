@@ -8,8 +8,8 @@ TagManager:
   - Missions
   - Sun
   - Bomb
-  - Projetile
   - Square
+  - Projectile
   layers:
   - Default
   - TransparentFX
