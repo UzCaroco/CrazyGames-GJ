@@ -33,7 +33,6 @@ public class MissionCollectCoin : Missions
     void GetTotalPlayers()
     {
         runner = FindObjectOfType<NetworkRunner>(); //Pega o NetworkRunner na cena
-        Debug.Log(runner + "EXISTE");
 
         totalPlayers = sbyte.Parse(runner.ActivePlayers.Count().ToString());
         Debug.Log("Quantidade de players ativos: " + runner.ActivePlayers.Count());

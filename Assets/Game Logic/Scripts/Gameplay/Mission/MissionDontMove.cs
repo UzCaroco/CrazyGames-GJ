@@ -22,7 +22,6 @@ public class MissionDontMove : Missions
     }
     public override void CallStartMission()
     {
-        print("Begginng");
     }
     public override void CallCompleteMission()
     {
