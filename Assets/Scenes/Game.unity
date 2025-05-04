@@ -39378,6 +39378,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19053805543826195, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+      propertyPath: Flags
+      value: 524289
+      objectReference: {fileID: 0}
+    - target: {fileID: 19053805543826195, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: SortKey
       value: 2997751436
       objectReference: {fileID: 0}
@@ -39591,7 +39595,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5588663556972665792, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: Flags
-      value: 131073
+      value: 524289
       objectReference: {fileID: 0}
     - target: {fileID: 5588663556972665792, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: SortKey
