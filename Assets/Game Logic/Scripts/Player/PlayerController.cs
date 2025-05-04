@@ -262,13 +262,7 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Square"))
-        {
-            missionStaySquare = false;
-        }
-    }
+    
 
 }
 

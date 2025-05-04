@@ -48,7 +48,6 @@ public class MissionStaySquare : Missions
         yield return new WaitForSeconds(TimeToArriveOnTheSquare);
 
         GetResults();
-        ControlScorePlayers();
     }
 
 
@@ -87,24 +86,6 @@ public class MissionStaySquare : Missions
         squareController.SetFinishTask(true);
     }
 
-    void ControlScorePlayers()
-    {
-        foreach (var player in runner.ActivePlayers)
-        {
-            NetworkObject playerObject = runner.GetPlayerObject(player);
-            if (playerObject != null)
-            {
-                var playerController = playerObject.GetComponent<PlayerController>(); ///////////Script que tera as informações
-                if (playerController != null)
-                {
-                    //se o player teve colissao com o quadrado 
-                    // ++score
-
-                    //se nao sem score a mais
-                }
-            }
-        }
-    }
 
     protected override void StartMission()
     {

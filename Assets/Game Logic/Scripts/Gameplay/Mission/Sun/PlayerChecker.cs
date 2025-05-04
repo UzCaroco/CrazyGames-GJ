@@ -127,13 +127,14 @@ public class PlayerChecker : NetworkBehaviour
     public NetworkBool MissionStaySquare(bool expectedResult)
     {
         Debug.Log("PlayerController: " + playerController + "SE NÃO TIVER NADA ANTES É NULO");
+
         if (playerController.missionStaySquare == expectedResult)
         {
             Debug.Log("Player COMPLETOOOOOOOOOOOOOOOOOOOOOOOU the mission!");
             return true;
         }
 
-        return false;
+            return false;
     }
 
     //--------------------------------------------//
