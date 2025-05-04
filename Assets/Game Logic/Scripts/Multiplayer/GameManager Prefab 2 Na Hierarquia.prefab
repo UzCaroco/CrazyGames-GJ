@@ -1296,10 +1296,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f193e501ab911d94b907fb3ea39d6e8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textPainel: {fileID: 0}
+  textSays: {fileID: 6850864688820440371}
+  textMission: {fileID: 1241396422495428156}
   sharedUITextInstance: {fileID: 0}
-  painelText: {fileID: 0}
-  message: 
+  painelText: {fileID: 2402274185337619672}
+  messageS: 
+  messageM: 
   timerForStartTheMission:
   - 2
   - 6
