@@ -54,7 +54,6 @@ public class MissionStayAwayBomb : Missions
 
     public override void FixedUpdateNetwork()
     {
-        Debug.Log("Rodando Netork Upfdate");
         
         StartMission();
     }
@@ -94,7 +93,6 @@ public class MissionStayAwayBomb : Missions
         }
         else
         {
-            print("nao");
         }
     }
 
@@ -124,7 +122,6 @@ public class MissionStayAwayBomb : Missions
 
     protected override void StartMission()
     {
-        Debug.Log("Stay Away Bomb, Beginning!");
 
         if (index == totalBomb)
         {

@@ -148,14 +148,14 @@ public class GameChecker : NetworkBehaviour
                             playerScores.Add(playerRef, 600);
                         }
                         break;
-                    case 6:
+                    case 5:
                         if (playerChecker.MissionBomb(false))
                         {
                             Debug.Log("Player " + playerChecker + " completed the mission!");
                             playerScores.Add(playerRef, 600);
                         }
                         break;
-                    case 7:
+                    case 6:
                         if (playerChecker.MissionStaySquare(true))
                         {
                             Debug.Log("Player " + playerChecker + " completed the mission!");

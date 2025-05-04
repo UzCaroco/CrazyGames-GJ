@@ -27,7 +27,6 @@ public class MissionStaySquare : Missions
     }
     public override void FixedUpdateNetwork()
     {
-        print("Update net");
 
     }
     public override void CallStartMission()

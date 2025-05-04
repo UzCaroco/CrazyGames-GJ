@@ -39,7 +39,6 @@ public class BombController : NetworkBehaviour
         if (isCountDown && timeForExplosion < 5)
         {
             timeForExplosion += Time.unscaledDeltaTime;
-            Debug.Log("eMcOUNTdOWN");
             if (timeForExplosion >= 5)
             {
                 isCountDown = false;

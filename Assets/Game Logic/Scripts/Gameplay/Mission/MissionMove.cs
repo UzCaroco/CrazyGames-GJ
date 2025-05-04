@@ -29,7 +29,7 @@ public class MissionMove : Missions
 
     protected override void StartMission()
     {
-        Debug.Log("MOVE, Beginning!");
+        
     }
     protected override void CompleteMission()
     {

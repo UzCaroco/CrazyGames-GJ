@@ -23,7 +23,6 @@ public class MoveProjectiles : NetworkBehaviour
     {
         base.FixedUpdateNetwork();
 
-        Debug.Log($"Tem autoridade? {Object.HasStateAuthority}");
         if (Object.HasStateAuthority)
         {
             transform.Translate(direction * speedObjects * Runner.DeltaTime);
