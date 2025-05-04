@@ -30,7 +30,9 @@ public class SunController : NetworkBehaviour
     //SunSaysUi uiSun;
     //private PlayerRef playerTextSunSays; 
 
-    [SerializeField] private NetworkObject painelText;
+    [SerializeField] private NetworkObject TextSays;
+    [SerializeField] private NetworkObject TextMission;
+
 
     private string[] taskSunSays = new string[2] { "Sun Says:\n", "Sun Don't Says:\n" };
     private string[] nameTheMission = new string[7] { "Avoid The Projectiles", "Collect a Coin", "Copy the Movement", "Don't Move", "Move" /*, "Push a Rival" */, "Stay Away From the Bomb", "Go to the Square" };
@@ -194,7 +196,16 @@ public class SunController : NetworkBehaviour
 
                 timerMission.InitializeTimeToGet(startMission, completeMission, this);
 
-                painelText.enabled = true; 
+                if (HasStateAuthority) // Só ativa a câmera do jogador local
+                {
+                    TextMeshProUGUI textS = TextSays.GetComponentInChildren<TextMeshProUGUI>(true); // true = busca em objetos inativos;
+                    textS.enabled = true;
+                    TextMeshProUGUI textM = TextMission.GetComponentInChildren<TextMeshProUGUI>(true); // true = busca em objetos inativos;
+                    textM.enabled = true;
+                }
+               // TextSays.enabled = true;
+               // TextMission.enabled = true;
+
                 messageS = taskSunSays[0];
                 messageM = nameTheMission[index];
                 ApplyUI(messageS, messageM);
@@ -224,7 +235,15 @@ public class SunController : NetworkBehaviour
     {
         if (isFinishWait)
         {
-            painelText.enabled = false;
+            if (HasStateAuthority) // Só ativa a câmera do jogador local
+            {
+                TextMeshProUGUI textS = TextSays.GetComponentInChildren<TextMeshProUGUI>(true); // true = busca em objetos inativos;
+                textS.enabled = true;
+                TextMeshProUGUI textM = TextMission.GetComponentInChildren<TextMeshProUGUI>(true); // true = busca em objetos inativos;
+                textM.enabled = true;
+            }
+            //TextSays.enabled = false;
+            //TextMission.enabled = false;
 
             mission[randomNumber].enabled = true;
             mission[randomNumber].CallStartMission();

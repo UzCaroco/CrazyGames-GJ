@@ -72,10 +72,8 @@ public class PlayerController : NetworkBehaviour
         }
         if (HasInputAuthority) // Só ativa a câmera do jogador local
         {
-            print("entrei aqui");
-
             Camera cam = GetComponentInChildren<Camera>(true); // true = busca em objetos inativos
-            Debug.Log("Camera: " + cam);
+            //Debug.Log("Camera: " + cam);
             cam.enabled = true;
         }
     }
