@@ -82,30 +82,35 @@ public class GameChecker : NetworkBehaviour
                     case 0:
                         if (playerChecker.MissionProjectile(false))
                         {
+                            Debug.Log("Player " + playerChecker + " completed the mission!");
                             playerScores.Add(playerRef, 600);
                         }
                         break;
                     case 3:
                         if (playerChecker.MissionDontMove(true))
                         {
+                            Debug.Log("Player " + playerChecker + " completed the mission!");
                             playerScores.Add(playerRef, 600);
                         }
                         break;
                     case 4:
                         if (playerChecker.MissionMove(true))
                         {
+                            Debug.Log("Player " + playerChecker + " completed the mission!");
                             playerScores.Add(playerRef, 600);
                         }
                         break;
                     case 6:
-                        if (playerChecker.MissionBomb(true))
+                        if (playerChecker.MissionBomb(false))
                         {
+                            Debug.Log("Player " + playerChecker + " completed the mission!");
                             playerScores.Add(playerRef, 600);
                         }
                         break;
                     case 7:
                         if (playerChecker.MissionStaySquare(true))
                         {
+                            Debug.Log("Player " + playerChecker + " completed the mission!");
                             playerScores.Add(playerRef, 600);
                         }
                         break;

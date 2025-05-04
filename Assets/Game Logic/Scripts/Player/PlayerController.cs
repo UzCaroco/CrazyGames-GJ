@@ -126,9 +126,11 @@ public class PlayerController : NetworkBehaviour
                 moveu = true; // Se o jogador se mover, a missão de não se mover falha
                 missionDontMove = false; // Se o jogador se mover, a missão de não se mover falha
             }
-            else if (moveInput == Vector2.zero && !moveu)
+            
+            if (moveInput == Vector2.zero && !moveu)
             {
                 missionDontMove = true; // Se o jogador não se mover, a missão de não se mover é completada
+                Debug.Log("Missão de não se mover completada: " + missionDontMove);
             }
         }
 
