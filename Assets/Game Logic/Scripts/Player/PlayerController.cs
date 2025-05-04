@@ -229,8 +229,11 @@ public class PlayerController : NetworkBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("MOEDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+
         if (collision.CompareTag("Coin"))
         {
+            Debug.Log("MOEDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             playerChecker = GetComponent<PlayerChecker>();
             Debug.Log("PlayerChecker ESTÁ VAZIO???: " + playerChecker);
 
@@ -243,14 +246,17 @@ public class PlayerController : NetworkBehaviour
         }
         else if (collision.CompareTag("Projectile"))
         {
+            Debug.Log("PROJETIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIL");
             missionProjectile = true;
         }
         else if (collision.CompareTag("Bomb"))
         {
+            Debug.Log("BOMBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
             missionBomb = true;
         }
         else if (collision.CompareTag("Square"))
         {
+            Debug.Log("QUADRADOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
             missionStaySquare = true;
         }
         else if (collision.CompareTag("Player") && playerInput.Player.PushRival.triggered)
