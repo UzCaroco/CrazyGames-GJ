@@ -172,7 +172,7 @@ public class SunController : NetworkBehaviour
     }
 
 
-    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    //[Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     void RPC_UpdateUIText(string textS, string textM,  RpcInfo info = default)
     {
         Debug.Log($"[RPC] RPX_ApllayText {playerTextSee}");
@@ -180,10 +180,10 @@ public class SunController : NetworkBehaviour
         textSays.text = textS.ToString();
         textMission.text = textM.ToString();
 
-        if (sharedUITextInstance != null)
+        /*if (sharedUITextInstance != null)
         {
             sharedUITextInstance.SetMessage(textS, textM);
-        }
+        }*/
     }
 
     #endregion CanvaText
