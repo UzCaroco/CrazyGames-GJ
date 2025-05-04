@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 6472670630079215346}
   - component: {fileID: 7332995209830050021}
   - component: {fileID: 7451890253154389108}
-  - component: {fileID: 2430372467019001387}
   - component: {fileID: 1424269971337256890}
   - component: {fileID: 8552912484708391286}
+  - component: {fileID: 5118959143067363456}
   m_Layer: 0
   m_Name: Coin
   m_TagString: Coin
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ce3ea59614ec8d64e9cdbd8b671f9042, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -109,22 +109,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!58 &2430372467019001387
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3339179606883994461}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!114 &1424269971337256890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,3 +139,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55544722a044bd84cb1f314ac9f904d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!58 &5118959143067363456
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3339179606883994461}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.008038878, y: -0.004823327}
+  serializedVersion: 2
+  m_Radius: 0.54643106
