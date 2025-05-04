@@ -7,38 +7,51 @@ public class RandomSkinAnimator : NetworkBehaviour
 {
     [SerializeField][Networked] int PlayerSpawn {get; set;}
     [Networked] int numRandom { get; set; }
-
-    [SerializeField]List<int> numeros = new List<int>();
+    [Networked, Capacity(8)] public NetworkArray<int> numeros => default;
     int minPlayer = 0;
     int maxPlayer = 8;
 
     public override void Spawned()
     {
-        DrawSkinController();
+        if (Object.HasStateAuthority)
+        {
+            DrawSkinController();
+        }
     }
     public void DrawSkinController()
     {
-        while (numeros.Count <  8)
+        List<int> temp = new List<int>();
+        while (temp.Count <  8)
         {
             int numeroAleatorio = Random.Range(minPlayer, maxPlayer);
-            if (!numeros.Contains(numeroAleatorio))
+            if (!temp.Contains(numeroAleatorio))
             {
-                numeros.Add(numeroAleatorio);
+                temp.Add(numeroAleatorio);
             }
         }
 
-        foreach (int numero in numeros) 
-            {
-                    Debug.Log(numero);
+        for (int i = 0; i < temp.Count; i++)
+        {
+            numeros.Set(i, temp[i]);
+        }
 
-            }
+        foreach (int numero in numeros) 
+        {
+            Debug.Log(numero);
+        }
     }
     public void PlayerIsSpawned()
     {
-        numRandom = numeros[PlayerSpawn];
-        Debug.Log(numeros[PlayerSpawn] + " " + numRandom);
-        if (PlayerSpawn < 7) 
+        if (PlayerSpawn < numeros.Length)
+        {
+            numRandom = numeros[PlayerSpawn];
+            Debug.Log(numeros[PlayerSpawn] + " " + numRandom);
             PlayerSpawn++;
+        }
+        else
+        {
+            Debug.LogError("PlayerSpawn fora dos limites da lista de números!");
+        }
     }
 
     public int SetNumRandom()
