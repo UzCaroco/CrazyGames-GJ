@@ -11,36 +11,10 @@ public class GameManager : NetworkBehaviour, INetworkRunnerCallbacks
     [Networked, Capacity(10)]
     private NetworkDictionary<PlayerRef, int> playerScores { get; } = default;
 
-    public bool HasCurrentMission => !string.IsNullOrEmpty(CurrentSays) && !string.IsNullOrEmpty(CurrentMission);
 
 
     // Eventos locais para UI
     public static event Action<PlayerRef, int> OnScoreChanged;
-
-
-    [Networked]
-    public string CurrentSays { get; set; }
-
-    [Networked]
-    public string CurrentMission { get; set; }
-
-    private string lastSays, lastMission;
-
-
-
-    public void SetNewMission(string says, string mission)
-    {
-        if (!HasStateAuthority) return;
-
-        CurrentSays = says;
-        CurrentMission = mission;
-    }
-
-
-
-
-
-
 
     public override void Spawned()
     {
@@ -49,15 +23,6 @@ public class GameManager : NetworkBehaviour, INetworkRunnerCallbacks
 
     public override void FixedUpdateNetwork()
     {
-        // Todos podem ver as mudanças (não só o Host)
-        if (CurrentSays != lastSays || CurrentMission != lastMission)
-        {
-            lastSays = CurrentSays;
-            lastMission = CurrentMission;
-            OnNewMission?.Invoke(CurrentSays, CurrentMission);
-        }
-
-        // Outras lógicas de host ficam depois
         if (!HasStateAuthority) return;
 
         // Coloque aqui a lógica de partida (timer, fases, etc.)
@@ -140,13 +105,52 @@ public class GameManager : NetworkBehaviour, INetworkRunnerCallbacks
 
 
 
-    public static event Action<string, string> OnNewMission;
 
-    public void TriggerNewMission(string says, string mission)
+
+
+
+
+    // Adicione essas novas variáveis
+    [Networked] private string CurrentMission { get; set; }
+    public static event Action<string> OnMissionChanged; // Novo evento para missões
+
+    // Método para sortear nova missão (chamado pelo Host)
+    public void GenerateNewMission(string textS, string textM)
     {
-        OnNewMission?.Invoke(says, mission);
-        Debug.Log($"[GameManager] Nova missão: {says} {mission}");
+        if (!HasStateAuthority) return;
+
+        /*
+        // Exemplo simples de sorteio
+        string[] missions = {
+            "Colete 10 cristais!",
+            "Derrote 5 inimigos!",
+            "Sobreviva por 2 minutos!"
+        };*/
+
+        CurrentMission = textM;
+        RPC_UpdateMission(CurrentMission);
     }
+
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    private void RPC_UpdateMission(string newMission)
+    {
+        CurrentMission = newMission;
+        OnMissionChanged?.Invoke(newMission);
+        UpdateAllUIs(); // Reaproveita o método existente
+    }
+
+    // Método para pegar a missão atual
+    public string GetCurrentMission()
+    {
+        return CurrentMission;
+    }
+
+
+
+
+
+
+
 
 
 

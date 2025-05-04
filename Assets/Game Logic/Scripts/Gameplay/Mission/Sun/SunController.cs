@@ -25,12 +25,12 @@ public class SunController : NetworkBehaviour
     private NetworkString<_256> playerTextSee { get; set; }
     public static SunController local { get; set; }
 
-    [SerializeField] private SunSaysUi sharedUITextInstance;
+    //[SerializeField] private SunSaysUi sharedUITextInstance;
 
     //SunSaysUi uiSun;
     //private PlayerRef playerTextSunSays; 
 
-    [SerializeField] private NetworkObject painelText;
+    //[SerializeField] private NetworkObject painelText;
 
     private string[] taskSunSays = new string[2] { "Sun Says:\n", "Sun Don't Says:\n" };
     private string[] nameTheMission = new string[7] { "Avoid The Projectiles", "Collect a Coin", "Copy the Movement", "Don't Move", "Move" /*, "Push a Rival" */, "Stay Away From the Bomb", "Go to the Square" };
@@ -66,7 +66,7 @@ public class SunController : NetworkBehaviour
     [SerializeField] private float[] timerForStartTheMission  = new float[7]; // Array to store time for each mission
     [SerializeField] private float[] timeCompleteMission = new float[7]; // Array to store time for each mission
 
-    [Networked][SerializeField] private bool isFinishMission{ get; set; }
+    [Networked]public bool isFinishMission{ get; set; }
     [Networked][SerializeField] private bool isFinishWait { get; set; }
 
     /// <summary>
@@ -113,7 +113,7 @@ public class SunController : NetworkBehaviour
             mission[5] = GetComponentInChildren<MissionStayAwayBomb>();
             mission[6] = GetComponentInChildren<MissionStaySquare>();
 
-            sharedUITextInstance = FindObjectOfType<SunSaysUi>();
+            //sharedUITextInstance = FindObjectOfType<SunSaysUi>();
             runner = FindObjectOfType<NetworkRunner>();
 
             base.Spawned();
@@ -141,7 +141,8 @@ public class SunController : NetworkBehaviour
     
     public void ApplyUI(string textS, string textM)
     {
-        FindObjectOfType<GameManager>().SetNewMission(messageS, messageM);
+        //Luiz
+        FindObjectOfType<GameManager>().GenerateNewMission(textS, textM);
 
 
         RPC_UpdateUIText(textS, textM);
@@ -194,7 +195,7 @@ public class SunController : NetworkBehaviour
 
                 timerMission.InitializeTimeToGet(startMission, completeMission, this);
 
-                painelText.enabled = true; 
+                //painelText.enabled = true; 
                 messageS = taskSunSays[0];
                 messageM = nameTheMission[index];
                 ApplyUI(messageS, messageM);
@@ -224,7 +225,7 @@ public class SunController : NetworkBehaviour
     {
         if (isFinishWait)
         {
-            painelText.enabled = false;
+            //painelText.enabled = false;
 
             mission[randomNumber].enabled = true;
             mission[randomNumber].CallStartMission();

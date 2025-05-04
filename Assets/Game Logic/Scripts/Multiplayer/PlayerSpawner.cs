@@ -41,9 +41,9 @@ public class PlayerSpawner : SimulationBehaviour, IPlayerJoined
             NetworkObject playerObj = Runner.Spawn(playerPrefab, Vector3.zero, Quaternion.identity, inputAuthority: player);
             Runner.SetPlayerObject(player, playerObj);
             
-            anim = playerObj.GetComponent<Animator>();
-            randomSkin.PlayerIsSpawned();
-            anim.runtimeAnimatorController = animatorOverrideController[randomSkin.SetNumRandom()];
+            //anim = playerObj.GetComponent<Animator>();
+            //randomSkin.PlayerIsSpawned();
+            //anim.runtimeAnimatorController = animatorOverrideController[randomSkin.SetNumRandom()];
         }
     }
 }
