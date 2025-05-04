@@ -30,7 +30,7 @@ public class SunController : NetworkBehaviour
     //SunSaysUi uiSun;
     //private PlayerRef playerTextSunSays; 
 
-    [SerializeField] private GameObject painelText;
+    [SerializeField] private NetworkObject painelText;
 
     private string[] taskSunSays = new string[2] { "Sun Says:\n", "Sun Don't Says:\n" };
     private string[] nameTheMission = new string[7] { "Avoid The Projectiles", "Collect a Coin", "Copy the Movement", "Don't Move", "Move" /*, "Push a Rival" */, "Stay Away From the Bomb", "Go to the Square" };
@@ -194,7 +194,7 @@ public class SunController : NetworkBehaviour
 
                 timerMission.InitializeTimeToGet(startMission, completeMission, this);
 
-                painelText.SetActive(true);
+                painelText.enabled = true; 
                 messageS = taskSunSays[0];
                 messageM = nameTheMission[index];
                 ApplyUI(messageS, messageM);
@@ -224,7 +224,7 @@ public class SunController : NetworkBehaviour
     {
         if (isFinishWait)
         {
-            painelText.SetActive(false);
+            painelText.enabled = false;
 
             mission[randomNumber].enabled = true;
             mission[randomNumber].CallStartMission();
