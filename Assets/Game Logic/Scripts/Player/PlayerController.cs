@@ -261,9 +261,6 @@ public class PlayerController : NetworkBehaviour
             missionPushRival = true;
         }
     }
-
-    
-
 }
 
 
