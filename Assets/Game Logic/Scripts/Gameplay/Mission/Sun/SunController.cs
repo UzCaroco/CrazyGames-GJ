@@ -141,6 +141,8 @@ public class SunController : NetworkBehaviour
     
     public void ApplyUI(string textS, string textM)
     {
+        FindObjectOfType<GameManager>().TriggerNewMission(messageS, messageM);
+
         RPC_UpdateUIText(textS, textM);
     }
 
@@ -195,6 +197,17 @@ public class SunController : NetworkBehaviour
                 messageS = taskSunSays[0];
                 messageM = nameTheMission[index];
                 ApplyUI(messageS, messageM);
+
+
+
+
+
+
+
+
+
+
+
 
                 //OnTextChanged();
 
