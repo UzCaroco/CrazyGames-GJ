@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SquareController : NetworkBehaviour
 {
-    private List<PlayerManager> playersCollided = new List<PlayerManager>();
+    private List<PlayerController> playersCollided = new List<PlayerController>();
     private NetworkRunner runner;
 
     [SerializeField] bool isFinishMission;
@@ -45,11 +45,11 @@ public class SquareController : NetworkBehaviour
         if (!runner.IsPlayer.Equals(netObj.InputAuthority)) return;
 
         // Tenta pegar o PlayerManager
-        PlayerManager playerManager = netObj.GetComponent<PlayerManager>();
-        if (playerManager != null && !playersCollided.Contains(playerManager))
+        PlayerController playerController = netObj.GetComponent<PlayerController>();
+        /*if (playerController != null && !playersCollided.Contains(playerController))
         {
-            playersCollided.Add(playerManager);
-            playerManager.SetCollision(true); //mudar para script de controle ////////////////////////
-        }
+            playersCollided.Add(playerController);
+            playerController.missionStaySquare = true; ; //mudar para script de controle ////////////////////////
+        }*/
     }
 }
