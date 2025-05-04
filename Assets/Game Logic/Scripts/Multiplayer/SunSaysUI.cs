@@ -14,8 +14,11 @@ public class SunSaysUI : MonoBehaviour
 
     private void Start()
     {
+        GameManager.OnNewMission += UpdateMissionUI;
+
         var gm = FindObjectOfType<GameManager>();
-        UpdateMissionUI(gm.CurrentSays, gm.CurrentMission);
+        if (gm != null && gm.HasCurrentMission)
+            UpdateMissionUI(gm.CurrentSays, gm.CurrentMission);
     }
 
 

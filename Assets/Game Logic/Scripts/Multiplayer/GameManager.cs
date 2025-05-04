@@ -11,6 +11,7 @@ public class GameManager : NetworkBehaviour, INetworkRunnerCallbacks
     [Networked, Capacity(10)]
     private NetworkDictionary<PlayerRef, int> playerScores { get; } = default;
 
+    public bool HasCurrentMission => !string.IsNullOrEmpty(CurrentSays) && !string.IsNullOrEmpty(CurrentMission);
 
 
     // Eventos locais para UI
