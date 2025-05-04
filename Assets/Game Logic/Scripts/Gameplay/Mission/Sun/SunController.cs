@@ -16,23 +16,23 @@ public class SunController : NetworkBehaviour
     /// 
 
     // Text Mission por jogador
-    
+
     [SerializeField] private TextMeshProUGUI textSays;
     [SerializeField] private TextMeshProUGUI textMission;
 
     //[Networked(OnChanged = nameof(OnTextChanged))]
-    private NetworkString<_256> playerTextSee { get; set; }   
+    private NetworkString<_256> playerTextSee { get; set; }
     public static SunController local { get; set; }
 
     [SerializeField] private SunSaysUi sharedUITextInstance;
-    
+
     //SunSaysUi uiSun;
     //private PlayerRef playerTextSunSays; 
 
     [SerializeField] private GameObject painelText;
 
-    private string[] taskSunSays = new string[2] { "Sun Says:\n", "Sun Don't Says:\n"};
-    private string[] nameTheMission = new string[7] { "Avoid The Projectiles", "Collect a Coin", "Copy the Movement", "Don't Move" , "Move" /*, "Push a Rival" */, "Stay Away From the Bomb" , "Go to the Square"};
+    private string[] taskSunSays = new string[2] { "Sun Says:\n", "Sun Don't Says:\n" };
+    private string[] nameTheMission = new string[7] { "Avoid The Projectiles", "Collect a Coin", "Copy the Movement", "Don't Move", "Move" /*, "Push a Rival" */, "Stay Away From the Bomb", "Go to the Square" };
     public string messageS;
     public string messageM;
 
@@ -47,11 +47,14 @@ public class SunController : NetworkBehaviour
     private MissionMove missionMove; // SCRIPT MOVE 4
     private MissionPushRival missionPushRival; // SCRIPT PUSH THE RIVAL 5*/
     private MissionStayAwayBomb missionStayAwayBomb; // SCRIPT STAY AWAY FROM THE BOMB 6 
-   // private MissionStaySquare missionStaySquare; // SCRIPT STAY IN THE GREEN SQUARE 7
-    
+                                                     // private MissionStaySquare missionStaySquare; // SCRIPT STAY IN THE GREEN SQUARE 7
+
     /// <summary>
     /// Controller the Missions
     /// </summary>
+
+    [Networked] int randomNum { get; set;}
+    [Networked] int rand { get; set; }
 
     int randomNumber = -1; // Variable to store the random number
     int random = -1;
@@ -142,8 +145,12 @@ public class SunController : NetworkBehaviour
         while (random == randomNumber)
         {
             random = Random.Range(0, 7); // Generate a random number between 0 and 9
+            rand = Random.Range(0, 7);
         }
-        
+
+        randomNum = rand;
+        Debug.Log("OIEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE AQUI O RANDOM É:" + randomNum);
+
         randomNumber = random;
         SetupTM();
     }
