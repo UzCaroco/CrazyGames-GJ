@@ -7,7 +7,6 @@ using Fusion;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static System.Net.Mime.MediaTypeNames;
 
 public class SunController : NetworkBehaviour
 {
@@ -28,7 +27,9 @@ public class SunController : NetworkBehaviour
 
     private string[] taskSunSays = new string[2] { "Sun Says: \r\n", "Sun Don't Says: \r\n"};
     private string[] nameTheMission = new string[7] { "Avoid The Projectiles", "Collect a Coin", "Copy the Movement", "Don't Move" , "Move" /*, "Push a Rival" */, "Stay Away From the Bomb" , "Go to the Square"};
-    
+    [Networked] public string Message { get; set; }
+
+    [SerializeField] private SunSaysUi sharedUITextInstance;
 
     private TimerMission timerMission; // Reference to the TimerMission script
     private Missions[] mission = new Missions[7];
@@ -76,6 +77,7 @@ public class SunController : NetworkBehaviour
         mission[5] = GetComponentInChildren<MissionStayAwayBomb>();
         mission[6] = GetComponentInChildren<MissionStaySquare>();
 
+        sharedUITextInstance = FindObjectOfType<SunSaysUi>();
         runner = FindObjectOfType<NetworkRunner>();
 
         //missionStayAwayBomb = GetComponentInChildren<MissionStayAwayBomb>();
@@ -110,31 +112,32 @@ public class SunController : NetworkBehaviour
 
     #region CanvaText
     //[Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
-    public void RPC_SeeTextMission(PlayerRef player, string text)
-    {
-        if (!HasStateAuthority) return;
+    /* public void RPC_SeeTextMission(PlayerRef player, string text)
+     {
+         if (!HasStateAuthority) return;
 
-        playerTextSee.Set(player, text);
-        Debug.Log($"O texto é agora {text}");
+         playerTextSee.Set(player, text);
+         Debug.Log($"O texto é agora {text}");
 
-        // Atualiza todos os clientes
-        RPC_UpdateTextMission();
-    }
+         // Atualiza todos os clientes
+         RPC_UpdateTextMission();
+     }
 
-    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-    private void RPC_UpdateTextMission()
-    {
-        // Dispara evento para atualizar UIs
-        UpdateAllUIs();
-    }
-    private void UpdateAllUIs()
-    {
-        var textSunUIs = FindObjectsOfType<SunSaysUi>();
-        foreach (var ui in textSunUIs)
-        {
-            ui.UpdateRankingUI(taskSunSays[0] + nameTheMission[random]);
-        }
-    }
+     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+     private void RPC_UpdateTextMission()
+     {
+         // Dispara evento para atualizar UIs
+         UpdateAllUIs();
+     }
+     private void UpdateAllUIs()
+     {
+         var textSunUIs = FindObjectsOfType<SunSaysUi>();
+         foreach (var ui in textSunUIs)
+         {
+             ui.UpdateRankingUI(taskSunSays[0] + nameTheMission[random]);
+         }
+     }*/
+    
 
     #endregion CanvaText
 
@@ -162,7 +165,8 @@ public class SunController : NetworkBehaviour
 
                 painelText.SetActive(true);
 
-                foreach (var player in runner.ActivePlayers)
+                sharedUITextInstance.SetMessage($"{taskSunSays[0]} + {nameTheMission[index]}");
+                /*foreach (var player in runner.ActivePlayers)
                 {
                     if (player != null)
                     {
@@ -173,7 +177,7 @@ public class SunController : NetworkBehaviour
                             RPC_SeeTextMission(playerRefs, taskSunSays[0] + nameTheMission[index]);
                         }
                     }
-                }
+                }*/
 
                 //textPainel.text = (taskSunSays[0] + nameTheMission[index]).ToString();
                 Debug.Log(taskSunSays[0] + nameTheMission[index]);
