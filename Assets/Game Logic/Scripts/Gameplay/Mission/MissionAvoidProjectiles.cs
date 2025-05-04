@@ -159,7 +159,7 @@ public class MissionAvoidProjectiles : Missions
     {
         while (indexProj[randomURDL] != randomQuantProject[randomURDL])
         {
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.1f);
 
             LocalIntanciete();
         }
@@ -174,7 +174,7 @@ public class MissionAvoidProjectiles : Missions
     {
         StopCoroutine(SpawnTime());
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
 
         FinishAllProjectiles();
     }
@@ -197,6 +197,10 @@ public class MissionAvoidProjectiles : Missions
             {
                 NetworkObject obj = Runner.Spawn(projectilePrefab, new Vector3(randomPositionSpawn, extremes, 0), Quaternion.identity);
                 obj.transform.SetParent(transform);
+
+                if (randomURDL == 2)
+                    obj.transform.rotation = Quaternion.Euler(0, 0, 180);
+
                 indexProj[randomURDL]++;
                 if (obj.TryGetComponent<MoveProjectiles>(out var projectileScript))
                 {
@@ -228,6 +232,12 @@ public class MissionAvoidProjectiles : Missions
             {
                 NetworkObject obj = Runner.Spawn(projectilePrefab, new Vector3(extremes, randomPositionSpawn, 0), Quaternion.identity);
                 obj.transform.SetParent(transform);
+
+                if (randomURDL == 1)
+                    obj.transform.rotation = Quaternion.Euler(0, 0, 90);
+                else if (randomURDL == 3)
+                    obj.transform.rotation = Quaternion.Euler(0, 0, -90);
+
                 indexProj[randomURDL]++;
                 if (obj.TryGetComponent<MoveProjectiles>(out var projectileScript))
                 {
