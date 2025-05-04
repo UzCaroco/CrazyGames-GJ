@@ -168,17 +168,23 @@ public class SunController : NetworkBehaviour
         textPainel.text = playerTextSee.ToString();
     }
 
-    public void ApplyUI(string playerTextSee)
+    public void ApplyUI(string text)
     {
-        RPC_ApplyText(playerTextSee);
+        RPC_UpdateUIText(text);
     }
 
 
-    [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
-    void RPC_ApplyText(string text, RpcInfo info = default)
+    [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
+    void RPC_UpdateUIText(string text, RpcInfo info = default)
     {
         Debug.Log($"[RPC] RPX_ApllayText {playerTextSee}");
-        this.playerTextSee = text;
+        playerTextSee = text;
+        textPainel.text = text;
+
+        if (sharedUITextInstance != null)
+        {
+            sharedUITextInstance.SetMessage(text);
+        }
     }
 
     #endregion CanvaText
@@ -188,7 +194,7 @@ public class SunController : NetworkBehaviour
     {
         while (random == randomNumber)
         {
-            random = Random.Range(4, 6); // Generate a random number between 0 and 9
+            random = Random.Range(5, 7); // Generate a random number between 0 and 9
         }
         
         randomNumber = random;

@@ -10,7 +10,7 @@ public class SunSaysUi : NetworkBehaviour
     [Networked] public string Message { get; set; }
     [SerializeField] private TextMeshProUGUI textPainel;
 
-    /*
+    
     public override void Render()
     {
         // Sempre atualiza o texto na UI com a versão de rede
@@ -28,7 +28,7 @@ public class SunSaysUi : NetworkBehaviour
             Message = newMessage;
         }
     }
-    */
+    
 
     
     /*public void SetConnectionType(string type)
