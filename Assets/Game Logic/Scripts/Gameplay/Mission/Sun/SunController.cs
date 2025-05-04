@@ -20,7 +20,7 @@ public class SunController : NetworkBehaviour
     [SerializeField] private TextMeshProUGUI textPainel;
 
     //[Networked(OnChanged = nameof(OnTextChanged))]
-    private NetworkString<_64> playerTextSee { get; set; }   
+    private NetworkString<_256> playerTextSee { get; set; }   
     public static SunController local { get; set; }
 
     [SerializeField] private SunSaysUi sharedUITextInstance;
@@ -30,7 +30,7 @@ public class SunController : NetworkBehaviour
 
     [SerializeField] private GameObject painelText;
 
-    private string[] taskSunSays = new string[2] { "Sun Says:\r\n", "Sun Don't Says:\r\n"};
+    private string[] taskSunSays = new string[2] { "Sun Says:\n", "Sun Don't Says:\n"};
     private string[] nameTheMission = new string[7] { "Avoid The Projectiles", "Collect a Coin", "Copy the Movement", "Don't Move" , "Move" /*, "Push a Rival" */, "Stay Away From the Bomb" , "Go to the Square"};
     public string message;
 
@@ -159,14 +159,14 @@ public class SunController : NetworkBehaviour
     /*static void OnTextChanged(Changed<SunController> changed)
     {
         changed.Behaviour.OnTextChanged();
-    }*/
+    }
 
     void OnTextChanged()
     {
         Debug.Log($"Text Sun Chaged to {playerTextSee}");
 
         textPainel.text = playerTextSee.ToString();
-    }
+    }*/
 
     public void ApplyUI(string text)
     {
@@ -227,11 +227,14 @@ public class SunController : NetworkBehaviour
                 }*/
 
                 ApplyUI(taskSunSays[0] + nameTheMission[index]);
-                OnTextChanged();
-                //sharedUITextInstance.SetMessage(message);
-                //sharedUITextInstance.SetMessage(taskSunSays[0] + nameTheMission[index]);
-                //textPainel.text = (taskSunSays[0] + nameTheMission[index]).ToString();
+
+                //OnTextChanged();
+
                 Debug.Log(taskSunSays[0] + nameTheMission[index]);
+                /*sharedUITextInstance.SetMessage(message);
+                sharedUITextInstance.SetMessage(taskSunSays[0] + nameTheMission[index]);
+                textPainel.text = (taskSunSays[0] + nameTheMission[index]).ToString();*/
+
             }
         }
 
