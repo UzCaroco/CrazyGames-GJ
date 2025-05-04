@@ -9,9 +9,12 @@ public class PlayerSpawner : SimulationBehaviour, IPlayerJoined
 
     public void PlayerJoined(PlayerRef player)
     {
-        // Todos os players (inclusive o host) serão instanciados pelo host
-        NetworkObject playerObj = Runner.Spawn(playerPrefab, Vector3.zero, Quaternion.identity);
+        // Só o peer com StateAuthority vai instanciar
 
-        runner.SetPlayerObject(player, playerObj); // Agora sim vai funcionar o GetPlayerObject
+        if (player == Runner.LocalPlayer) // ou Runner.IsServer se tiver usando Server/Client
+        {
+            NetworkObject playerObj = Runner.Spawn(playerPrefab, Vector3.zero, Quaternion.identity, inputAuthority: player);
+            Runner.SetPlayerObject(player, playerObj);
+        }
     }
 }
