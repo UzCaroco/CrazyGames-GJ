@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ public class GameChecker : NetworkBehaviour
 
      List<PlayerChecker> playerCheckers = new List<PlayerChecker>();
 
-    Dictionary<PlayerRef, int> playersSequence = new Dictionary<PlayerRef, int>();
+    List<Tuple<PlayerRef, int>> playersSequence = new List<Tuple<PlayerRef, int>>();
     Dictionary<PlayerRef, int> playerScores = new Dictionary<PlayerRef, int>();
 
     private void OnEnable()
@@ -42,11 +43,13 @@ public class GameChecker : NetworkBehaviour
     {
         if (playerCheckers.Contains(playerChecker)) return; // Se o player já estiver na lista, não adiciona novamente
 
-        Debug.Log("Adicionando player " + playerChecker + " à lista de jogadores.");
         if (!playerCheckers.Contains(playerChecker))
         {
-            Debug.Log("Adicionando player " + playerChecker + " à lista de jogadores.");
-            playerCheckers.Add(playerChecker);
+            if (playerChecker.playerController != null)
+            {
+                Debug.Log("Adicionando player " + playerChecker + " à lista de jogadores.");
+                playerCheckers.Add(playerChecker);
+            }
         }
     }
 
@@ -190,7 +193,7 @@ public class GameChecker : NetworkBehaviour
             Debug.Log("Player " + player + " foi adicionado à lista na posição " + playersSequence.Count);
 
 
-            playersSequence.Add(player.Object.InputAuthority, 1);
+            playersSequence.Add(new Tuple<PlayerRef, int>(player.Object.InputAuthority, 1));
         }
     }
 
@@ -199,24 +202,23 @@ public class GameChecker : NetworkBehaviour
     {
         Debug.Log("Adicionando pontuação em sequência para os jogadores.");
 
-        foreach (KeyValuePair<PlayerRef, int> player in playersSequence)
+        for (int i = 0; i < playersSequence.Count; i++)
         {
-            if (player.Value == 0)
+            var player = playersSequence[i].Item1; // PlayerRef
+            Debug.Log($"Adicionando pontuação para o player {player}");
+
+            int pontuacao = 0;
+            switch (i)
             {
-                playerScores.Add(player.Key, 1);
+                case 0: pontuacao = 1200; break;
+                case 1: pontuacao = 1000; break;
+                case 2: pontuacao = 800; break;
+                case 3: pontuacao = 600; break;
+                default: pontuacao = 600; break;
             }
-            else if (player.Value == 1)
-            {
-                playerScores.Add(player.Key, 1);
-            }
-            else if (player.Value == 2)
-            {
-                playerScores.Add(player.Key, 1);
-            }
-            else if (player.Value > 2)
-            {
-                playerScores.Add(player.Key, 1);
-            }
+
+            if (!playerScores.ContainsKey(player))
+                playerScores.Add(player, pontuacao);
         }
         playersSequence.Clear(); // Limpa a lista após adicionar as pontuações
 
