@@ -20,7 +20,6 @@ public class SunController : NetworkBehaviour
     [Networked, Capacity(10)]
     private NetworkDictionary<PlayerRef, string> playerTextSee { get; } = default;
     
-
     private PlayerRef playerTextSunSays;
 
     [SerializeField] private GameObject painelText;
@@ -165,13 +164,19 @@ public class SunController : NetworkBehaviour
 
                 painelText.SetActive(true);
 
-                /*foreach(var player in PlayerController)
+                foreach (var player in runner.ActivePlayers)
                 {
                     if (player != null)
                     {
-                        RPC_SeeTextMission(player, taskSunSays[0] + nameTheMission[index]);
+                        PlayerRef playerRefs = Object.InputAuthority;
+                                
+                        if (playerRefs != null)
+                        {
+                            RPC_SeeTextMission(playerRefs, taskSunSays[0] + nameTheMission[index]);
+                        }
                     }
-                }*/
+                }
+
                 //textPainel.text = (taskSunSays[0] + nameTheMission[index]).ToString();
                 Debug.Log(taskSunSays[0] + nameTheMission[index]);
             }
