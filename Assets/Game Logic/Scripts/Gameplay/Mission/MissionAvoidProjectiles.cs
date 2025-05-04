@@ -88,7 +88,6 @@ public class MissionAvoidProjectiles : Missions
             randomURDL = (sbyte)Random.Range(0, 4);
         }
 
-        print("random" + randomURDL);
     }
 
     void RandonQuantProjectiles()
