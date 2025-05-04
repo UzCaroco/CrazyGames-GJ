@@ -25,9 +25,9 @@ public class SunController : NetworkBehaviour
     [SerializeField] private GameObject painelText;
     [SerializeField] private TextMeshProUGUI textPainel;
 
-    private string[] taskSunSays = new string[2] { "Sun Says: \r\n", "Sun Don't Says: \r\n"};
+    private string[] taskSunSays = new string[2] { "Sun Says:\r\n", "Sun Don't Says:\r\n"};
     private string[] nameTheMission = new string[7] { "Avoid The Projectiles", "Collect a Coin", "Copy the Movement", "Don't Move" , "Move" /*, "Push a Rival" */, "Stay Away From the Bomb" , "Go to the Square"};
-    [Networked] public string Message { get; set; }
+    public string message;
 
     [SerializeField] private SunSaysUi sharedUITextInstance;
 
@@ -164,8 +164,7 @@ public class SunController : NetworkBehaviour
                 timerMission.InitializeTimeToGet(timerForStartTheMission[index], timeCompleteMission[index], this);
 
                 painelText.SetActive(true);
-
-                sharedUITextInstance.SetMessage($"{taskSunSays[0]} + {nameTheMission[index]}");
+                message = taskSunSays[0] + nameTheMission[index];
                 /*foreach (var player in runner.ActivePlayers)
                 {
                     if (player != null)
@@ -179,10 +178,13 @@ public class SunController : NetworkBehaviour
                     }
                 }*/
 
+                //sharedUITextInstance.SetMessage(message);
+                sharedUITextInstance.SetMessage(taskSunSays[0] + nameTheMission[index]);
                 //textPainel.text = (taskSunSays[0] + nameTheMission[index]).ToString();
                 Debug.Log(taskSunSays[0] + nameTheMission[index]);
             }
         }
+
     }
     void ActiveTheMission()
     {

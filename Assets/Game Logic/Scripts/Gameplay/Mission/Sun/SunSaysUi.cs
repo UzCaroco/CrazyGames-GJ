@@ -14,7 +14,7 @@ public class SunSaysUi : NetworkBehaviour
         // Sempre atualiza o texto na UI com a versão de rede
         if (textPainel != null)
         {
-            textPainel.text = Message;
+            textPainel.text = Message.ToString();
         }
     }
 
