@@ -228,8 +228,6 @@ public class PlayerController : NetworkBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("MOEDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-
         if (collision.CompareTag("Coin"))
         {
             Debug.Log("MOEDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");

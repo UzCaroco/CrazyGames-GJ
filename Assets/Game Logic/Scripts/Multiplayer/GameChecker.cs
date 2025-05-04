@@ -54,7 +54,6 @@ public class GameChecker : NetworkBehaviour
     public void CheckPlayersInTheEndOfMission(sbyte mission)
     {
         Debug.Log("Verificando os jogadores no final da missão: " + mission);
-        Debug.Log("Total de jogadores na lista: " + playerCheckers.Count);
 
         if (mission == 0 || mission == 3 || mission == 4 || mission == 5 || mission == 6)
         {
@@ -71,7 +70,6 @@ public class GameChecker : NetworkBehaviour
 
 
         runner = FindObjectOfType<NetworkRunner>(); //Pega o NetworkRunner na cena
-        Debug.Log(runner + "EXISTE");
         Debug.Log("Quantidade de players ativos: " + runner.ActivePlayers.Count());
 
 
@@ -115,8 +113,6 @@ public class GameChecker : NetworkBehaviour
 
     private void AddEqualScores(sbyte mission)
     {
-        Debug.Log($"Verificando os jogadores {playerCheckers[0]} e {playerCheckers[1]} na missão 7");
-
         foreach (PlayerChecker playerChecker in playerCheckers)
         {
             if (playerChecker.playerController != null)
@@ -128,7 +124,7 @@ public class GameChecker : NetworkBehaviour
                 switch (mission)
                 {
                     case 0:
-                        if (playerChecker.MissionProjectile(false))
+                        if (playerChecker.MissionProjectile(false)) //falso é igual a não colidir
                         {
                             Debug.Log("Player " + playerChecker + " completed the mission!");
                             playerScores.Add(playerRef, 600);
@@ -205,7 +201,11 @@ public class GameChecker : NetworkBehaviour
 
         foreach (KeyValuePair<PlayerRef, int> player in playersSequence)
         {
-            if (player.Value == 1)
+            if (player.Value == 0)
+            {
+                playerScores.Add(player.Key, 1);
+            }
+            else if (player.Value == 1)
             {
                 playerScores.Add(player.Key, 1);
             }
@@ -213,11 +213,7 @@ public class GameChecker : NetworkBehaviour
             {
                 playerScores.Add(player.Key, 1);
             }
-            else if (player.Value == 3)
-            {
-                playerScores.Add(player.Key, 1);
-            }
-            else if (player.Value > 3)
+            else if (player.Value > 2)
             {
                 playerScores.Add(player.Key, 1);
             }

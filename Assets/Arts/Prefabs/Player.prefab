@@ -183,16 +183,19 @@ MonoBehaviour:
     m_Bits: 32
   speed: 5
   timeToCopyTheMovements: 0
+  dontMove: 0
+  move: 0
+  moveu: 0
   copyThisMovement: 00000000
   listCopyThisMovement: 
-  missionProjectile: 1
-  missionCollectCoin: 1
-  missionCopyMoviment: 1
-  missionDontMove: 1
-  missionMove: 1
-  missionPushRival: 1
-  missionBomb: 1
-  missionStaySquare: 1
+  missionProjectile: 0
+  missionCollectCoin: 0
+  missionCopyMoviment: 0
+  missionDontMove: 0
+  missionMove: 0
+  missionPushRival: 0
+  missionBomb: 0
+  missionStaySquare: 0
 --- !u!70 &5616251057289849434
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
