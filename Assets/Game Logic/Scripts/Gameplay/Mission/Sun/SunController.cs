@@ -81,22 +81,24 @@ public class SunController : NetworkBehaviour
     #region GetComponents
     void Awake()
     {
-        timerMission = GetComponent<TimerMission>(); // Get the TimerMission component attached to the same GameObject
-        
-        mission[0] = GetComponentInChildren<MissionAvoidProjectiles>();
-        mission[1] = GetComponentInChildren<MissionCollectCoin>();
-        mission[2] = GetComponentInChildren<MissionCopyMovement>();
-        mission[3] = GetComponentInChildren<MissionDontMove>();
-        mission[4] = GetComponentInChildren<MissionMove>();
-        //mission[5] = GetComponentInChildren<MissionPushRival>();
-        mission[5] = GetComponentInChildren<MissionStayAwayBomb>();
-        mission[6] = GetComponentInChildren<MissionStaySquare>();
+        if (HasStateAuthority)
+        {
+            timerMission = GetComponent<TimerMission>(); // Get the TimerMission component attached to the same GameObject
 
-        sharedUITextInstance = FindObjectOfType<SunSaysUi>();
-        runner = FindObjectOfType<NetworkRunner>();
+            mission[0] = GetComponentInChildren<MissionAvoidProjectiles>();
+            mission[1] = GetComponentInChildren<MissionCollectCoin>();
+            mission[2] = GetComponentInChildren<MissionCopyMovement>();
+            mission[3] = GetComponentInChildren<MissionDontMove>();
+            mission[4] = GetComponentInChildren<MissionMove>();
+            //mission[5] = GetComponentInChildren<MissionPushRival>();
+            mission[5] = GetComponentInChildren<MissionStayAwayBomb>();
+            mission[6] = GetComponentInChildren<MissionStaySquare>();
 
-        //missionStayAwayBomb = GetComponentInChildren<MissionStayAwayBomb>();
-       
+            sharedUITextInstance = FindObjectOfType<SunSaysUi>();
+            runner = FindObjectOfType<NetworkRunner>();
+
+            //missionStayAwayBomb = GetComponentInChildren<MissionStayAwayBomb>();
+        }
     }
 
     #endregion GetComponent
@@ -110,17 +112,19 @@ public class SunController : NetworkBehaviour
 
     public override void Spawned()
     {
-        base.Spawned();
-
-        for (int i = 0; i < mission.Length; i++)
+        if (HasStateAuthority)
         {
-            mission[i].enabled = false;
+            base.Spawned();
+
+            for (int i = 0; i < mission.Length; i++)
+            {
+                mission[i].enabled = false;
+            }
+
+            print("Beginning the draw");
+
+            Invoke("Draw", 5f); // Só chame aqui, após o Spawned
         }
-
-        print("Beginning the draw");
-
-        Invoke("Draw", 5f); // Só chame aqui, após o Spawned
-
     }
 
     public override void FixedUpdateNetwork()

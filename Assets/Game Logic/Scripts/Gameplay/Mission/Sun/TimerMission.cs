@@ -27,18 +27,20 @@ public class TimerMission : NetworkBehaviour
 
     public override void Spawned()
     {
+        if (HasStateAuthority)
         sunController = FindAnyObjectByType<SunController>();
     }
     public override void FixedUpdateNetwork()
     {
-        StartTimerToWait();
-        StartTimerToComplete();
+        if (HasStateAuthority)
+        { 
+            StartTimerToWait();
+            StartTimerToComplete();
+        }
     }
 
     void StartTimerToWait()
     {
-        if (HasStateAuthority)
-        {
             if (timeToWaitTheMission <= 0 && isTimerActiveToStart)
             {
                 isTimerActiveToComplete = true;
@@ -54,12 +56,12 @@ public class TimerMission : NetworkBehaviour
             {
                 isTimerActiveToStart = true;
             }
-        }
     }
 
 
     void StartTimerToComplete()
     {
+
         if (timerToCompleteThMission <= 0 && isTimerActiveToComplete)
         {
             isTimerActiveToComplete = false; // Disable the script when the timer is complete
