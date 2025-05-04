@@ -8,7 +8,7 @@ using System.Linq;
 public class PlayerController : NetworkBehaviour
 {
     //public GameObject cameraRoot;
-
+    Animator animPlayer;
     private Vector2 moveInput;
     public LayerMask collisionLayers; // Define no Inspector os layers que vai colidir
 
@@ -43,6 +43,7 @@ public class PlayerController : NetworkBehaviour
 
         playerInput = new PlayerInputs();
         col = GetComponent<Collider2D>();
+        animPlayer = GetComponent<Animator>();
 
     }
 
@@ -100,7 +101,7 @@ public class PlayerController : NetworkBehaviour
         if (moveDelta != Vector2.zero)
         {
             RaycastHit2D hit = Physics2D.BoxCast(transform.position, col.bounds.size, 0f, moveDelta.normalized, moveDelta.magnitude, collisionLayers);
-
+            animPlayer.SetBool("isWalking", true);
 
 
             if (!hit)
@@ -111,6 +112,10 @@ public class PlayerController : NetworkBehaviour
             {
                 // Opcional: pode fazer algo quando colidir, tipo logar
             }
+        }
+        else
+        {
+            animPlayer.SetBool("isWalking", false);
         }
 
         if (timeToCopyTheMovements)
