@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class RandomSkinAnimator : NetworkBehaviour
 {
-    int PlayerSpawn = 1;
+    [SerializeField] int PlayerSpawn = 0;
     [Networked] int numRandom { get; set; }
 
-    List<int> numeros = new List<int>() ;
+    [SerializeField]List<int> numeros = new List<int>();
     int minPlayer = 0;
     int maxPlayer = 8;
 
@@ -26,11 +26,17 @@ public class RandomSkinAnimator : NetworkBehaviour
                 numeros.Add(numeroAleatorio);
             }
         }
+
+        foreach (int numero in numeros) 
+            {
+                    Debug.Log(numero);
+
+            }
     }
     public void PlayerIsSpawned()
     {
         numRandom = numeros[PlayerSpawn];
-
+        Debug.Log(numeros[PlayerSpawn] + " " + numRandom);
         if (PlayerSpawn < 7) 
             PlayerSpawn++;
     }
