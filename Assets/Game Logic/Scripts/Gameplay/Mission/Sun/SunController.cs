@@ -85,13 +85,8 @@ public class SunController : NetworkBehaviour
         runner = FindObjectOfType<NetworkRunner>();
 
         //missionStayAwayBomb = GetComponentInChildren<MissionStayAwayBomb>();
-        if (Object.HasInputAuthority)
-        {
-            local = this;
-        }
+       
     }
-
-
 
     #endregion GetComponent
 
@@ -109,6 +104,7 @@ public class SunController : NetworkBehaviour
 
         print("Beginning the draw");
         Invoke("Draw", 5f);
+
     }
 
     // Update is called once per frame
@@ -224,6 +220,8 @@ public class SunController : NetworkBehaviour
                     }
                 }*/
 
+                ApplyUI(taskSunSays[0] + nameTheMission[index]);
+                OnTextChanged();
                 //sharedUITextInstance.SetMessage(message);
                 //sharedUITextInstance.SetMessage(taskSunSays[0] + nameTheMission[index]);
                 //textPainel.text = (taskSunSays[0] + nameTheMission[index]).ToString();
