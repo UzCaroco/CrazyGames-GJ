@@ -7,12 +7,11 @@ public class PlayerSpawner : SimulationBehaviour, IPlayerJoined
 {
     RandomSkinAnimator randomSkin;
 
-
     [SerializeField] private GameObject sunControllerPrefab;
     NetworkObject gameManager;
     
     Animator anim;
-    AnimatorOverrideController[] animatorOverrideController;
+    [SerializeField] AnimatorOverrideController[] animatorOverrideController;
     int idex;
 
     public GameObject playerPrefab;
@@ -28,8 +27,8 @@ public class PlayerSpawner : SimulationBehaviour, IPlayerJoined
 
         if (player == Runner.LocalPlayer) // ou Runner.IsServer se tiver usando Server/Client
         {
-            //randomSkin.PlayerIsSpawned();
-            //anim = animatorOverrideController[randomSkin.SetNumRandom()];
+            randomSkin.PlayerIsSpawned();
+            anim.runtimeAnimatorController = animatorOverrideController[randomSkin.SetNumRandom()];
             /*print("TA O QUE" + gameManager);
 
 

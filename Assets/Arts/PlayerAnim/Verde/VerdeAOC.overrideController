@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: VerdeAOC
+  m_Controller: {fileID: 9100000, guid: 22b8e4b2bac546a4e9bef28771c6b7bf, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 8372ab8b39d935c4495a74b9a6331e63, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 85759b03b9b772a49a08e6b21c0b0c5e, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 8332ffa820ac2de4893aef04349711c3, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5a4b24e9330270b408136ad725b26669, type: 2}

@@ -9,7 +9,7 @@ AnimatorOverrideController:
   m_Name: AmareloAOC
   m_Controller: {fileID: 9100000, guid: 22b8e4b2bac546a4e9bef28771c6b7bf, type: 2}
   m_Clips:
-  - m_OriginalClip: {fileID: 7400000, guid: 3fee19ebc761a7841a80603c0cc3bcb2, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 3fee19ebc761a7841a80603c0cc3bcb2, type: 2}
-  - m_OriginalClip: {fileID: 7400000, guid: 7238eb54e00e1fd44a91cbc87517fe4e, type: 2}
-    m_OverrideClip: {fileID: 7400000, guid: 7238eb54e00e1fd44a91cbc87517fe4e, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 8372ab8b39d935c4495a74b9a6331e63, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 58aab1bc0803c7f45bb0755edf3cb954, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 8332ffa820ac2de4893aef04349711c3, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 2e157d0d397d6104f9961ab8a9720be6, type: 2}
