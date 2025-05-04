@@ -59,10 +59,15 @@ public class SunController : NetworkBehaviour
 
     int randomNumber = -1; // Variable to store the random number
     int random = -1;
-    [SerializeField] private float[] timerForStartTheMission = new float[7]; // Array to store time for each mission
+
+    [Networked] private float startMission { get; set; }
+    [Networked] private float completeMission { get; set; }
+
+    [SerializeField] private float[] timerForStartTheMission  = new float[7]; // Array to store time for each mission
     [SerializeField] private float[] timeCompleteMission = new float[7]; // Array to store time for each mission
 
-    [SerializeField] private bool isFinishWait, isFinishMission;
+    [Networked][SerializeField] private bool isFinishMission{ get; set; }
+    [Networked][SerializeField] private bool isFinishWait { get; set; }
 
     /// <summary>
     /// Beginning
@@ -115,18 +120,16 @@ public class SunController : NetworkBehaviour
         print("Beginning the draw");
 
         Invoke("Draw", 5f); // Só chame aqui, após o Spawned
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        ActiveTheMission();
-        DesactiveMission();
     }
 
     public override void FixedUpdateNetwork()
     {
-        //GetSomeStats();
+        if (HasStateAuthority)
+        {
+            ActiveTheMission();
+            DesactiveMission();
+        }
     }
     #region CanvaText
     
@@ -153,17 +156,21 @@ public class SunController : NetworkBehaviour
     #region Draw
     void Draw()
     {
-        while (random == randomNumber)
+        if (HasStateAuthority)
         {
-            random = Random.Range(0, 7); // Generate a random number between 0 and 9
-            rand = Random.Range(0, 7);
+            while (random == randomNumber)
+            {
+                random = Random.Range(0, 7); // Generate a random number between 0 and 9
+                rand = Random.Range(0, 7);
+            }
+
+            randomNum = rand;
+            //Debug.Log("OIEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE AQUI O RANDOM É:" + randomNum);
+
+            randomNumber = random;
+            SetupTM();
         }
-
-        randomNum = rand;
-        //Debug.Log("OIEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE AQUI O RANDOM É:" + randomNum);
-
-        randomNumber = random;
-        SetupTM();
+        
     }
 #endregion Draw
 
@@ -172,9 +179,11 @@ public class SunController : NetworkBehaviour
     {
         for(byte index = 0; index < timerForStartTheMission.Length; index++)
         {
-            if (index == randomNumber){
+            if (index == randomNumber && HasStateAuthority){
+                startMission = timerForStartTheMission[index];
+                completeMission = timeCompleteMission[index];
 
-                timerMission.InitializeTimeToGet(timerForStartTheMission[index], timeCompleteMission[index], this);
+                timerMission.InitializeTimeToGet(startMission, completeMission, this);
 
                 painelText.SetActive(true);
                 messageS = taskSunSays[0];

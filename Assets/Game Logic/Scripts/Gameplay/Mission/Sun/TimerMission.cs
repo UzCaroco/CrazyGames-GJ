@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using Fusion;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -7,22 +8,28 @@ using UnityEngine;
 public class TimerMission : NetworkBehaviour
 {
     private SunController sunController;
-    [SerializeField] private float timeToWaitTheMission = 0 ; // Time to wait in seconds
-    [SerializeField] private float timerToCompleteThMission = 0;
+    [Networked][SerializeField] private float timeToWaitTheMission { get; set; } = 0; // Time to wait in seconds
+    [Networked][SerializeField] private float timerToCompleteThMission { get; set; } = 0;
 
-    [SerializeField] private bool isTimerActiveToStart = false, isTimerActiveToComplete = false; // Flag to check if the timer is active
+    [Networked][SerializeField] private bool isTimerActiveToStart { get; set; } = false;
+    [Networked][SerializeField] private bool isTimerActiveToComplete { get; set; } = false; // Flag to check if the timer is active
 
     // Start is called before the first frame update
     void Start()
     {
-        sunController = FindAnyObjectByType<SunController>();
+       // sunController = FindAnyObjectByType<SunController>();
     }
 
     // Update is called once per frame
     void Update()
     {
     }
-    private void FixedUpdate()
+
+    public override void Spawned()
+    {
+        sunController = FindAnyObjectByType<SunController>();
+    }
+    public override void FixedUpdateNetwork()
     {
         StartTimerToWait();
         StartTimerToComplete();
@@ -30,22 +37,27 @@ public class TimerMission : NetworkBehaviour
 
     void StartTimerToWait()
     {
-        if (timeToWaitTheMission <= 0  && isTimerActiveToStart)
+        if (HasStateAuthority)
         {
-            isTimerActiveToComplete = true;
-            isTimerActiveToStart = false; // Disable the script when the timer is complete
+            if (timeToWaitTheMission <= 0 && isTimerActiveToStart)
+            {
+                isTimerActiveToComplete = true;
+                isTimerActiveToStart = false; // Disable the script when the timer is complete
 
-            sunController.SetupBegin(true);
-        }
-        else if (isTimerActiveToStart && timeToWaitTheMission > 0)
-        { 
-            timeToWaitTheMission -= Time.unscaledDeltaTime; 
-        }
-        else if (!isTimerActiveToStart && timeToWaitTheMission > 0){
-            isTimerActiveToStart = true;
+                sunController.SetupBegin(true);
+            }
+            else if (isTimerActiveToStart && timeToWaitTheMission > 0)
+            {
+                timeToWaitTheMission -= Runner.DeltaTime;
+            }
+            else if (!isTimerActiveToStart && timeToWaitTheMission > 0)
+            {
+                isTimerActiveToStart = true;
+            }
         }
     }
-    
+
+
     void StartTimerToComplete()
     {
         if (timerToCompleteThMission <= 0 && isTimerActiveToComplete)
@@ -56,7 +68,7 @@ public class TimerMission : NetworkBehaviour
         }
         else if (isTimerActiveToComplete && timerToCompleteThMission > 0)
         {
-            timerToCompleteThMission -= Time.unscaledDeltaTime; 
+            timerToCompleteThMission -= Runner.DeltaTime;
         } 
     }
 

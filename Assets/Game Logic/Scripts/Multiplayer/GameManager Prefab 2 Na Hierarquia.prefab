@@ -1280,8 +1280,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca8904f146d81a84bbfc7506b5461069, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToWaitTheMission: 0
-  timerToCompleteThMission: 0
+  _timeToWaitTheMission: 0
+  _timerToCompleteThMission: 0
   isTimerActiveToStart: 0
   isTimerActiveToComplete: 0
 --- !u!114 &8894191357013397404
@@ -1312,7 +1312,6 @@ MonoBehaviour:
   - 3
   - 3
   timeCompleteMission:
-  - 20
   - 20
   - 20
   - 20
