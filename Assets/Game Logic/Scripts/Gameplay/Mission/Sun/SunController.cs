@@ -92,10 +92,6 @@ public class SunController : NetworkBehaviour
 
     #endregion GetComponent
 
-
-    
-
-
     // Start is called before the first frame update
     void Start()
     {
@@ -253,8 +249,6 @@ public class SunController : NetworkBehaviour
 
             isFinishMission = false;
             mission[randomNumber].enabled = false;
-
-            
 
             Draw();
         }

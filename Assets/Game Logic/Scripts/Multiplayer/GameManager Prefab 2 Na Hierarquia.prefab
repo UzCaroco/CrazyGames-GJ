@@ -1303,12 +1303,12 @@ MonoBehaviour:
   messageS: 
   messageM: 
   timerForStartTheMission:
-  - 2
-  - 6
-  - 7
-  - 1
-  - 5
-  - 8
+  - 3
+  - 3
+  - 3
+  - 3
+  - 3
+  - 3
   - 3
   - 3
   timeCompleteMission:

@@ -39690,27 +39690,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8894191357013397404, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: timerForStartTheMission.Array.data[1]
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8894191357013397404, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: timerForStartTheMission.Array.data[2]
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8894191357013397404, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: timerForStartTheMission.Array.data[3]
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8894191357013397404, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: timerForStartTheMission.Array.data[4]
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8894191357013397404, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: timerForStartTheMission.Array.data[5]
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8894191357013397404, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: timerForStartTheMission.Array.data[6]
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8894191357013397404, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: timerForStartTheMission.Array.data[7]
