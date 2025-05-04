@@ -17,7 +17,8 @@ public class SunController : NetworkBehaviour
 
     // Text Mission por jogador
     
-    [SerializeField] private TextMeshProUGUI textPainel;
+    [SerializeField] private TextMeshProUGUI textSays;
+    [SerializeField] private TextMeshProUGUI textMission;
 
     //[Networked(OnChanged = nameof(OnTextChanged))]
     private NetworkString<_256> playerTextSee { get; set; }   
@@ -32,7 +33,8 @@ public class SunController : NetworkBehaviour
 
     private string[] taskSunSays = new string[2] { "Sun Says:\n", "Sun Don't Says:\n"};
     private string[] nameTheMission = new string[7] { "Avoid The Projectiles", "Collect a Coin", "Copy the Movement", "Don't Move" , "Move" /*, "Push a Rival" */, "Stay Away From the Bomb" , "Go to the Square"};
-    public string message;
+    public string messageS;
+    public string messageM;
 
 
     private TimerMission timerMission; // Reference to the TimerMission script
@@ -168,22 +170,23 @@ public class SunController : NetworkBehaviour
         textPainel.text = playerTextSee.ToString();
     }*/
 
-    public void ApplyUI(string text)
+    public void ApplyUI(string textS, string textM)
     {
-        RPC_UpdateUIText(text);
+        RPC_UpdateUIText(textS, textM);
     }
 
 
     [Rpc(RpcSources.StateAuthority, RpcTargets.All)]
-    void RPC_UpdateUIText(string text, RpcInfo info = default)
+    void RPC_UpdateUIText(string textS, string textM,  RpcInfo info = default)
     {
         Debug.Log($"[RPC] RPX_ApllayText {playerTextSee}");
-        playerTextSee = text;
-        textPainel.text = text;
+        playerTextSee = textS + textM;
+        textSays.text = textS.ToString();
+        textMission.text = textM.ToString();
 
         if (sharedUITextInstance != null)
         {
-            sharedUITextInstance.SetMessage(text);
+            sharedUITextInstance.SetMessage(textS, textM);
         }
     }
 
@@ -194,7 +197,7 @@ public class SunController : NetworkBehaviour
     {
         while (random == randomNumber)
         {
-            random = Random.Range(5, 7); // Generate a random number between 0 and 9
+            random = Random.Range(0, 2); // Generate a random number between 0 and 9
         }
         
         randomNumber = random;
@@ -212,21 +215,9 @@ public class SunController : NetworkBehaviour
                 timerMission.InitializeTimeToGet(timerForStartTheMission[index], timeCompleteMission[index], this);
 
                 painelText.SetActive(true);
-                message = taskSunSays[0] + nameTheMission[index];
-                /*foreach (var player in runner.ActivePlayers)
-                {
-                    if (player != null)
-                    {
-                        PlayerRef playerRefs = Object.InputAuthority;
-                                
-                        if (playerRefs != null)
-                        {
-                            RPC_SeeTextMission(playerRefs, taskSunSays[0] + nameTheMission[index]);
-                        }
-                    }
-                }*/
-
-                ApplyUI(taskSunSays[0] + nameTheMission[index]);
+                messageS = taskSunSays[0];
+                messageM = nameTheMission[index];
+                ApplyUI(messageS, messageM);
 
                 //OnTextChanged();
 

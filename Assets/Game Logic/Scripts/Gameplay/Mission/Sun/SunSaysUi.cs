@@ -7,26 +7,25 @@ using UnityEngine;
 
 public class SunSaysUi : NetworkBehaviour
 {
-    [Networked] public string Message { get; set; }
+    [Networked] public string MessageS { get; set; }
+    [Networked] public string MessageM { get; set; }
     [SerializeField] private TextMeshProUGUI textPainel;
 
     
-    public override void Render()
+    /*public override void Render()
     {
         // Sempre atualiza o texto na UI com a versão de rede
         if (textPainel != null)
         {
             textPainel.text = Message.ToString();
         }
-    }
+    }*/
 
-    public void SetMessage(string newMessage)
+    public void SetMessage(string newMessageS, string newMessagesM)
     {
-        if (HasStateAuthority)
-        {
-            Debug.Log("SunController Has Authotity");
-            Message = newMessage;
-        }
+        Debug.Log("SunController Has Authotity");
+        MessageS = newMessageS;
+        MessageM = newMessagesM;
     }
     
 
