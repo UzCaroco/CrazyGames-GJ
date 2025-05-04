@@ -5,6 +5,7 @@ using System.Threading;
 using CrazyGames;
 using Fusion;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SunController : NetworkBehaviour
@@ -84,6 +85,10 @@ public class SunController : NetworkBehaviour
         runner = FindObjectOfType<NetworkRunner>();
 
         //missionStayAwayBomb = GetComponentInChildren<MissionStayAwayBomb>();
+        if (Object.HasInputAuthority)
+        {
+            local = this;
+        }
     }
 
 
@@ -113,6 +118,10 @@ public class SunController : NetworkBehaviour
         DesactiveMission();
     }
 
+    public override void FixedUpdateNetwork()
+    {
+        //GetSomeStats();
+    }
     #region CanvaText
     //[Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
     /* public void RPC_SeeTextMission(PlayerRef player, string text)
@@ -141,6 +150,7 @@ public class SunController : NetworkBehaviour
          }
      }*/
     
+    
     /*void GetSomeStats()
     {
         if(Object.HasInputAuthority && sharedUITextInstance != null)
@@ -148,16 +158,16 @@ public class SunController : NetworkBehaviour
             sharedUITextInstance.SetConnectionType(runner.CurrentConnectionType.ToString());
             sharedUITextInstance.SetRtt($"RTT {Mathf.RoundToInt((float)runner.GetPlayerRtt(Object.InputAuthority) * 100)} ms");
         }
-    }
+    }*/
 
-    static void OnTextChanged(Changed<SunController> changed)
+    /*static void OnTextChanged(Changed<SunController> changed)
     {
         changed.Behaviour.OnTextChanged();
-    }
+    }*/
 
     void OnTextChanged()
     {
-        Utils.DebugLog($"Text Sun Chaged to {playerTextSee}");
+        Debug.Log($"Text Sun Chaged to {playerTextSee}");
 
         textPainel.text = playerTextSee.ToString();
     }
@@ -166,14 +176,15 @@ public class SunController : NetworkBehaviour
     {
         RPC_ApplyText(playerTextSee);
     }
-   
+
 
     [Rpc(RpcSources.InputAuthority, RpcTargets.StateAuthority)]
     void RPC_ApplyText(string text, RpcInfo info = default)
     {
-        Utils.DebugLog($"[RPC] RPX_ApllayText {playerTextSee}");
+        Debug.Log($"[RPC] RPX_ApllayText {playerTextSee}");
         this.playerTextSee = text;
-    */
+    }
+
     #endregion CanvaText
 
     #region Draw
@@ -181,7 +192,7 @@ public class SunController : NetworkBehaviour
     {
         while (random == randomNumber)
         {
-            random = Random.Range(2, 4); // Generate a random number between 0 and 9
+            random = Random.Range(4, 6); // Generate a random number between 0 and 9
         }
         
         randomNumber = random;
@@ -214,7 +225,7 @@ public class SunController : NetworkBehaviour
                 }*/
 
                 //sharedUITextInstance.SetMessage(message);
-                sharedUITextInstance.SetMessage(taskSunSays[0] + nameTheMission[index]);
+                //sharedUITextInstance.SetMessage(taskSunSays[0] + nameTheMission[index]);
                 //textPainel.text = (taskSunSays[0] + nameTheMission[index]).ToString();
                 Debug.Log(taskSunSays[0] + nameTheMission[index]);
             }

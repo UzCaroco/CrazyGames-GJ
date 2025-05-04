@@ -10,7 +10,7 @@ public class SunSaysUi : NetworkBehaviour
     [Networked] public string Message { get; set; }
     [SerializeField] private TextMeshProUGUI textPainel;
 
-    
+    /*
     public override void Render()
     {
         // Sempre atualiza o texto na UI com a versão de rede
@@ -28,8 +28,9 @@ public class SunSaysUi : NetworkBehaviour
             Message = newMessage;
         }
     }
-    
+    */
 
+    
     /*public void SetConnectionType(string type)
     {
         connectionTypeText.text = $"Coonnection type: {type}";
@@ -42,7 +43,10 @@ public class SunSaysUi : NetworkBehaviour
 
     public void OnApplyInGame()
     {
-        Utils.DebugLog()
+        Debug.Log("OnApplyGame clicked");
+
+        SunController.local.ApplyUI(nameInputField.text);
     }
+   
     */
 }
