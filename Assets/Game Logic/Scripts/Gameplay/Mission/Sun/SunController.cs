@@ -130,6 +130,7 @@ public class SunController : NetworkBehaviour
     //[Rpc(RpcSources.StateAuthority, RpcTargets.All)]
     void RPC_UpdateUIText(string textS, string textM,  RpcInfo info = default)
     {
+        Debug.Log($"[Fusion RPC] RANDOM É:{randomNum}");
         Debug.Log($"[RPC] RPX_ApllayText {playerTextSee}");
         playerTextSee = textS + textM;
         textSays.text = textS.ToString();
@@ -149,7 +150,7 @@ public class SunController : NetworkBehaviour
         }
 
         randomNum = rand;
-        Debug.Log("OIEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE AQUI O RANDOM É:" + randomNum);
+        //Debug.Log("OIEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE AQUI O RANDOM É:" + randomNum);
 
         randomNumber = random;
         SetupTM();
