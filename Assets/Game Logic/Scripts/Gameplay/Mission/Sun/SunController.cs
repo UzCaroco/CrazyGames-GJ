@@ -20,7 +20,8 @@ public class SunController : NetworkBehaviour
     [Networked, Capacity(10)]
     private NetworkDictionary<PlayerRef, string> playerTextSee { get; } = default;
     
-    private PlayerRef playerTextSunSays;
+
+    private PlayerRef playerTextSunSays; 
 
     [SerializeField] private GameObject painelText;
     [SerializeField] private TextMeshProUGUI textPainel;
@@ -75,7 +76,7 @@ public class SunController : NetworkBehaviour
         mission[5] = GetComponentInChildren<MissionStayAwayBomb>();
         mission[6] = GetComponentInChildren<MissionStaySquare>();
 
-        
+        runner = FindObjectOfType<NetworkRunner>();
 
         //missionStayAwayBomb = GetComponentInChildren<MissionStayAwayBomb>();
     }
@@ -113,11 +114,8 @@ public class SunController : NetworkBehaviour
     {
         if (!HasStateAuthority) return;
 
-        if (!playerTextSee.TryGet(player, out string currentText))
-            currentText = taskSunSays[0] + nameTheMission[randomNumber];
-
-        playerTextSee.Set(player, currentText);
-        Debug.Log($"O texto é agora {currentText}");
+        playerTextSee.Set(player, text);
+        Debug.Log($"O texto é agora {text}");
 
         // Atualiza todos os clientes
         RPC_UpdateTextMission();
