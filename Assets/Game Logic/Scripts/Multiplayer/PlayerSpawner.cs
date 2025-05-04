@@ -23,7 +23,7 @@ public class PlayerSpawner : SimulationBehaviour, IPlayerJoined
 
         if (player == Runner.LocalPlayer) // ou Runner.IsServer se tiver usando Server/Client
         {
-            print("TA O QUE" + gameManager);
+            /*print("TA O QUE" + gameManager);
 
 
             if (gameManager == null)
@@ -32,7 +32,7 @@ public class PlayerSpawner : SimulationBehaviour, IPlayerJoined
                 gameManager = runner.Spawn(sunControllerPrefab, Vector3.zero, Quaternion.identity, inputAuthority: null);
             }
 
-            print("TA O QUE"+gameManager);
+            print("TA O QUE"+gameManager);*/
 
             NetworkObject playerObj = Runner.Spawn(playerPrefab, Vector3.zero, Quaternion.identity, inputAuthority: player);
             Runner.SetPlayerObject(player, playerObj);
