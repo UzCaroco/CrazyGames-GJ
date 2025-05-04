@@ -134,10 +134,11 @@ public class PlayerController : NetworkBehaviour
 
         if (move)
         {
-            if (moveInput != Vector2.zero)
+            if (moveInput != Vector2.zero && !moveu)
             {
                 moveu = true; // Se o jogador se mover, a missão de não se mover falha
                 missionMove = true; // Se o jogador se mover, a missão de não se mover falha
+                Debug.Log("Moveu: " + missionMove);
             }
         }
 
