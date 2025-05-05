@@ -30,7 +30,9 @@ public class SunController : NetworkBehaviour
     //SunSaysUi uiSun;
     //private PlayerRef playerTextSunSays; 
 
-    //[SerializeField] private NetworkObject painelText;
+    [SerializeField] private GameObject TextS;
+    [SerializeField] private GameObject TextM;
+
     [SerializeField] private NetworkObject TextSays;
     [SerializeField] private NetworkObject TextMission;
 
@@ -197,17 +199,18 @@ public class SunController : NetworkBehaviour
                 completeMission = timeCompleteMission[index];
 
                 timerMission.InitializeTimeToGet(startMission, completeMission, this);
-                /*
-                //painelText.enabled = true; 
-                if (HasStateAuthority) // Só ativa a câmera do jogador local
+
+                TextS.SetActive(true);
+                TextM.SetActive(true);
+                /*if (HasStateAuthority) // Só ativa a câmera do jogador local
                 {
                     TextMeshProUGUI textS = TextSays.GetComponent<TextMeshProUGUI>(); // true = busca em objetos inativos;
                     textS.enabled = true;
                     TextMeshProUGUI textM = TextMission.GetComponent<TextMeshProUGUI>(); // true = busca em objetos inativos;
                     textM.enabled = true;
                 }*/
-               // TextSays.enabled = true;
-               // TextMission.enabled = true;
+                // TextSays.enabled = true;
+                // TextMission.enabled = true;
 
                 messageS = taskSunSays[0];
                 messageM = nameTheMission[index];
@@ -238,6 +241,8 @@ public class SunController : NetworkBehaviour
     {
         if (isFinishWait)
         {
+            TextS.SetActive(false);
+            TextM.SetActive(false);
             /*
             //painelText.enabled = false;
 

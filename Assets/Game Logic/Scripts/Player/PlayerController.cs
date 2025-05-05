@@ -77,7 +77,7 @@ public class PlayerController : NetworkBehaviour
         {
             Camera cam = GetComponentInChildren<Camera>(true); // true = busca em objetos inativos
             //Debug.Log("Camera: " + cam);
-            camPlayer = cam;
+            camPlayer = GetComponentInChildren<Camera>(true);
             cam.enabled = true;
         }
     }
@@ -156,6 +156,8 @@ public class PlayerController : NetworkBehaviour
                 transform.position = CurrentPos;
                 camPlayer.enabled = true;
                 SunController = null;
+
+                Debug.Log("FInalizou respawnando: " + missionMove);
             }
         }
     }

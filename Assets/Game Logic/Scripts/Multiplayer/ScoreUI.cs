@@ -56,7 +56,8 @@ public class ScoreUI : MonoBehaviour
 
     public void UpdateMissionUI(string mission)
     {
-        missionText.text = $"Missão: {mission}";
+        missionText.text = mission;
+        //missionText.text = $"Missão: {mission}";
     }
 
 }

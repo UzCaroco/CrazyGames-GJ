@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &56068011 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5666553019233820535, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+  m_PrefabInstance: {fileID: 1767128026}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &97786075
 GameObject:
   m_ObjectHideFlags: 0
@@ -26576,7 +26581,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3895241761481777043, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
   m_PrefabInstance: {fileID: 1767128026}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1356393612}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -39209,26 +39214,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textSays: {fileID: 1750806130}
   textMission: {fileID: 1784076169}
+  TextS: {fileID: 56068011}
+  TextM: {fileID: 1356393612}
   TextSays: {fileID: 0}
   TextMission: {fileID: 0}
   messageS: 
   messageM: 
   timerForStartTheMission:
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
-  - 3
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
+  - 2
   timeCompleteMission:
   - 20
-  - 20
-  - 20
-  - 20
-  - 20
-  - 20
-  - 20
+  - 15
+  - 15
+  - 5
+  - 5
+  - 17
+  - 15
   _isFinishMission: 0
   _isFinishWait: 0
 --- !u!114 &1103647773
@@ -39385,6 +39392,11 @@ BoxCollider2D:
 --- !u!1 &1318254321 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3108194950587201866, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+  m_PrefabInstance: {fileID: 1767128026}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1356393612 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3622892200056558833, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
   m_PrefabInstance: {fileID: 1767128026}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1675196869
@@ -39820,6 +39832,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.9568628
       objectReference: {fileID: 0}
+    - target: {fileID: 3622892200056558833, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3695284744361588157, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: CoinPrefab
       value: 
@@ -39924,6 +39940,10 @@ PrefabInstance:
       propertyPath: NetworkedBehaviours.Array.data[2]
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5666553019233820535, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6528084104354241003, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: SortKey
       value: 1816470840
@@ -39959,6 +39979,14 @@ PrefabInstance:
     - target: {fileID: 7444054663129259651, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: m_Enabled
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8119088447134508170, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -762
+      objectReference: {fileID: 0}
+    - target: {fileID: 8119088447134508170, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -180
       objectReference: {fileID: 0}
     - target: {fileID: 8635712204153360074, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: m_IsActive
