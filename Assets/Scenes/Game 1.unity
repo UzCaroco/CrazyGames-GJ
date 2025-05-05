@@ -39209,6 +39209,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textSays: {fileID: 1750806130}
   textMission: {fileID: 1784076169}
+  TextSays: {fileID: 0}
+  TextMission: {fileID: 0}
   messageS: 
   messageM: 
   timerForStartTheMission:
@@ -39537,9 +39539,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1767128026}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1750806133 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6528084104354241003, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+  m_PrefabInstance: {fileID: 1767128026}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1767128026
@@ -39611,7 +39624,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19053805543826195, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: NestedObjects.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 19053805543826195, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: NestedObjects.Array.data[1]
@@ -39620,11 +39633,11 @@ PrefabInstance:
     - target: {fileID: 19053805543826195, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: NestedObjects.Array.data[2]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1750806133}
     - target: {fileID: 19053805543826195, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: NestedObjects.Array.data[3]
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1784076172}
     - target: {fileID: 19053805543826195, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: NestedObjects.Array.data[4]
       value: 
@@ -39813,6 +39826,10 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: -7144695304587850186, guid: 2ab0d95c0488489498cfbc5b00d55ec1, type: 2}
+    - target: {fileID: 4775484186991008377, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+      propertyPath: SortKey
+      value: 1632173213
+      objectReference: {fileID: 0}
     - target: {fileID: 5262487590616239899, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -39888,6 +39905,10 @@ PrefabInstance:
     - target: {fileID: 5588663556972665792, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: NetworkedBehaviours.Array.data[2]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6528084104354241003, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+      propertyPath: SortKey
+      value: 1816470840
       objectReference: {fileID: 0}
     - target: {fileID: 6850864688820440371, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
       propertyPath: m_hasFontAssetChanged
@@ -40050,9 +40071,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 1767128026}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1784076172 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4775484186991008377, guid: 359b5f7f41081c044a1e0c3b0a70b668, type: 3}
+  m_PrefabInstance: {fileID: 1767128026}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &2052637918

@@ -116,51 +116,63 @@ public class GameChecker : NetworkBehaviour
 
     private void AddEqualScores(sbyte mission)
     {
-        foreach (PlayerChecker playerChecker in playerCheckers)
+        foreach (var player in runner.ActivePlayers)
         {
-            if (playerChecker.playerController != null)
+            Debug.Log("Checando player: " + player);
+
+            var networkObject = runner.GetPlayerObject(player); //Percorre os objetos de rede ativos (Players)
+
+            Debug.Log("NETWORKOBJECT VAZIO??: " + networkObject);
+            if (networkObject != null) //Verifica se o objeto de rede não é nulo
             {
-                Debug.Log(playerChecker + " Verificando se TODOS os player");
+                PlayerChecker playerChecker = networkObject.GetComponent<PlayerChecker>(); //Pega o script PlayerController do objeto de rede
 
-                PlayerRef playerRef = playerChecker.Object.InputAuthority;
-
-                switch (mission)
+                if (playerChecker != null)
                 {
-                    case 0:
-                        if (playerChecker.MissionProjectile(false)) //falso é igual a não colidir
-                        {
-                            Debug.Log("Player " + playerChecker + " completed the mission!");
-                            playerScores.Add(playerRef, 600);
-                        }
-                        break;
-                    case 3:
-                        if (playerChecker.MissionDontMove(true))
-                        {
-                            Debug.Log("Player " + playerChecker + " completed the mission!");
-                            playerScores.Add(playerRef, 600);
-                        }
-                        break;
-                    case 4:
-                        if (playerChecker.MissionMove(true))
-                        {
-                            Debug.Log("Player " + playerChecker + " completed the mission!");
-                            playerScores.Add(playerRef, 600);
-                        }
-                        break;
-                    case 5:
-                        if (playerChecker.MissionBomb(false))
-                        {
-                            Debug.Log("Player " + playerChecker + " completed the mission!");
-                            playerScores.Add(playerRef, 600);
-                        }
-                        break;
-                    case 6:
-                        if (playerChecker.MissionStaySquare(true))
-                        {
-                            Debug.Log("Player " + playerChecker + " completed the mission!");
-                            playerScores.Add(playerRef, 600);
-                        }
-                        break;
+
+                    Debug.Log(playerChecker + " Verificando se TODOS os player");
+
+                    PlayerRef playerRef = playerChecker.Object.InputAuthority;
+
+                    switch (mission)
+                    {
+                        case 0:
+                            if (playerChecker.MissionProjectile(false)) //falso é igual a não colidir
+                            {
+                                Debug.Log("Player " + playerChecker + " completed the mission!");
+                                playerScores.Add(playerRef, 600);
+                            }
+                            break;
+                        case 3:
+                            if (playerChecker.MissionDontMove(true))
+                            {
+                                Debug.Log("Player " + playerChecker + " completed the mission!");
+                                playerScores.Add(playerRef, 600);
+                            }
+                            break;
+                        case 4:
+                            if (playerChecker.MissionMove(true))
+                            {
+                                Debug.Log("Player " + playerChecker + " completed the mission!");
+                                playerScores.Add(playerRef, 600);
+                            }
+                            break;
+                        case 5:
+                            if (playerChecker.MissionBomb(false))
+                            {
+                                Debug.Log("Player " + playerChecker + " completed the mission!");
+                                playerScores.Add(playerRef, 600);
+                            }
+                            break;
+                        case 6:
+                            if (playerChecker.MissionStaySquare(true))
+                            {
+                                Debug.Log("Player " + playerChecker + " completed the mission!");
+                                playerScores.Add(playerRef, 600);
+                            }
+                            break;
+                    }
+
                 }
             }
         }
