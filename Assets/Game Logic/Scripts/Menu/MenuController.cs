@@ -49,4 +49,9 @@ public class MenuController : MonoBehaviour
             Debug.Log("Loading scene: " + asyncLoad.progress * 100 + "%"); // Log the loading progress (0 to 1)
         }
     }
+
+    public void DesconectSession()
+    {
+
+    }
 }

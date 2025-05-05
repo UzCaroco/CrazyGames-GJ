@@ -188,6 +188,7 @@ GameObject:
   - component: {fileID: 2561477664086431204}
   - component: {fileID: 4354114754790753420}
   - component: {fileID: 2615426836941224577}
+  - component: {fileID: 4513321762181437450}
   m_Layer: 0
   m_Name: Button
   m_TagString: Untagged
@@ -296,7 +297,35 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4354114754790753420}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4513321762181437450}
+        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
+        m_MethodName: DesconectSession
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
+--- !u!114 &4513321762181437450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4390275610599253783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08e9d00595c24b84098bd70314dd98de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  indexScene: 0
+  PainelMenu: {fileID: 0}
+  PainelOptions: {fileID: 0}
+  painelCredits: {fileID: 0}
 --- !u!1 &7663681712904282676
 GameObject:
   m_ObjectHideFlags: 0
