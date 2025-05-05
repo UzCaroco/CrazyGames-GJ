@@ -1,14 +1,12 @@
 using CrazyGames;
 using Fusion;
+using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
 public class PlayerSpawner : SimulationBehaviour, IPlayerJoined
 {
-    [SerializeField] RandomSkinAnimator randomSkin;
-
     [SerializeField] private GameObject sunControllerPrefab;
-    NetworkObject gameManager;
     
     Animator anim;
     [SerializeField] AnimatorOverrideController[] animatorOverrideController;
@@ -16,9 +14,23 @@ public class PlayerSpawner : SimulationBehaviour, IPlayerJoined
 
     public GameObject playerPrefab;
     [SerializeField] private NetworkRunner runner;
+
+
+
+
+    [SerializeField] int PlayerSpawn { get; set; }
+
+    int numRandom;
+    int minPlayer = 0;
+    int maxPlayer = 8;
+
+
+    List<int> numeros = new List<int>();
+
+
     void Start()
     {
-        
+        DrawSkinController();
     }
 
     public void PlayerJoined(PlayerRef player)
@@ -42,8 +54,52 @@ public class PlayerSpawner : SimulationBehaviour, IPlayerJoined
             Runner.SetPlayerObject(player, playerObj);
             
             anim = playerObj.GetComponent<Animator>();
-            randomSkin.PlayerIsSpawned();
-            anim.runtimeAnimatorController = animatorOverrideController[randomSkin.SetNumRandom()];
+            PlayerIsSpawned();
+            anim.runtimeAnimatorController = animatorOverrideController[SetNumRandom()];
         }
+    }
+
+
+    
+
+    public void DrawSkinController()
+    {
+        List<int> temp = new List<int>();
+        while (temp.Count < 8)
+        {
+            int numeroAleatorio = Random.Range(minPlayer, maxPlayer);
+            if (!temp.Contains(numeroAleatorio))
+            {
+                temp.Add(numeroAleatorio);
+            }
+        }
+
+        for (int i = 0; i < temp.Count; i++)
+        {
+            numeros.Add(temp[i]);
+        }
+
+        foreach (int numero in numeros)
+        {
+            Debug.Log(numero);
+        }
+    }
+    public void PlayerIsSpawned()
+    {
+        if (PlayerSpawn < numeros.Count)
+        {
+            numRandom = numeros[PlayerSpawn];
+            Debug.Log(numeros[PlayerSpawn] + " " + numRandom);
+            PlayerSpawn++;
+        }
+        else
+        {
+            Debug.LogError("PlayerSpawn fora dos limites da lista de números!");
+        }
+    }
+
+    public int SetNumRandom()
+    {
+        return numRandom;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class RandomSkinAnimator : NetworkBehaviour
 {
-    [SerializeField][Networked] int PlayerSpawn {get; set;}
+    /*[SerializeField][Networked] int PlayerSpawn {get; set;}
     [Networked] int numRandom { get; set; }
     [Networked, Capacity(8)] public NetworkArray<int> numeros => default;
     int minPlayer = 0;
@@ -57,5 +57,5 @@ public class RandomSkinAnimator : NetworkBehaviour
     public int SetNumRandom()
     {
         return numRandom;
-    }
+    }*/
 }

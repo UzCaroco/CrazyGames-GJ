@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Fusion;
 using TMPro;
 using UnityEngine;
@@ -13,6 +14,8 @@ public class ScoreUI : MonoBehaviour
     {
         GameManager.OnScoreChanged += HandleScoreChanged;
         GameManager.OnMissionChanged += HandleMissionChanged; // Novo handler
+
+        
     }
 
     private void OnDisable()
@@ -59,5 +62,12 @@ public class ScoreUI : MonoBehaviour
         missionText.text = mission;
         //missionText.text = $"Missão: {mission}";
     }
+
+
+
+
+
+
+    
 
 }
