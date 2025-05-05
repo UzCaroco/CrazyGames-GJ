@@ -129,7 +129,7 @@ public class PlayerController : NetworkBehaviour
             GameManager gM = FindObjectOfType<GameManager>();
             if (HasInputAuthority && currentM != gM.GetCurrentMission())
             {
-                transform.position = CurrentPos;
+                transform.position = new Vector2(0, 0);
                 camPlayer.enabled = true;
                 SunController = null;
 
@@ -249,9 +249,17 @@ public class PlayerController : NetworkBehaviour
 
 
     private void OnTriggerEnter2D(Collider2D collision)
-    {
-        SunController = FindObjectOfType<SunController>();
-        CurrentPos = new Vector2(transform.position.x, transform.position.y);
+    {        
+        //CurrentPos = new Vector2(transform.position.x, transform.position.y);
+        
+
+        if (CompareTag("Bomb") || collision.CompareTag("Projectile"))
+        {
+
+            transform.position = new Vector2(transform.position.x - 100, transform.position.y - 100);
+            transform.position = new Vector2(transform.position.x -100, -100);
+
+        }
 
         if (collision.CompareTag("Coin"))
         {
@@ -268,21 +276,19 @@ public class PlayerController : NetworkBehaviour
         }
         else if (collision.CompareTag("Projectile"))
         {
-            GameManager gM = FindObjectOfType<GameManager>();
-            currentM = gM.GetCurrentMission();
-            transform.position = new Vector2(transform.position.x, transform.position.y - 100);
+            
             missionProjectile = true;
             camPlayer.enabled = false;
+
+            
             Debug.Log("PROJETIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIL");
 
         }
         else if (collision.CompareTag("Bomb"))
         {
-            GameManager gM = FindObjectOfType<GameManager>();
-            currentM = gM.GetCurrentMission();
-            transform.position = new Vector2(transform.position.x, transform.position.y - 100);
             camPlayer.enabled = false;
             missionBomb = true;
+
             Debug.Log("BOMBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         }
         else if (collision.CompareTag("Square"))
@@ -294,6 +300,10 @@ public class PlayerController : NetworkBehaviour
         {
             missionPushRival = true;
         }
+
+        GameManager gM = FindObjectOfType<GameManager>();
+        currentM = gM.GetCurrentMission();
+        SunController = FindObjectOfType<SunController>();
     }
 }
 
