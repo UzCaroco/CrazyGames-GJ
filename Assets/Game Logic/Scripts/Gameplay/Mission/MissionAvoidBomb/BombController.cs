@@ -10,6 +10,8 @@ public class BombController : NetworkBehaviour
     private List<PlayerManager> playersCollided = new List<PlayerManager>();
     [SerializeField] private NetworkRunner runner;
     Animator animBomb;
+    SpriteRenderer spriteRenderer;
+    [SerializeField] Sprite explosionSprite;
 
     bool isCountDown = true, isExplode =  false, hasCollision = false;
     [SerializeField] private float timeForExplosion;
@@ -17,6 +19,7 @@ public class BombController : NetworkBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        spriteRenderer = GetComponent<SpriteRenderer>();
         animBomb = GetComponent<Animator>();
         runner = FindObjectOfType<NetworkRunner>();
         awayBomb = GetComponentInParent<MissionStayAwayBomb>();
@@ -42,9 +45,27 @@ public class BombController : NetworkBehaviour
             if (timeForExplosion >= 5)
             {
                 isCountDown = false;
+                StartCoroutine(Expansion());
                 ForExplodeTheBomb();
             }
         }
+    }
+
+    IEnumerator Expansion()
+    {
+        spriteRenderer.sprite = explosionSprite;
+        CircleCollider2D circleCollider = GetComponent<CircleCollider2D>();
+
+        for (int i = 0; i < 20; i++)
+        {
+            transform.localScale += new Vector3(0.1f, 0.1f, 0);
+            circleCollider.radius += 0.0008f;
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        
+        
+        yield return null;
     }
     void ForExplodeTheBomb()
     {
@@ -84,6 +105,7 @@ public class BombController : NetworkBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        /*
         // Verifica se o objeto colidido tem um NetworkObject
         NetworkObject netObj = collision.GetComponent<NetworkObject>();
         if (netObj == null) return;
@@ -97,7 +119,7 @@ public class BombController : NetworkBehaviour
         {
             playersCollided.Add(playerManager);
             playerManager.SetCollision(true);
-        }
+        }*/
 
         /*foreach (var player in runner.ActivePlayers)
         {
@@ -115,6 +137,7 @@ public class BombController : NetworkBehaviour
     }
     void OnTriggerExit2D(Collider2D collision)
     {
+        /*
         // Verifica se o objeto colidido tem um NetworkObject
         NetworkObject netObj = collision.GetComponent<NetworkObject>();
         if (netObj == null) return;
@@ -128,7 +151,7 @@ public class BombController : NetworkBehaviour
         {
             playersCollided.Add(playerManager);
             playerManager.SetCollision(false);
-        }
+        }*/
 
         /*
         foreach (var player in runner.ActivePlayers)

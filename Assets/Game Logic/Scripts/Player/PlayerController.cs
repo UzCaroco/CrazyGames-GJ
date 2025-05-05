@@ -10,6 +10,8 @@ public class PlayerController : NetworkBehaviour
 {
     string currentM;
 
+    bool ifFacingRight = true;
+
     SpriteRenderer spriteRenderer;
     Vector2 CurrentPos;
     Camera camPlayer;
@@ -110,8 +112,24 @@ public class PlayerController : NetworkBehaviour
             RaycastHit2D hit = Physics2D.BoxCast(transform.position, col.bounds.size, 0f, moveDelta.normalized, moveDelta.magnitude, collisionLayers);
             animPlayer.SetBool("isWalking", true);
 
+            if (moveDelta.x > 0)
+            {
+                if (!ifFacingRight)
+                {
+                    spriteRenderer.flipX = false;
+                    ifFacingRight = true;
+                }
+            }
+            else if (moveDelta.x < 0)
+            {
+                if (ifFacingRight)
+                {
+                    spriteRenderer.flipX = true;
+                    ifFacingRight = false;
+                }
+            }
 
-            if (!hit)
+                if (!hit)
             {
                 transform.Translate(moveDelta);
             }
@@ -131,6 +149,7 @@ public class PlayerController : NetworkBehaviour
             if (HasInputAuthority && currentM != gM.GetCurrentMission())
             {
                 transform.position = new Vector2(0, 0);
+                spriteRenderer.color = new Color(255, 255, 255, 1);
                 camPlayer.enabled = true;
                 SunController = null;
 
@@ -142,6 +161,8 @@ public class PlayerController : NetworkBehaviour
         {
             CopyMoviment();
         }
+
+
 
         if (dontMove)
         {
@@ -167,7 +188,29 @@ public class PlayerController : NetworkBehaviour
             }
         }
 
-       
+        if (playerInput.Player.Dash.triggered)
+        {
+            if (moveInput != Vector2.zero)
+            {
+                Vector2 dashDirection = moveInput.normalized;
+                StartCoroutine(DashRoutine(dashDirection));
+            }
+        }
+
+    }
+
+    IEnumerator DashRoutine(Vector2 direction)
+    {
+        float dashDuration = 0.2f;
+        float dashSpeed = 15f;
+        float elapsed = 0f;
+
+        while (elapsed < dashDuration)
+        {
+            transform.Translate(direction * dashSpeed * Time.deltaTime);
+            elapsed += Time.deltaTime;
+            yield return null; // Executa por frame, sem atraso de FixedUpdate
+        }
     }
 
     private void CopyMoviment()
@@ -255,8 +298,8 @@ public class PlayerController : NetworkBehaviour
         
         if (CompareTag("Bomb") || collision.CompareTag("Projectile"))
         {
-            transform.position = new Vector2(transform.position.x - 100, transform.position.y - 100);
-            transform.position = new Vector2(- 100, -100);
+            
+
         }
 
         if (collision.CompareTag("Coin"))
@@ -274,6 +317,8 @@ public class PlayerController : NetworkBehaviour
         }
         else if (collision.CompareTag("Projectile"))
         {
+            spriteRenderer.color = new Color(255, 255, 255, 0);
+
             missionProjectile = true;
             camPlayer.enabled = false;
 
@@ -282,6 +327,8 @@ public class PlayerController : NetworkBehaviour
         }
         else if (collision.CompareTag("Bomb"))
         {
+            spriteRenderer.color = new Color(255, 255, 255, 0);
+
             camPlayer.enabled = false;
             missionBomb = true;
 

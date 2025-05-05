@@ -214,7 +214,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 200}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2561477664086431204
 CanvasRenderer:
@@ -407,7 +407,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 20
   m_Sprite: {fileID: 21300000, guid: 3108c2601c875a144846fcc5b46de056, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -434,7 +434,7 @@ MonoBehaviour:
   collisionLayers:
     serializedVersion: 2
     m_Bits: 32
-  speed: 5
+  speed: 8
   timeToCopyTheMovements: 0
   dontMove: 0
   move: 0
@@ -462,8 +462,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.09432721, y: 0.008132815}
-  m_Size: {x: 0.66849065, y: 1.7252619}
+  m_Offset: {x: 0.03666389, y: -0.024817586}
+  m_Size: {x: 0.7838173, y: 2.7796762}
   m_Direction: 0
 --- !u!50 &7709088043970064343
 Rigidbody2D:
@@ -595,7 +595,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 125, y: -125}
-  m_SizeDelta: {x: 250, y: 250}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3579425418235783765
 CanvasRenderer:

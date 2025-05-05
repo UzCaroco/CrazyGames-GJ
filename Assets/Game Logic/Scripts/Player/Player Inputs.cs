@@ -62,6 +62,15 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""fb5dfc2a-e4fc-4f99-87c7-f660d5bbe06d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -196,6 +205,17 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
                     ""action"": ""PushRival"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f41c2162-b948-49aa-b5fa-44b5602ac2a0"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -220,6 +240,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         m_Player_CopyMovimentX = m_Player.FindAction("CopyMovimentX", throwIfNotFound: true);
         m_Player_CopyMovimentY = m_Player.FindAction("CopyMovimentY", throwIfNotFound: true);
         m_Player_PushRival = m_Player.FindAction("PushRival", throwIfNotFound: true);
+        m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -285,6 +306,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_CopyMovimentX;
     private readonly InputAction m_Player_CopyMovimentY;
     private readonly InputAction m_Player_PushRival;
+    private readonly InputAction m_Player_Dash;
     public struct PlayerActions
     {
         private @PlayerInputs m_Wrapper;
@@ -293,6 +315,7 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         public InputAction @CopyMovimentX => m_Wrapper.m_Player_CopyMovimentX;
         public InputAction @CopyMovimentY => m_Wrapper.m_Player_CopyMovimentY;
         public InputAction @PushRival => m_Wrapper.m_Player_PushRival;
+        public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -314,6 +337,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @PushRival.started += instance.OnPushRival;
             @PushRival.performed += instance.OnPushRival;
             @PushRival.canceled += instance.OnPushRival;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -330,6 +356,9 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
             @PushRival.started -= instance.OnPushRival;
             @PushRival.performed -= instance.OnPushRival;
             @PushRival.canceled -= instance.OnPushRival;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -362,5 +391,6 @@ public partial class @PlayerInputs: IInputActionCollection2, IDisposable
         void OnCopyMovimentX(InputAction.CallbackContext context);
         void OnCopyMovimentY(InputAction.CallbackContext context);
         void OnPushRival(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }
