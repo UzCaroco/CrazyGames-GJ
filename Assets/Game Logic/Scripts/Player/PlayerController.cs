@@ -252,13 +252,10 @@ public class PlayerController : NetworkBehaviour
     {        
         //CurrentPos = new Vector2(transform.position.x, transform.position.y);
         
-
         if (CompareTag("Bomb") || collision.CompareTag("Projectile"))
         {
-
             transform.position = new Vector2(transform.position.x - 100, transform.position.y - 100);
-            transform.position = new Vector2(transform.position.x -100, -100);
-
+            transform.position = new Vector2(- 100, -100);
         }
 
         if (collision.CompareTag("Coin"))
