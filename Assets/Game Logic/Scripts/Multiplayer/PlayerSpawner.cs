@@ -1,62 +1,105 @@
 using CrazyGames;
 using Fusion;
 using System.Collections.Generic;
-using System.Linq;
+using System.Reflection;
 using UnityEngine;
 
 public class PlayerSpawner : SimulationBehaviour, IPlayerJoined
 {
     [SerializeField] private GameObject sunControllerPrefab;
+    
+    Animator anim;
     [SerializeField] AnimatorOverrideController[] animatorOverrideController;
+    int idex;
+
     public GameObject playerPrefab;
     [SerializeField] private NetworkRunner runner;
 
+
+
+
+    [SerializeField] int PlayerSpawn { get; set; }
+
+    int numRandom;
+    int minPlayer = 0;
+    int maxPlayer = 8;
+
+
     List<int> numeros = new List<int>();
+
 
     void Start()
     {
-        DrawSkinController(); // Gera a lista com semente fixa
+        DrawSkinController();
     }
 
     public void PlayerJoined(PlayerRef player)
     {
-        // Apenas o LocalPlayer spawna seu próprio jogador
-        if (player == Runner.LocalPlayer)
+        // Só o peer com StateAuthority vai instanciar
+
+        if (player == Runner.LocalPlayer) // ou Runner.IsServer se tiver usando Server/Client
         {
+            /*print("TA O QUE" + gameManager);
+
+
+            if (gameManager == null)
+            {
+                Debug.Log("entreiiiia aqui no sei la");
+                gameManager = runner.Spawn(sunControllerPrefab, Vector3.zero, Quaternion.identity, inputAuthority: null);
+            }
+
+            print("TA O QUE"+gameManager);*/
+
             NetworkObject playerObj = Runner.Spawn(playerPrefab, Vector3.zero, Quaternion.identity, inputAuthority: player);
             Runner.SetPlayerObject(player, playerObj);
-
-            Animator anim = playerObj.GetComponent<Animator>();
-            int playerCount = Runner.ActivePlayers.Count() - 1; // Índice baseado na ordem de chegada
-
-            if (playerCount < numeros.Count)
-            {
-                int skinIndex = numeros[playerCount];
-                anim.runtimeAnimatorController = animatorOverrideController[skinIndex];
-            }
-            else
-            {
-                Debug.LogError("Índice de skin fora dos limites!");
-            }
+            
+            anim = playerObj.GetComponent<Animator>();
+            PlayerIsSpawned();
+            anim.runtimeAnimatorController = animatorOverrideController[SetNumRandom()];
         }
     }
 
-    // Gera uma lista de números aleatórios únicos com semente fixa
-    void DrawSkinController()
-    {
-        Random.InitState(12345); // Semente fixa para todos os clientes
-        List<int> temp = new List<int>();
 
+    
+
+    public void DrawSkinController()
+    {
+        List<int> temp = new List<int>();
         while (temp.Count < 8)
         {
-            int numeroAleatorio = Random.Range(0, 8);
+            int numeroAleatorio = Random.Range(minPlayer, maxPlayer);
             if (!temp.Contains(numeroAleatorio))
             {
                 temp.Add(numeroAleatorio);
             }
         }
 
-        numeros.Clear();
-        numeros.AddRange(temp);
+        for (int i = 0; i < temp.Count; i++)
+        {
+            numeros.Add(temp[i]);
+        }
+
+        foreach (int numero in numeros)
+        {
+            Debug.Log(numero);
+        }
+    }
+    public void PlayerIsSpawned()
+    {
+        if (PlayerSpawn < numeros.Count)
+        {
+            numRandom = numeros[PlayerSpawn];
+            Debug.Log(numeros[PlayerSpawn] + " " + numRandom);
+            PlayerSpawn++;
+        }
+        else
+        {
+            Debug.LogError("PlayerSpawn fora dos limites da lista de números!");
+        }
+    }
+
+    public int SetNumRandom()
+    {
+        return numRandom;
     }
 }
