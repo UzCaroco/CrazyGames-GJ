@@ -139,7 +139,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   runner: {fileID: 0}
-  explosionSprite: {fileID: 21300000, guid: ce3ea59614ec8d64e9cdbd8b671f9042, type: 3}
+  explosionSprite: {fileID: 21300000, guid: f0e72bb87e03ea94ab88f3afff3a56c6, type: 3}
   timeForExplosion: 0
 --- !u!50 &7779076161003631018
 Rigidbody2D:

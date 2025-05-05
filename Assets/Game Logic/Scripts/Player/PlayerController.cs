@@ -34,6 +34,7 @@ public class PlayerController : NetworkBehaviour
     public List<sbyte> listCopyThisMovement = new List<sbyte>();
     bool wasPressingX = false;
     bool wasPressingY = false;
+    bool dashActive = false;
 
 
     [Header("Missions Bool")]
@@ -129,9 +130,22 @@ public class PlayerController : NetworkBehaviour
                 }
             }
 
-                if (!hit)
+            if (!hit)
             {
-                transform.Translate(moveDelta);
+                Debug.Log(playerInput.Player.Dash.IsPressed());
+                if (playerInput.Player.Dash.triggered)
+                {
+                    Debug.Log("DASH ATIVADOOOOOOOOOOOO");
+                    if (moveInput != Vector2.zero)
+                    {
+                        Vector2 dashDirection = moveInput.normalized;
+                        StartCoroutine(DashRoutine(dashDirection));
+                    }
+                }
+                else if (!dashActive)
+                {
+                    transform.Translate(moveDelta);
+                }
             }
             else
             {
@@ -188,19 +202,13 @@ public class PlayerController : NetworkBehaviour
             }
         }
 
-        if (playerInput.Player.Dash.triggered)
-        {
-            if (moveInput != Vector2.zero)
-            {
-                Vector2 dashDirection = moveInput.normalized;
-                StartCoroutine(DashRoutine(dashDirection));
-            }
-        }
+        
 
     }
 
     IEnumerator DashRoutine(Vector2 direction)
     {
+        dashActive = true; // Ativa o dash
         float dashDuration = 0.2f;
         float dashSpeed = 15f;
         float elapsed = 0f;
@@ -242,9 +250,9 @@ public class PlayerController : NetworkBehaviour
                 wasPressingY = true;
 
                 if (y > 0)
-                    listCopyThisMovement.Add(1); // Cima
+                    listCopyThisMovement.Add(3); // Cima
                 else
-                    listCopyThisMovement.Add(3); // Baixo
+                    listCopyThisMovement.Add(1); // Baixo
             }
             else if (y == 0)
             {
@@ -276,7 +284,7 @@ public class PlayerController : NetworkBehaviour
             }
             else
             {
-                playerChecker = GetComponent<PlayerChecker>();
+                /*playerChecker = GetComponent<PlayerChecker>();
                 Debug.Log("PlayerChecker ESTÁ VAZIO???: " + playerChecker);
                 GameChecker gameChecker = FindObjectOfType<GameChecker>();
 
@@ -284,7 +292,7 @@ public class PlayerController : NetworkBehaviour
 
                 timeToCopyTheMovements = false; // Para de copiar o movimento
                 listCopyThisMovement.Clear(); // Limpa a lista de movimentos copiados
-                copyThisMovement = new byte[4]; // Limpa a lista de movimentos a serem copiados
+                copyThisMovement = new byte[4]; // Limpa a lista de movimentos a serem copiados*/
             }
         }
     }

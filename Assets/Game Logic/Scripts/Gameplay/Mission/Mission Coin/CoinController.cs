@@ -11,7 +11,7 @@ public class CoinController : MonoBehaviour
 
     IEnumerator DestroyCoin()
     {
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(3f);
         Destroy(gameObject);
     }
 }
