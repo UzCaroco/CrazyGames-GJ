@@ -273,11 +273,9 @@ public class PlayerController : NetworkBehaviour
         }
         else if (collision.CompareTag("Projectile"))
         {
-            
             missionProjectile = true;
             camPlayer.enabled = false;
 
-            
             Debug.Log("PROJETIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIL");
 
         }
