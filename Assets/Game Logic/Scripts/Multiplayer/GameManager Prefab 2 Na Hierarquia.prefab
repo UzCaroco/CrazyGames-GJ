@@ -1687,6 +1687,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textSays: {fileID: 6850864688820440371}
   textMission: {fileID: 1241396422495428156}
+  TextS: {fileID: 0}
+  TextM: {fileID: 0}
   TextSays: {fileID: 6528084104354241003}
   TextMission: {fileID: 4775484186991008377}
   messageS: 
