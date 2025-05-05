@@ -7,6 +7,9 @@ using System.Linq;
 
 public class PlayerController : NetworkBehaviour
 {
+    string currentM;
+
+    SpriteRenderer spriteRenderer;
     Vector2 CurrentPos;
     Camera camPlayer;
     SunController SunController;
@@ -47,6 +50,7 @@ public class PlayerController : NetworkBehaviour
         playerInput = new PlayerInputs();
         col = GetComponent<Collider2D>();
         animPlayer = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
 
     }
 
@@ -120,6 +124,19 @@ public class PlayerController : NetworkBehaviour
             animPlayer.SetBool("isWalking", false);
         }
 
+        if (SunController != null && !camPlayer.enabled)
+        {
+            GameManager gM = FindObjectOfType<GameManager>();
+            if (HasInputAuthority && currentM != gM.GetCurrentMission())
+            {
+                transform.position = CurrentPos;
+                camPlayer.enabled = true;
+                SunController = null;
+
+                Debug.Log("FInalizou respawnando: ");
+            }
+        }
+
         if (timeToCopyTheMovements)
         {
             CopyMoviment();
@@ -149,17 +166,7 @@ public class PlayerController : NetworkBehaviour
             }
         }
 
-        if (SunController != null)
-        {
-            if (SunController.isFinishMission)
-            {
-                transform.position = CurrentPos;
-                camPlayer.enabled = true;
-                SunController = null;
-
-                Debug.Log("FInalizou respawnando: " + missionMove);
-            }
-        }
+       
     }
 
     private void CopyMoviment()
@@ -261,23 +268,27 @@ public class PlayerController : NetworkBehaviour
         }
         else if (collision.CompareTag("Projectile"))
         {
-            Debug.Log("PROJETIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIL");
+            GameManager gM = FindObjectOfType<GameManager>();
+            currentM = gM.GetCurrentMission();
+            transform.position = new Vector2(transform.position.x, transform.position.y - 100);
             missionProjectile = true;
             camPlayer.enabled = false;
-            transform.position = new Vector2(transform.position.x, transform.position.y - 100);
+            Debug.Log("PROJETIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIL");
 
         }
         else if (collision.CompareTag("Bomb"))
         {
-            Debug.Log("BOMBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-            missionBomb = true;
-            camPlayer.enabled = false;
+            GameManager gM = FindObjectOfType<GameManager>();
+            currentM = gM.GetCurrentMission();
             transform.position = new Vector2(transform.position.x, transform.position.y - 100);
+            camPlayer.enabled = false;
+            missionBomb = true;
+            Debug.Log("BOMBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
         }
         else if (collision.CompareTag("Square"))
         {
-            Debug.Log("QUADRADOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
             missionStaySquare = true;
+            Debug.Log("QUADRADOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
         }
         else if (collision.CompareTag("Player") && playerInput.Player.PushRival.triggered)
         {

@@ -82,7 +82,7 @@ public class MissionCopyMovement : Missions
     {
         imageMovement.sprite = spritesMovement[copyThisMovement[totalImages]];
         
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.8f);
 
         totalImages++;
         

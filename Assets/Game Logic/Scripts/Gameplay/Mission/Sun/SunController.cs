@@ -72,7 +72,7 @@ public class SunController : NetworkBehaviour
     [SerializeField] private float[] timeCompleteMission = new float[7]; // Array to store time for each mission
 
     [Networked]public bool isFinishMission{ get; set; }
-    [Networked][SerializeField] private bool isFinishWait { get; set; }
+    [Networked][SerializeField] public bool isFinishWait { get; set; }
 
     /// <summary>
     /// Beginning
@@ -270,8 +270,8 @@ public class SunController : NetworkBehaviour
             Debug.Log("GameChecker: " + gameChecker);
             gameChecker.CheckPlayersInTheEndOfMission((sbyte)randomNumber);
 
-            isFinishMission = false;
             mission[randomNumber].enabled = false;
+            isFinishMission = false;
 
             Draw();
         }
