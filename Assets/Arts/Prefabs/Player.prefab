@@ -298,9 +298,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4513321762181437450}
-        m_TargetAssemblyTypeName: MenuController, Assembly-CSharp
-        m_MethodName: DesconectSession
+      - m_Target: {fileID: 2942862363892137499}
+        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+        m_MethodName: Despawn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

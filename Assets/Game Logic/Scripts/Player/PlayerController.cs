@@ -4,6 +4,7 @@ using Fusion;
 using UnityEngine;
 using CrazyGames;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : NetworkBehaviour
 {
@@ -300,6 +301,28 @@ public class PlayerController : NetworkBehaviour
         currentM = gM.GetCurrentMission();
         SunController = FindObjectOfType<SunController>();
     }
+
+
+
+
+    public void Despawn()
+    {
+        // Só executa se tivermos autoridade sobre o objeto
+        if (Object.HasInputAuthority)
+        {
+            // Avisa o GameManager (se necessário)
+            if (gameManager != null)
+            {
+                gameManager.OnPlayerLeft(Object.InputAuthority, this);
+            }
+
+            // Despawna o objeto na rede
+            Runner.Despawn(Object);
+
+            SceneManager.LoadScene("Menu");
+        }
+    }
+
 }
 
 
